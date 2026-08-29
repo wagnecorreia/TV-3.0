@@ -243,6 +243,10 @@ function buildIndexHtml(channels) {
   #poster img { width:132px; height:132px; object-fit:contain; filter:drop-shadow(0 8px 24px rgba(0,0,0,.65)); border-radius:20px; background:#11161f; border:1px solid rgba(255,255,255,.06); }
   #poster .msg { font-size:16px; font-weight:600; }
   #poster .small { font-size:13px; color:#606878; }
+  #poster .globo-fallback { margin-top:6px; display:inline-flex; align-items:center; gap:9px; background:linear-gradient(135deg,#d4000f,#8c0303); color:#fff; border:none; padding:13px 22px; border-radius:999px; font-size:15px; font-weight:800; cursor:pointer; box-shadow:0 8px 30px rgba(212,0,15,.45); transition:.16s; }
+  #poster .globo-fallback:hover { transform:translateY(-2px); box-shadow:0 12px 36px rgba(212,0,15,.6); }
+  #poster .globo-fallback:active { transform:scale(.95); }
+  #poster .globo-fallback[hidden] { display:none; }
 
   /* Barra inferior integrada */
   #now { position:absolute; bottom:0; left:0; right:0; display:flex; align-items:center; gap:16px; padding:18px 22px 26px; z-index:4; }
@@ -290,6 +294,7 @@ function buildIndexHtml(channels) {
       <img id="posterLogo" alt="">
       <div class="msg" id="posterMsg">Carregando sinal…</div>
       <div class="small">Se ficar parado, aperte ► ou troque de canal</div>
+      <button class="globo-fallback" id="globoFallback" hidden>Assistir Globo oficial ▶</button>
     </div>
     <div id="now">
       <img id="nowLogo" class="logo" alt="">
@@ -336,6 +341,11 @@ const overlay = document.getElementById('overlay');
 const rmClose = document.getElementById('rmClose');
 const regionSearch = document.getElementById('regionSearch');
 const regionBody = document.getElementById('regionBody');
+const globoFallback = document.getElementById('globoFallback');
+
+// URL oficial da TV Globo ao vivo no Globoplay (afiliada é escolhida pela conta/região do usuário).
+const GLOBO_LIVE = 'https://globoplay.globo.com/tv-globo/ao-vivo/7832875/';
+const GLOBO_EXCLUDE = /sportv|multishow|globo\s*news|gnt|viva|canal\s*brasil|futura|premium|internacional|rural|off|24h|globo\.?net/i;
 
 // Proxy para canais HTTP (ex.: Globo). Preencha com a URL do seu Cloudflare Worker.
 // Dica: pode testar com  ?proxy=https://SEU-WORKER.workers.dev  sem redeploy.
@@ -358,6 +368,35 @@ function normalize(s) { return String(s||'').normalize('NFD').replace(/[^a-z0-9]
 function onlineUrl(c) {
   if (!PROXY_BASE) return c.url;
   return PROXY_BASE + (PROXY_BASE.endsWith('?') ? '' : '?') + 'url=' + encodeURIComponent(c.url);
+}
+
+// É a TV Globo ao vivo? (não Sportv/Multishow/GloboNews etc.)
+function isGloboLive(name) {
+  const n = normalize(name);
+  if (!n.includes('globo') || n.includes('dream')) return false;
+  return !GLOBO_EXCLUDE.test(name);
+}
+
+// Abre o Globoplay (TV Globo) numa nova aba / sessão (funciona como WebView no app Android).
+function openGloboOficial() {
+  const url = GLOBO_LIVE;
+  const w = window.open(url, '_blank', 'noopener');
+  if (!w) { location.href = url; }
+}
+
+function updateGloboFallback() {
+  const c = CHANNELS[idx];
+  const show = c && isGloboLive(c.name);
+  globoFallback.hidden = !show;
+}
+
+// A Globo não tocou no HLS: para aqui e oferece o globoplay oficial, sem pular o canal.
+function globoFail() {
+  clearTimeout(loadTimer);
+  const c = CHANNELS[idx];
+  setPoster(true, (c ? c.name : 'Globo') + ' não abriu aqui. Assista no Globoplay oficial:');
+  globoFallback.hidden = false;
+  globoFallback.focus();
 }
 
 // --- Geolocalização ---
@@ -441,6 +480,7 @@ function renderNow() {
   nowSub.textContent = PROXY_BASE && c.url.startsWith('http://') ? 'via proxy' : (c.url || 'sem url');
   if (c.logo) { nowLogo.src = c.logo; nowLogo.style.display = ''; } else { nowLogo.style.display = 'none'; }
   posterLogo.src = c.logo || '';
+  updateGloboFallback();
 }
 function destroyHls(el) {
   if (el._hls) { try { el._hls.destroy(); } catch (e) {} el._hls = null; }
@@ -450,8 +490,8 @@ function armLoadTimer(i) {
   clearTimeout(loadTimer);
   loadTimer = setTimeout(() => {
     if (tryingIndex === i) {
-      setPoster(true, 'Sinal lento/fora do ar — pulando para o proximo…');
-      next();
+      if (isGloboLive(CHANNELS[i].name)) { globoFail(); }
+      else { setPoster(true, 'Sinal lento/fora do ar — pulando para o proximo…'); next(); }
     }
   }, START_TIMEOUT);
 }
@@ -472,6 +512,10 @@ function playChannel(i) {
     return;
   }
   if (isHttp && !PROXY_BASE) {
+    if (isGloboLive(c.name)) {
+      globoFail();
+      return;
+    }
     setPoster(true, '🔒 Canal via HTTP. Configure o proxy (Globo etc.) para tocar aqui.');
     let k = 1;
     while (k < CHANNELS.length) {
@@ -489,7 +533,10 @@ function playChannel(i) {
     try {
       const h = new Hls({ autoStartLoad: true, startLevel: -1 });
       h.on(Hls.Events.ERROR, (e, data) => {
-        if (data && data.fatal && tryingIndex === idx) { next(); }
+        if (data && data.fatal && tryingIndex === idx) {
+          if (isGloboLive(c.name)) { globoFail(); }
+          else { next(); }
+        }
       });
       h.on(Hls.Events.MANIFEST_PARSED, () => {
         if (tryingIndex === idx) { setPoster(false); clearTimeout(loadTimer); tryingIndex = -1; preloadNext(); }
@@ -533,6 +580,7 @@ prevBtn.onclick = prev;
 nextBtn.onclick = next;
 playBtn.onclick = toggle;
 regionBtn.onclick = openModal;
+globoFallback.onclick = openGloboOficial;
 rmClose.onclick = closeModal;
 overlay.onclick = (e) => { if (e.target === overlay) closeModal(); };
 document.addEventListener('keydown', (e) => {
