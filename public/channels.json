@@ -1,19 +1,5 @@
 [
   {
-    "id": "adessotv",
-    "name": "AdessoTV",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-9715/LVW9715_12B26T62tm/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "agrocanal",
-    "name": "AgroCanal",
-    "logo": "",
-    "url": "https://aovivo.equipea.com.br:5443/aovivort/streams/pshRLrnv6isXq7RG4747567774043229.m3u8",
-    "uf": []
-  },
-  {
     "id": "agromais",
     "name": "AgroMais",
     "logo": "https://i.imgur.com/9f3J8I2.png",
@@ -21,24 +7,10 @@
     "uf": []
   },
   {
-    "id": "alphachannel",
-    "name": "AlphaChannel",
-    "logo": "",
-    "url": "https://5b01a3d32b65c.streamlock.net:1936/tvalpha/tvalpha/playlist.m3u8",
-    "uf": []
-  },
-  {
     "id": "amazonsat",
     "name": "Amazon Sat",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Amazon_Sat_logo.png/512px-Amazon_Sat_logo.png",
     "url": "https://amazonsat.brasilstream.com.br/hls/amazonsat/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "ararunatv",
-    "name": "ArarunaTV",
-    "logo": "",
-    "url": "https://video05.logicahost.com.br/ararunatv/ararunatv/playlist.m3u8",
     "uf": []
   },
   {
@@ -58,66 +30,10 @@
     "uf": []
   },
   {
-    "id": "augetv",
-    "name": "AugeTV",
-    "logo": "",
-    "url": "https://cdn-tiva-video01-logicahost-com-br.smartbit.co/canalaugetv/canalaugetv/playlist.m3u8",
-    "uf": []
-  },
-  {
     "id": "band",
     "name": "Band",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Band_logo_2023.svg/512px-Band_logo_2023.svg.png",
     "url": "https://media.cdntvms.com.br/band_sat/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "bandnews",
-    "name": "BandNews",
-    "logo": "",
-    "url": "https://cdn-5.nxplay.com.br/BAND_NEWS/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "bandsports",
-    "name": "BandSports",
-    "logo": "",
-    "url": "https://cdn-5.nxplay.com.br/BAND_SPORTS/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "bemmelhor",
-    "name": "BemMelhor",
-    "logo": "",
-    "url": "https://cdn-tiva-video01-logicahost-com-br.smartbit.co/bemmelhor/bemmelhor/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "blitstv",
-    "name": "Blitstv",
-    "logo": "",
-    "url": "https://stmv1.transmissaodigital.com/blitstv/blitstv/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "boasnovas",
-    "name": "BoasNovas",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-9375/LVW9375_6i0wPBCHYc/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "br8tv",
-    "name": "BR8TV",
-    "logo": "",
-    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-11668/ngrp:LVW11668_wiJpjbMrks_all/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "cabofriotv",
-    "name": "CaboFrioTV",
-    "logo": "",
-    "url": "https://59f2354c05961.streamlock.net:1443/ararutv/_definst_/ararutv/playlist.m3u8",
     "uf": []
   },
   {
@@ -142,174 +58,6 @@
     "uf": []
   },
   {
-    "id": "canal25jundiai",
-    "name": "Canal25Jundiai",
-    "logo": "",
-    "url": "https://cdn-tiva-stream01-msolutionbrasil-com-br.smartbit.co/hls/canal25/live.m3u8",
-    "uf": []
-  },
-  {
-    "id": "canal38",
-    "name": "Canal38",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-8503/LVW8503_d0V5oduFlK/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "canaldocriador",
-    "name": "CanaldoCriador",
-    "logo": "",
-    "url": "https://607d2a1a47b1f.streamlock.net/crur/smil:canaldocriador.smil/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "canalfdr",
-    "name": "CanalFDR",
-    "logo": "",
-    "url": "https://v-us-01.wisestream.io/memfs/e4ade538-7924-4359-81ef-b9d4dd229e91.m3u8",
-    "uf": []
-  },
-  {
-    "id": "canallibras",
-    "name": "CanalLibras",
-    "logo": "",
-    "url": "https://canallibras-stream.ebc.com.br/mux_video_ts/index-1.m3u8",
-    "uf": []
-  },
-  {
-    "id": "canalmetropolitanodenoticias",
-    "name": "CanalMetropolitanodeNoticias",
-    "logo": "",
-    "url": "https://stmv5.samcast.com.br/claudio8701/claudio8701/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "canalricos",
-    "name": "CanalRicos",
-    "logo": "",
-    "url": "https://5d82644094cc0.streamlock.net/ricostv/ricostv/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "canalrural",
-    "name": "CanalRural",
-    "logo": "",
-    "url": "https://607d2a1a47b1f.streamlock.net/crur/smil:canalrural.smil/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "canalsaude",
-    "name": "CanalSaude",
-    "logo": "",
-    "url": "https://eitv7.cdn.broadpeak.io/account351-i1495/event/canalsaude/format720p.m3u8",
-    "uf": []
-  },
-  {
-    "id": "canalstart",
-    "name": "CanalSTART",
-    "logo": "",
-    "url": "https://cdn-tiva-srv5-zcast-com-br.smartbit.co/canalstart/canalstart/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "canaluol",
-    "name": "CanalUOL",
-    "logo": "",
-    "url": "https://video24.mais.uol.com.br/live/6146.m3u8",
-    "uf": []
-  },
-  {
-    "id": "catve2",
-    "name": "Catve2",
-    "logo": "",
-    "url": "https://5b33b873179a2.streamlock.net:1443/catve2/catve2/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "cazetv",
-    "name": "CazeTV",
-    "logo": "",
-    "url": "https://dfr80qz435crc.cloudfront.net/MNOP/Amagi/Caze/Caze_TV_BR/Caze_TV.m3u8",
-    "uf": []
-  },
-  {
-    "id": "chromatv",
-    "name": "ChromaTV",
-    "logo": "",
-    "url": "https://5c483b9d1019c.streamlock.net/8054/8054/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "cindietv",
-    "name": "CINDIETV",
-    "logo": "",
-    "url": "https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/352.m3u8",
-    "uf": []
-  },
-  {
-    "id": "cinturaoverde",
-    "name": "CinturaoVerde",
-    "logo": "",
-    "url": "https://play.redecinturaoverde.com.br/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "classiquetv",
-    "name": "ClassiqueTV",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/classique/classique/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "combrasil",
-    "name": "COMBrasil",
-    "logo": "",
-    "url": "https://dfr80qz435crc.cloudfront.net/EFGH/Amagi/NewCo/New_Brasil_BR/New_Brasil.m3u8",
-    "uf": []
-  },
-  {
-    "id": "conectamaistv",
-    "name": "ConectaMaisTV",
-    "logo": "",
-    "url": "https://adylnet.streampool.net/10324/live/hls/Conecta/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "conectvbrasil",
-    "name": "ConecTVBrasil",
-    "logo": "",
-    "url": "https://stream01.msolutionbrasil.com.br/hls/conectv/live.m3u8",
-    "uf": []
-  },
-  {
-    "id": "conexaotv",
-    "name": "ConexaoTV",
-    "logo": "",
-    "url": "https://5a57bda70564a.streamlock.net/conexaotv/conexaotv.sdp/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "culturafast",
-    "name": "CulturaFast",
-    "logo": "",
-    "url": "https://fpa-gateway.tvcultura.com.br:8181/memfs/606caef0-a290-413d-9f1f-8fcdb3a73831.m3u8",
-    "uf": []
-  },
-  {
-    "id": "demaistv",
-    "name": "DemaisTV",
-    "logo": "",
-    "url": "https://cdn-tiva-stmv1-samcast-com-br.smartbit.co/demaistv6503/demaistv6503/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "despertartv",
-    "name": "DespertarTV",
-    "logo": "",
-    "url": "https://br.conectmy.com.br/DespertarTV/index.m3u8",
-    "uf": []
-  },
-  {
     "id": "dw_en",
     "name": "DW English",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Deutsche_Welle_Logo.svg/512px-Deutsche_Welle_Logo.svg.png",
@@ -317,38 +65,10 @@
     "uf": []
   },
   {
-    "id": "elementalchannel",
-    "name": "ElementalChannel",
-    "logo": "",
-    "url": "https://5d82644094cc0.streamlock.net/8116/8116/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "elytv",
-    "name": "ElyTV",
-    "logo": "",
-    "url": "https://stmv1.srvsite.com/ely/ely/playlist.m3u8",
-    "uf": []
-  },
-  {
     "id": "euronews",
     "name": "Euronews",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Euronews_2022_logo.svg/512px-Euronews_2022_logo.svg.png",
     "url": "http://45.190.28.50/EURONEWS_HD/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "eutv",
-    "name": "EUTV",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "falalitoral",
-    "name": "FalaLitoral",
-    "logo": "",
-    "url": "https://5c483b9d1019c.streamlock.net/falalitoraltv/falalitoraltv/playlist.m3u8",
     "uf": []
   },
   {
@@ -361,13 +81,6 @@
     ]
   },
   {
-    "id": "foratediotv",
-    "name": "ForaTedioTV",
-    "logo": "",
-    "url": "https://stmv2.srvif.com/foratedio/foratedio/playlist.m3u8",
-    "uf": []
-  },
-  {
     "id": "france24_en",
     "name": "France 24 English",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/France_24_logo.svg/512px-France_24_logo.svg.png",
@@ -375,143 +88,10 @@
     "uf": []
   },
   {
-    "id": "geekdot",
-    "name": "Geekdot",
-    "logo": "",
-    "url": "https://stream.ichibantv.com:3764/hybrid/play.m3u8",
-    "uf": []
-  },
-  {
-    "id": "gefast",
-    "name": "GeFast",
-    "logo": "",
-    "url": "https://amg00716-globo-amg00716c1-tcl-br-9495.playouts.now.amagi.tv/playlist.m3u8",
-    "uf": []
-  },
-  {
     "id": "globo",
     "name": "Globo (Sinal Aberto)",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
     "url": "http://45.190.28.50/GLOBO_HD/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "gospelcartoon",
-    "name": "GospelCartoon",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/gospelcartoon/gospelcartoon/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "gospelmovietv",
-    "name": "GospelMovieTV",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/gospelf/gospelf/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "impdtvworldwide",
-    "name": "IMPDTVWorldwide",
-    "logo": "",
-    "url": "https://igrejamundial.nuvemplay.live/hls/stream.m3u8",
-    "uf": []
-  },
-  {
-    "id": "j3newstv",
-    "name": "J3NEWSTV",
-    "logo": "",
-    "url": "https://video01.brascast.com/d92ebb4f/d92ebb4f/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "kpoptvplay",
-    "name": "KpopTVPlay",
-    "logo": "",
-    "url": "https://giatv.bozztv.com/giatv/giatv-kpoptvplay/kpoptvplay/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "kuriakoscine",
-    "name": "KuriakosCine",
-    "logo": "",
-    "url": "https://w2.manasat.com/kcine/smil:kcine.smil/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "kuriakoskids",
-    "name": "KuriakosKids",
-    "logo": "",
-    "url": "https://w2.manasat.com/kkids/smil:kkids.smil/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "laboraltv",
-    "name": "LaboralTV",
-    "logo": "",
-    "url": "https://tv.laboralsst.com.br/hls/stream.m3u8",
-    "uf": []
-  },
-  {
-    "id": "lamorerockshowwebtv",
-    "name": "LamoreRockShowWebTV",
-    "logo": "",
-    "url": "https://a.cdni.live/rodrigo2364/rodrigo2364/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "lidertv",
-    "name": "LiderTV",
-    "logo": "",
-    "url": "https://cdn-tiva-video08-logicahost-com-br.smartbit.co/lidertvssp/lidertvssp/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "lke",
-    "name": "Lke",
-    "logo": "",
-    "url": "https://cnl-cl.otteravision.com/cnl/cl_h265/cl_h265.m3u8",
-    "uf": []
-  },
-  {
-    "id": "loading",
-    "name": "Loading",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/loadingtv/loadingtv/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "mbcbrasiltv",
-    "name": "MBCBrasilTV",
-    "logo": "",
-    "url": "https://play.mbcbrasil.tv.br/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "nickonline",
-    "name": "NickOnline",
-    "logo": "",
-    "url": "https://x1colegal.com/hls/stream.m3u8",
-    "uf": []
-  },
-  {
-    "id": "nicktoonsbrasil",
-    "name": "NickToonsBrasil",
-    "logo": "",
-    "url": "https://stmv2.srvif.com/nicktoons/nicktoons/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "nsports",
-    "name": "NSports",
-    "logo": "",
-    "url": "https://ogc-nsprt-tcl-roku-syndication.otteravision.com/ogc/nsprt/nsprt.m3u8",
-    "uf": []
-  },
-  {
-    "id": "ntv",
-    "name": "NTV",
-    "logo": "",
-    "url": "https://cdn.livespanel.com/nossatv/nossatv/playlist.m3u8",
     "uf": []
   },
   {
@@ -524,48 +104,6 @@
     ]
   },
   {
-    "id": "petloverstv",
-    "name": "PetloversTV",
-    "logo": "",
-    "url": "https://video04.logicahost.com.br/petloverstv/petloverstv/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "playtv",
-    "name": "PlayTV",
-    "logo": "",
-    "url": "https://isaocorp.cloudecast.com/playtv/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "plenatv",
-    "name": "PlenaTV",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-9591/LVW9591_PmXtgATnaS/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "plenitudetv",
-    "name": "PlenitudeTV",
-    "logo": "",
-    "url": "https://strv.painelvox.top/plenitude/plenitude/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "rbatv",
-    "name": "RBATV",
-    "logo": "",
-    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-15748/LVW15748_Yed7yzLuRC/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "rctvbrasil",
-    "name": "RCTVBrasil",
-    "logo": "",
-    "url": "https://stmv.webtvninjas.com.br/rctv/rctv/playlist.m3u8",
-    "uf": []
-  },
-  {
     "id": "record",
     "name": "Record",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Record_TV_logo_2023.svg/512px-Record_TV_logo_2023.svg.png",
@@ -573,80 +111,10 @@
     "uf": []
   },
   {
-    "id": "recordnews",
-    "name": "RecordNews",
-    "logo": "",
-    "url": "https://rnw-rn.otteravision.com/rnw/rn/rnw_rn.m3u8",
-    "uf": []
-  },
-  {
     "id": "redevida",
     "name": "Rede Vida",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Rede_Vida_logo.png/512px-Rede_Vida_logo.png",
     "url": "http://45.190.28.50/REDE_VIDA_HD/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "redebrasil",
-    "name": "RedeBrasil",
-    "logo": "",
-    "url": "https://redebrasil.nuvemplay.live/hls/stream.m3u8",
-    "uf": []
-  },
-  {
-    "id": "redeglobo",
-    "name": "RedeGlobo",
-    "logo": "",
-    "url": "https://media2.cdntvms.com.br/tv_morena_dorados/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "redegospel",
-    "name": "RedeGospel",
-    "logo": "",
-    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "redemeionorte",
-    "name": "RedeMeioNorte",
-    "logo": "",
-    "url": "https://maystreaming.cloudecast.com/redemeio/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "redemetropole",
-    "name": "RedeMetropole",
-    "logo": "",
-    "url": "https://cdn-tiva-isaocorp-cloudecast-com.smartbit.co/metropole/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "redeminas",
-    "name": "RedeMinas",
-    "logo": "",
-    "url": "https://8hzcavccys.zoeweb.tv/redeminas/ngrp:redeminas_all/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "redengt",
-    "name": "RedeNGT",
-    "logo": "",
-    "url": "https://isaocorp.cloudecast.com/ngt/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "redepremiumtv",
-    "name": "RedePremiumTV",
-    "logo": "",
-    "url": "https://cdn-tiva-stmv2-samcast-com-br.smartbit.co/leonardo9878/leonardo9878/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "redesptv",
-    "name": "RedeSPTV",
-    "logo": "",
-    "url": "https://video01.logicahost.com.br/websptv/websptv/playlist.m3u8",
     "uf": []
   },
   {
@@ -666,143 +134,10 @@
     ]
   },
   {
-    "id": "redetvmais",
-    "name": "RedeTVMais",
-    "logo": "",
-    "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "rittv",
-    "name": "RITTV",
-    "logo": "",
-    "url": "https://acesso.ecast.site:3648/live/ritlive.m3u8",
-    "uf": []
-  },
-  {
-    "id": "santaceciliatv",
-    "name": "SantaCeciliaTV",
-    "logo": "",
-    "url": "https://5fb29de4928ea.streamlock.net/2063/2063/playlist.m3u8",
-    "uf": []
-  },
-  {
     "id": "sbt",
     "name": "SBT",
     "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SBT_logo_2022.svg/512px-SBT_logo_2022.svg.png",
     "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "sbtcuiaba",
-    "name": "SBTCuiaba",
-    "logo": "",
-    "url": "https://video09.logicahost.com.br/sbtcuiaba/sbtcuiaba/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "sbtinterior",
-    "name": "SBTInterior",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-10801/LVW10801_Xvg4R0u57n/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "sbtnacional",
-    "name": "SBTNacional",
-    "logo": "",
-    "url": "https://6836041ea1117.streamlock.net/cverde/cverde/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "sbtnews",
-    "name": "SBTNews",
-    "logo": "",
-    "url": "https://dai.google.com/linear/hls/event/1XSOdtQ0SH2G8OEmEfGgjQ/master.m3u8",
-    "uf": []
-  },
-  {
-    "id": "sbtnovamutum",
-    "name": "SBTNovaMutum",
-    "logo": "",
-    "url": "https://video09.logicahost.com.br/sbtmutum/sbtmutum/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "sbtrondonopolis",
-    "name": "SBTRondonopolis",
-    "logo": "",
-    "url": "https://video09.logicahost.com.br/sbtroo/sbtroo/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "seriesclassic",
-    "name": "SeriesClassic",
-    "logo": "",
-    "url": "https://cdn-tiva-video10-logicahost-com-br.smartbit.co/serieclassic/serieclassic/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "sesctv",
-    "name": "SESCTV",
-    "logo": "",
-    "url": "https://slbps-ml-sambatech.akamaized.net/samba-live/2472/7424/8a00fe7cc36ac263b2c3e9324497d5ff/video/93a9920d-1b24-4c5e-a7d2-63d5489f59b5_index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "sictv",
-    "name": "SICTV",
-    "logo": "",
-    "url": "https://parecisfmlive.brasilstream.com.br/hls/parecisfmlive/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "sonychannel",
-    "name": "SonyChannel",
-    "logo": "",
-    "url": "https://cdn-5.nxplay.com.br/SONY_CHANNEL/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "soutv",
-    "name": "SOUTV",
-    "logo": "",
-    "url": "https://video10.logicahost.com.br/soutv/soutv/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "stztv",
-    "name": "STZTV",
-    "logo": "",
-    "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-12952/playlist/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tcm10hd",
-    "name": "TCM10HD",
-    "logo": "",
-    "url": "https://live.tcm10.com.br/tcm10hd/stream.m3u8",
-    "uf": []
-  },
-  {
-    "id": "terraviva",
-    "name": "TerraViva",
-    "logo": "",
-    "url": "https://9ada494d.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctYnJfVXBseW5rLU5ld2NvX0hMUw/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tiktokradiobrasil",
-    "name": "TikTokRadioBrasil",
-    "logo": "",
-    "url": "https://d1bl6tskrpq9ze.cloudfront.net/hls/master.m3u8?ads.xumo_channelId=99992529",
-    "uf": []
-  },
-  {
-    "id": "timesbrasil",
-    "name": "TimesBrasil",
-    "logo": "",
-    "url": "https://ssai2-ads.api.leiniao.com/global-adinsertion-api/hls/live/v2/21fdb6dd7491406bba86497a24390a25/playlist.m3u8",
     "uf": []
   },
   {
@@ -1133,41 +468,6 @@
     ]
   },
   {
-    "id": "tvadorar",
-    "name": "TVAdorar",
-    "logo": "",
-    "url": "https://cdn-tiva-isaocorp-cloudecast-com.smartbit.co/tvadorar/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvaldeia",
-    "name": "TVAldeia",
-    "logo": "",
-    "url": "https://stmv1.samcast.com.br/giovane7843/giovane7843/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvalternativa",
-    "name": "TVAlternativa",
-    "logo": "",
-    "url": "https://stmv5.samcast.com.br/wagner7919/wagner7919/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvassembleiaceara",
-    "name": "TVAssembleiaCeara",
-    "logo": "",
-    "url": "https://jjn5dkk9bd.zoeweb.tv/z404-live/stream/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvbirigui",
-    "name": "TVBirigui",
-    "logo": "",
-    "url": "https://59f2354c05961.streamlock.net:1443/tvdigitalbirigui/_definst_/tvdigitalbirigui/playlist.m3u8",
-    "uf": []
-  },
-  {
     "id": "tvc-rio",
     "name": "TVC-Rio",
     "logo": "https://i.imgur.com/WDiikWv.png",
@@ -1175,27 +475,6 @@
     "uf": [
       "RJ"
     ]
-  },
-  {
-    "id": "tvcarioca",
-    "name": "TVCarioca",
-    "logo": "",
-    "url": "https://cdn-tiva-video03-logicahost-com-br.smartbit.co/cariocainternacional1/cariocainternacional1/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvcidadeverdecuiaba",
-    "name": "TVCidadeVerdeCuiaba",
-    "logo": "",
-    "url": "https://televisaocidadeverde.brasilstream.com.br/hls/televisaocidadeverde/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvclube",
-    "name": "TVClube",
-    "logo": "",
-    "url": "https://5c483b9d1019c.streamlock.net/8186/8186/playlist.m3u8",
-    "uf": []
   },
   {
     "id": "tvcom-df",
@@ -1216,41 +495,6 @@
     ]
   },
   {
-    "id": "tvcomunitaria",
-    "name": "TVComunitaria",
-    "logo": "",
-    "url": "https://5b7f3c45ab7c2.streamlock.net/8008/smil:8008.smil/playlist.m3u8?DVR=",
-    "uf": []
-  },
-  {
-    "id": "tvcuruca",
-    "name": "TVCuruca",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/tvcurucasp/tvcurucasp/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvdestak",
-    "name": "TVDestak",
-    "logo": "",
-    "url": "https://59f2354c05961.streamlock.net:1443/pascoal/_definst_/pascoal/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvdifusao",
-    "name": "TVDifusao",
-    "logo": "",
-    "url": "https://tvdsoultv.acessaradios.com.br/tvdsoultv/tvdsoultv.stream/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvdifusoraleste",
-    "name": "TVDifusoraLeste",
-    "logo": "",
-    "url": "https://stream.amsolution.net.br:8443/live/60d0a8ea6b884/index.m3u8",
-    "uf": []
-  },
-  {
     "id": "tvecultura",
     "name": "TVE Cultura",
     "logo": "https://i.imgur.com/FpqoWcB.png",
@@ -1267,24 +511,514 @@
     ]
   },
   {
-    "id": "tvempire",
-    "name": "TVEmpire",
+    "id": "adessotv",
+    "name": "AdessoTV",
     "logo": "",
-    "url": "https://5d82644094cc0.streamlock.net/empiremagazinetv/empiremagazinetv/playlist.m3u8",
+    "url": "https://cdn.jmvstream.com/w/LVW-9715/LVW9715_12B26T62tm/playlist.m3u8",
     "uf": []
   },
   {
-    "id": "tvencontrodasaguas",
-    "name": "TVEncontrodasAguas",
+    "id": "agrocanal",
+    "name": "AgroCanal",
     "logo": "",
-    "url": "https://stmv7.samcast.com.br/sistemaencontrodasaguas/sistemaencontrodasaguas/playlist.m3u8",
+    "url": "https://aovivo.equipea.com.br:5443/aovivort/streams/pshRLrnv6isXq7RG4747567774043229.m3u8",
     "uf": []
   },
   {
-    "id": "tvevangelizar",
-    "name": "TVEvangelizar",
+    "id": "ararunatv",
+    "name": "ArarunaTV",
     "logo": "",
-    "url": "https://cdn-tiva-tvevangelizar-brasilstream-com-br.smartbit.co/hls/tvevangelizar/index.m3u8",
+    "url": "https://video05.logicahost.com.br/ararunatv/ararunatv/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "blitstv",
+    "name": "Blitstv",
+    "logo": "",
+    "url": "https://stmv1.transmissaodigital.com/blitstv/blitstv/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "boasnovas",
+    "name": "BoasNovas",
+    "logo": "",
+    "url": "https://cdn.jmvstream.com/w/LVW-9375/LVW9375_6i0wPBCHYc/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "br8tv",
+    "name": "BR8TV",
+    "logo": "",
+    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-11668/ngrp:LVW11668_wiJpjbMrks_all/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "canal38",
+    "name": "Canal38",
+    "logo": "",
+    "url": "https://cdn.jmvstream.com/w/LVW-8503/LVW8503_d0V5oduFlK/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "canalfdr",
+    "name": "CanalFDR",
+    "logo": "",
+    "url": "https://v-us-01.wisestream.io/memfs/e4ade538-7924-4359-81ef-b9d4dd229e91.m3u8",
+    "uf": []
+  },
+  {
+    "id": "canalmetropolitanodenoticias",
+    "name": "CanalMetropolitanodeNoticias",
+    "logo": "",
+    "url": "https://stmv5.samcast.com.br/claudio8701/claudio8701/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "canalsaude",
+    "name": "CanalSaude",
+    "logo": "",
+    "url": "https://eitv7.cdn.broadpeak.io/account351-i1495/event/canalsaude/format720p.m3u8",
+    "uf": []
+  },
+  {
+    "id": "canaluol",
+    "name": "CanalUOL",
+    "logo": "",
+    "url": "https://video24.mais.uol.com.br/live/6146.m3u8",
+    "uf": []
+  },
+  {
+    "id": "catve2",
+    "name": "Catve2",
+    "logo": "",
+    "url": "https://5b33b873179a2.streamlock.net:1443/catve2/catve2/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "chromatv",
+    "name": "ChromaTV",
+    "logo": "",
+    "url": "https://5c483b9d1019c.streamlock.net/8054/8054/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "cindietv",
+    "name": "CINDIETV",
+    "logo": "",
+    "url": "https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/352.m3u8",
+    "uf": []
+  },
+  {
+    "id": "cinturaoverde",
+    "name": "CinturaoVerde",
+    "logo": "",
+    "url": "https://play.redecinturaoverde.com.br/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "classiquetv",
+    "name": "ClassiqueTV",
+    "logo": "",
+    "url": "https://stmv1.srvif.com/classique/classique/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "combrasil",
+    "name": "COMBrasil",
+    "logo": "",
+    "url": "https://dfr80qz435crc.cloudfront.net/EFGH/Amagi/NewCo/New_Brasil_BR/New_Brasil.m3u8",
+    "uf": []
+  },
+  {
+    "id": "conectamaistv",
+    "name": "ConectaMaisTV",
+    "logo": "",
+    "url": "https://adylnet.streampool.net/10324/live/hls/Conecta/index.m3u8",
+    "uf": []
+  },
+  {
+    "id": "conectvbrasil",
+    "name": "ConecTVBrasil",
+    "logo": "",
+    "url": "https://stream01.msolutionbrasil.com.br/hls/conectv/live.m3u8",
+    "uf": []
+  },
+  {
+    "id": "culturafast",
+    "name": "CulturaFast",
+    "logo": "",
+    "url": "https://fpa-gateway.tvcultura.com.br:8181/memfs/606caef0-a290-413d-9f1f-8fcdb3a73831.m3u8",
+    "uf": []
+  },
+  {
+    "id": "despertartv",
+    "name": "DespertarTV",
+    "logo": "",
+    "url": "https://br.conectmy.com.br/DespertarTV/index.m3u8",
+    "uf": []
+  },
+  {
+    "id": "elytv",
+    "name": "ElyTV",
+    "logo": "",
+    "url": "https://stmv1.srvsite.com/ely/ely/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "eutv",
+    "name": "EUTV",
+    "logo": "",
+    "url": "https://cdn.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "falalitoral",
+    "name": "FalaLitoral",
+    "logo": "",
+    "url": "https://5c483b9d1019c.streamlock.net/falalitoraltv/falalitoraltv/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "foratediotv",
+    "name": "ForaTedioTV",
+    "logo": "",
+    "url": "https://stmv2.srvif.com/foratedio/foratedio/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "gefast",
+    "name": "GeFast",
+    "logo": "",
+    "url": "https://amg00716-globo-amg00716c1-tcl-br-9495.playouts.now.amagi.tv/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "gospelcartoon",
+    "name": "GospelCartoon",
+    "logo": "",
+    "url": "https://stmv1.srvif.com/gospelcartoon/gospelcartoon/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "gospelmovietv",
+    "name": "GospelMovieTV",
+    "logo": "",
+    "url": "https://stmv1.srvif.com/gospelf/gospelf/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "impdtvworldwide",
+    "name": "IMPDTVWorldwide",
+    "logo": "",
+    "url": "https://igrejamundial.nuvemplay.live/hls/stream.m3u8",
+    "uf": []
+  },
+  {
+    "id": "j3newstv",
+    "name": "J3NEWSTV",
+    "logo": "",
+    "url": "https://video01.brascast.com/d92ebb4f/d92ebb4f/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "kpoptvplay",
+    "name": "KpopTVPlay",
+    "logo": "",
+    "url": "https://giatv.bozztv.com/giatv/giatv-kpoptvplay/kpoptvplay/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "kuriakoscine",
+    "name": "KuriakosCine",
+    "logo": "",
+    "url": "https://w2.manasat.com/kcine/smil:kcine.smil/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "kuriakoskids",
+    "name": "KuriakosKids",
+    "logo": "",
+    "url": "https://w2.manasat.com/kkids/smil:kkids.smil/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "laboraltv",
+    "name": "LaboralTV",
+    "logo": "",
+    "url": "https://tv.laboralsst.com.br/hls/stream.m3u8",
+    "uf": []
+  },
+  {
+    "id": "lamorerockshowwebtv",
+    "name": "LamoreRockShowWebTV",
+    "logo": "",
+    "url": "https://a.cdni.live/rodrigo2364/rodrigo2364/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "lke",
+    "name": "Lke",
+    "logo": "",
+    "url": "https://cnl-cl.otteravision.com/cnl/cl_h265/cl_h265.m3u8",
+    "uf": []
+  },
+  {
+    "id": "loading",
+    "name": "Loading",
+    "logo": "",
+    "url": "https://stmv1.srvif.com/loadingtv/loadingtv/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "mbcbrasiltv",
+    "name": "MBCBrasilTV",
+    "logo": "",
+    "url": "https://play.mbcbrasil.tv.br/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "nickonline",
+    "name": "NickOnline",
+    "logo": "",
+    "url": "https://x1colegal.com/hls/stream.m3u8",
+    "uf": []
+  },
+  {
+    "id": "nicktoonsbrasil",
+    "name": "NickToonsBrasil",
+    "logo": "",
+    "url": "https://stmv2.srvif.com/nicktoons/nicktoons/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "nsports",
+    "name": "NSports",
+    "logo": "",
+    "url": "https://ogc-nsprt-tcl-roku-syndication.otteravision.com/ogc/nsprt/nsprt.m3u8",
+    "uf": []
+  },
+  {
+    "id": "ntv",
+    "name": "NTV",
+    "logo": "",
+    "url": "https://cdn.livespanel.com/nossatv/nossatv/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "petloverstv",
+    "name": "PetloversTV",
+    "logo": "",
+    "url": "https://video04.logicahost.com.br/petloverstv/petloverstv/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "playtv",
+    "name": "PlayTV",
+    "logo": "",
+    "url": "https://isaocorp.cloudecast.com/playtv/index.m3u8",
+    "uf": []
+  },
+  {
+    "id": "plenatv",
+    "name": "PlenaTV",
+    "logo": "",
+    "url": "https://cdn.jmvstream.com/w/LVW-9591/LVW9591_PmXtgATnaS/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "plenitudetv",
+    "name": "PlenitudeTV",
+    "logo": "",
+    "url": "https://strv.painelvox.top/plenitude/plenitude/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "rbatv",
+    "name": "RBATV",
+    "logo": "",
+    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-15748/LVW15748_Yed7yzLuRC/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "rctvbrasil",
+    "name": "RCTVBrasil",
+    "logo": "",
+    "url": "https://stmv.webtvninjas.com.br/rctv/rctv/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "recordnews",
+    "name": "RecordNews",
+    "logo": "",
+    "url": "https://rnw-rn.otteravision.com/rnw/rn/rnw_rn.m3u8",
+    "uf": []
+  },
+  {
+    "id": "redebrasil",
+    "name": "RedeBrasil",
+    "logo": "",
+    "url": "https://redebrasil.nuvemplay.live/hls/stream.m3u8",
+    "uf": []
+  },
+  {
+    "id": "redegospel",
+    "name": "RedeGospel",
+    "logo": "",
+    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "redemeionorte",
+    "name": "RedeMeioNorte",
+    "logo": "",
+    "url": "https://maystreaming.cloudecast.com/redemeio/index.m3u8",
+    "uf": []
+  },
+  {
+    "id": "redeminas",
+    "name": "RedeMinas",
+    "logo": "",
+    "url": "https://8hzcavccys.zoeweb.tv/redeminas/ngrp:redeminas_all/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "redengt",
+    "name": "RedeNGT",
+    "logo": "",
+    "url": "https://isaocorp.cloudecast.com/ngt/index.m3u8",
+    "uf": []
+  },
+  {
+    "id": "redesptv",
+    "name": "RedeSPTV",
+    "logo": "",
+    "url": "https://video01.logicahost.com.br/websptv/websptv/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "redetvmais",
+    "name": "RedeTVMais",
+    "logo": "",
+    "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "rittv",
+    "name": "RITTV",
+    "logo": "",
+    "url": "https://acesso.ecast.site:3648/live/ritlive.m3u8",
+    "uf": []
+  },
+  {
+    "id": "sbtinterior",
+    "name": "SBTInterior",
+    "logo": "",
+    "url": "https://cdn.jmvstream.com/w/LVW-10801/LVW10801_Xvg4R0u57n/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "sbtnacional",
+    "name": "SBTNacional",
+    "logo": "",
+    "url": "https://6836041ea1117.streamlock.net/cverde/cverde/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "sbtnews",
+    "name": "SBTNews",
+    "logo": "",
+    "url": "https://dai.google.com/linear/hls/event/1XSOdtQ0SH2G8OEmEfGgjQ/master.m3u8",
+    "uf": []
+  },
+  {
+    "id": "sictv",
+    "name": "SICTV",
+    "logo": "",
+    "url": "https://parecisfmlive.brasilstream.com.br/hls/parecisfmlive/index.m3u8",
+    "uf": []
+  },
+  {
+    "id": "soutv",
+    "name": "SOUTV",
+    "logo": "",
+    "url": "https://video10.logicahost.com.br/soutv/soutv/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "stztv",
+    "name": "STZTV",
+    "logo": "",
+    "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-12952/playlist/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "tcm10hd",
+    "name": "TCM10HD",
+    "logo": "",
+    "url": "https://live.tcm10.com.br/tcm10hd/stream.m3u8",
+    "uf": []
+  },
+  {
+    "id": "terraviva",
+    "name": "TerraViva",
+    "logo": "",
+    "url": "https://9ada494d.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctYnJfVXBseW5rLU5ld2NvX0hMUw/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "tiktokradiobrasil",
+    "name": "TikTokRadioBrasil",
+    "logo": "",
+    "url": "https://d1bl6tskrpq9ze.cloudfront.net/hls/master.m3u8?ads.xumo_channelId=99992529",
+    "uf": []
+  },
+  {
+    "id": "tvaldeia",
+    "name": "TVAldeia",
+    "logo": "",
+    "url": "https://stmv1.samcast.com.br/giovane7843/giovane7843/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "tvalternativa",
+    "name": "TVAlternativa",
+    "logo": "",
+    "url": "https://stmv5.samcast.com.br/wagner7919/wagner7919/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "tvcidadeverdecuiaba",
+    "name": "TVCidadeVerdeCuiaba",
+    "logo": "",
+    "url": "https://televisaocidadeverde.brasilstream.com.br/hls/televisaocidadeverde/index.m3u8",
+    "uf": []
+  },
+  {
+    "id": "tvclube",
+    "name": "TVClube",
+    "logo": "",
+    "url": "https://5c483b9d1019c.streamlock.net/8186/8186/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "tvcomunitaria",
+    "name": "TVComunitaria",
+    "logo": "",
+    "url": "https://5b7f3c45ab7c2.streamlock.net/8008/smil:8008.smil/playlist.m3u8?DVR=",
+    "uf": []
+  },
+  {
+    "id": "tvcuruca",
+    "name": "TVCuruca",
+    "logo": "",
+    "url": "https://stmv1.srvif.com/tvcurucasp/tvcurucasp/playlist.m3u8",
+    "uf": []
+  },
+  {
+    "id": "tvdifusao",
+    "name": "TVDifusao",
+    "logo": "",
+    "url": "https://tvdsoultv.acessaradios.com.br/tvdsoultv/tvdsoultv.stream/playlist.m3u8",
     "uf": []
   },
   {
@@ -1292,34 +1026,6 @@
     "name": "TVFuturo",
     "logo": "",
     "url": "https://tv02.zas.media:1936/tvfuturo/tvfuturo/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvgazin",
-    "name": "TVGazin",
-    "logo": "",
-    "url": "https://cdn-tiva-video09-logicahost-com-br.smartbit.co/tvgazin/tvgazin/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvglobosaopaulo",
-    "name": "TVGloboSaoPaulo",
-    "logo": "",
-    "url": "https://cdn-5.nxplay.com.br/GLOBO_SP_TK/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvgraopara",
-    "name": "TVGraoPara",
-    "logo": "",
-    "url": "https://video01.kshost.com.br:4443/moises3834/moises3834/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvinterlagos",
-    "name": "TVInterlagos",
-    "logo": "",
-    "url": "https://v8.ciclano.io:1443/tvinterlagos/_definst_/tvinterlagos/playlist.m3u8",
     "uf": []
   },
   {
@@ -1341,27 +1047,6 @@
     "name": "TVLifeAmerica",
     "logo": "",
     "url": "https://streaming.cloudecast.com/hls/tvlifeamerica/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvmackenzie",
-    "name": "TVMackenzie",
-    "logo": "",
-    "url": "https://player.internetaovivo.com:8443/live_tvmackenzieabr/tvmackenzieabr/playlist.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvmeio",
-    "name": "TVMeio",
-    "logo": "",
-    "url": "https://cdn-tiva-maystreaming-cloudecast-com.smartbit.co/redemeio/index.m3u8",
-    "uf": []
-  },
-  {
-    "id": "tvmon",
-    "name": "TVMon",
-    "logo": "",
-    "url": "https://cdn-tiva-video10-logicahost-com-br.smartbit.co/tvmon/tvmon/playlist.m3u8",
     "uf": []
   },
   {
@@ -1460,13 +1145,6 @@
     "name": "VEJAPlusTV",
     "logo": "",
     "url": "https://gpa-vja.otteravision.com/gpa/vja/vja.m3u8",
-    "uf": []
-  },
-  {
-    "id": "vrtchannel",
-    "name": "VRTChannel",
-    "logo": "",
-    "url": "https://sistemavrt.vrtchannel.tv.br:3473/stream/play.m3u8",
     "uf": []
   }
 ]

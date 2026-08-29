@@ -136,10 +136,6 @@ async function fetchIptvOrg() {
   return parseIptvOrg(await res.text())
 }
 
-function sortChannels(list) {
-  return [...list].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'))
-}
-
 function buildIndexHtml(channels) {
   const cryptoItems = channels.map((c) => ({
     name: c.name.replace(/\\/g, '\\\\').replace(/"/g, '\\"'),
@@ -199,6 +195,7 @@ function buildIndexHtml(channels) {
 
   <div id="stage">
     <video id="video" playsinline autoplay muted></video>
+    <video id="previd" playsinline muted preload="metadata" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"></video>
     <div id="poster">
       <img id="posterLogo" alt="">
       <div class="msg" id="posterMsg">Carregando sinal…</div>
@@ -235,9 +232,11 @@ const nextBtn = document.getElementById('next');
 const playBtn = document.getElementById('play');
 
 let idx = 0;
-let hls = null;
 let live = true;
-let tried = new Set();
+let loadTimer = null;
+let tryingIndex = -1;
+
+const START_TIMEOUT = 10000; // 10s sem iniciar -> pula para o proximo canal
 
 function setPoster(show, msg) {
   poster.classList.toggle('hide', !show);
@@ -250,48 +249,86 @@ function renderNow() {
   if (c.logo) { nowLogo.src = c.logo; nowLogo.style.display = ''; } else { nowLogo.style.display = 'none'; }
   posterLogo.src = c.logo || '';
 }
-function stop() {
-  if (hls) { try { hls.destroy(); } catch (e) {} hls = null; }
-  try { video.pause(); video.removeAttribute('src'); video.load(); } catch (e) {}
+function destroyHls(el) {
+  if (el._hls) { try { el._hls.destroy(); } catch (e) {} el._hls = null; }
+  try { el.pause(); el.removeAttribute('src'); el.load(); } catch (e) {}
 }
+function armLoadTimer(i) {
+  clearTimeout(loadTimer);
+  loadTimer = setTimeout(() => {
+    if (tryingIndex === i) {
+      setPoster(true, 'Sinal lento/fora do ar — pulando para o proximo…');
+      next();
+    }
+  }, START_TIMEOUT);
+}
+
 function playChannel(i) {
   i = ((i % CHANNELS.length) + CHANNELS.length) % CHANNELS.length;
   idx = i;
+  tryingIndex = i;
   const c = CHANNELS[idx];
-  stop();
+  destroyHls(video);
+  clearTimeout(loadTimer);
   renderNow();
-  setPoster(true, 'Carregando sinal…');
-  if (!c.url || !/^https?:/i.test(c.url)) {
+  if (!c.url || !(c.url.startsWith('https://') || c.url.startsWith('http://'))) {
     setPoster(true, 'Sem link para este canal.');
+    next();
     return;
   }
-  if (/^http:\/\//i.test(c.url)) {
-    setPoster(true, '🔒 Este canal é via HTTP e não toca na página segura (HTTPS). Abra a playlist.m3u num player externo (VLC/IPTV).');
-    return;
-  }
-  if (hls && Hls.isSupported()) {
-    try {
-      hls = new Hls({ autoStartLoad: true, startLevel: -1 });
-      hls.loadSource(c.url);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.ERROR, (e, data) => {
-        if (data && data.fatal) {
-          setPoster(true, 'Erro ao carregar sinal. Tente outro canal.');
-        }
-      });
-      hls.on(Hls.Events.MANIFEST_PARSED, () => { setPoster(false); });
-      if (video.paused) video.play().catch(()=>{});
-    } catch (e) {
-      setPoster(true, 'Erro no player.');
+  if (c.url.startsWith('http://')) {
+    // HTTP nao toca na pagina segura; pula automaticamente continuando a busca por um HTTPS.
+    setPoster(true, '🔒 Pulo canal HTTP (só na playlist.m3u). Buscando o próximo…');
+    let k = 1;
+    while (k < CHANNELS.length) {
+      const j = (i + k) % CHANNELS.length;
+      if (CHANNELS[j].url && CHANNELS[j].url.startsWith('https://')) break;
+      k++;
     }
+    playChannel(i + k);
+    return;
+  }
+  setPoster(true, 'Carregando: ' + c.name + '…');
+  if (Hls.isSupported()) {
+    try {
+      const h = new Hls({ autoStartLoad: true, startLevel: -1 });
+      h.on(Hls.Events.ERROR, (e, data) => {
+        if (data && data.fatal && tryingIndex === idx) { next(); }
+      });
+      h.on(Hls.Events.MANIFEST_PARSED, () => {
+        if (tryingIndex === idx) { setPoster(false); clearTimeout(loadTimer); tryingIndex = -1; preloadNext(); }
+      });
+      video._hls = h;
+      if (video.paused) video.play().catch(()=>{});
+      h.loadSource(c.url);
+      h.attachMedia(video);
+      armLoadTimer(i);
+    } catch (e) { setPoster(true, 'Erro no player.'); }
   } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
     video.src = c.url;
-    video.play().catch(()=>{});
-    setPoster(false);
+    if (video.paused) video.play().catch(()=>{});
+    setPoster(false); clearTimeout(loadTimer); tryingIndex = -1; preloadNext();
   } else {
     setPoster(true, 'Seu navegador não suporta HLS.');
   }
 }
+
+function preloadNext() {
+  const el = document.getElementById('previd');
+  const j = (idx + 1) % CHANNELS.length;
+  const c = CHANNELS[j];
+  destroyHls(el);
+  if (!c.url || !c.url.startsWith('https://')) return;
+  if (!Hls.isSupported()) return;
+  try {
+    const h = new Hls({ autoStartLoad: true, startLevel: -1 });
+    h.on(Hls.Events.ERROR, () => {});
+    el._hls = h;
+    h.loadSource(c.url);
+    h.attachMedia(el);
+  } catch (e) {}
+}
+
 function next() { live = true; playChannel(idx + 1); }
 function prev() { live = true; playChannel(idx - 1); }
 function toggle() { if (video.paused) { video.play().catch(()=>{}); } else { video.pause(); } }
@@ -335,6 +372,53 @@ function buildM3u(channels) {
   return lines.join('\n') + '\n'
 }
 
+// Ordena colocando os canais curados (confiaveis) primeiro, depois os do iptv-org.
+function orderLists(merged) {
+  const curated = merged.filter((c) => c.source === 'curada')
+  const iptv = merged.filter((c) => c.source === 'iptv-org')
+  const byName = (a, b) => a.name.localeCompare(b.name, 'pt-BR')
+  return [...curated.sort(byName), ...iptv.sort(byName)]
+}
+
+async function checkHls(ch) {
+  if (!/^https:\/\//i.test(ch.url)) return true // http: não toca na página, mas mantém p/ playlist externa
+  const ctrl = new AbortController()
+  const timer = setTimeout(() => ctrl.abort(), 6500)
+  try {
+    const res = await fetch(ch.url, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126.0 Safari/537.36' },
+      signal: ctrl.signal,
+    })
+    if (!res.ok && res.status !== 206) return false
+    const body = await res.text()
+    return body.includes('#EXTM3U') || /^#EXT/i.test(body)
+  } catch {
+    return false
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+async function verifyOnly(list, source) {
+  const toCheck = list.filter((c) => c.source === source)
+  const keepMap = new Map()
+
+  let cursor = 0
+  const WORKERS = 12
+  async function worker() {
+    while (cursor < toCheck.length) {
+      const idx = cursor++
+      const c = toCheck[idx]
+      keepMap.set(c.id, await checkHls(c))
+    }
+  }
+  await Promise.all(Array.from({ length: WORKERS }, worker))
+
+  const kept = list.filter((c) => c.source !== source || keepMap.get(c.id))
+  const dead = list.length - kept.length
+  return { kept, dead }
+}
+
 async function main() {
   log('TV 3.0 · gerando…')
   const base = loadCurated()
@@ -347,28 +431,42 @@ async function main() {
     log(`  aviso: não deu pra buscar iptv-org (${err.message}) — segue só com a base.`)
   }
 
-  const merged = sortChannels(merge(base, complement))
-  const fromBase = merged.filter((c) => c.source === 'curada').length
-  const fromIptv = merged.filter((c) => c.source === 'iptv-org').length
+  const merged = merge(base, complement)
+  log(`  mesclado: ${merged.length} (${base.length} curados + ${merged.length - base.length} do iptv-org)`)
+
+  // Verifica (rapidamente) os canais do iptv-org e remove os que não respondem HLS.
+  let finalList = merged
+  let dead = 0
+  if (!GOVERNMENTAL_ONLY) {
+    log('  verificando canais HTTPS do iptv-org (removendo mortos/lentos)…')
+    const r = await verifyOnly(merged, 'iptv-org')
+    finalList = r.kept
+    dead = r.dead
+    log(`  verificacao: ${finalList.length - base.length} aprovados, ${dead} removidos`)
+  }
+
+  finalList = orderLists(finalList)
+  const fromBase = finalList.filter((c) => c.source === 'curada').length
+  const fromIptv = finalList.filter((c) => c.source === 'iptv-org').length
 
   rmSync(OUT, { recursive: true, force: true })
   mkdirSync(OUT, { recursive: true })
 
-  writeFileSync(path.join(OUT, 'index.html'), buildIndexHtml(merged), 'utf8')
-  writeFileSync(path.join(OUT, 'playlist.m3u'), buildM3u(merged), 'utf8')
+  writeFileSync(path.join(OUT, 'index.html'), buildIndexHtml(finalList), 'utf8')
+  writeFileSync(path.join(OUT, 'playlist.m3u'), buildM3u(finalList), 'utf8')
   writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify(buildManifest(), null, 2), 'utf8')
   writeFileSync(
     path.join(OUT, 'channels.json'),
-    JSON.stringify(merged.map((c) => ({ id: c.id, name: c.name, logo: c.logo, url: c.url, uf: c.uf })), null, 2),
+    JSON.stringify(finalList.map((c) => ({ id: c.id, name: c.name, logo: c.logo, url: c.url, uf: c.uf })), null, 2),
     'utf8'
   )
   writeFileSync(
     path.join(OUT, 'channels-status.json'),
-    JSON.stringify({ generatedAt: new Date().toISOString(), total: merged.length, fromCurated: fromBase, fromIptvOrg: fromIptv }, null, 2),
+    JSON.stringify({ generatedAt: new Date().toISOString(), total: finalList.length, fromCurated: fromBase, fromIptvOrg: fromIptv, removedDead: dead }, null, 2),
     'utf8'
   )
 
-  log(`  destino: public/ (${merged.length} canais: ${fromBase} curados + ${fromIptv} do iptv-org)`)
+  log(`  destino: public/ (${finalList.length} canais: ${fromBase} curados + ${fromIptv} do iptv-org)`)
   log('TV 3.0 · OK')
 }
 
