@@ -19,10 +19,9 @@ export default {
     }
 
     const url = new URL(request.url)
-    // Liberar apenas nós mesmos (opcional, mas recomendado) e o GitHub Pages:
-    const origin = request.headers.get('Origin') || url.origin
-    const allowed = !origin || origin.startsWith('https://wagnecorreia.github.io')
-    if (!allowed) {
+    // Libera o GitHub Pages; pedidos sem Origin (curl, player nativo) também passam.
+    const origin = request.headers.get('Origin')
+    if (origin && !origin.startsWith('https://wagnecorreia.github.io')) {
       return new Response('Origin nao permitido', { status: 403, headers: CORS })
     }
 
