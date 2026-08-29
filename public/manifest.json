@@ -1,0 +1,9 @@
+{
+  "name": "TV 3.0",
+  "short_name": "TV 3.0",
+  "description": "Sinal de TV, de graça, pra onde não existe.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b0e14",
+  "theme_color": "#0b0e14"
+}

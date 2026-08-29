@@ -1,0 +1,11 @@
+{
+  "name": "tv-3.0",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web TV: player único + playlist atualizada via cron. Sinal de TV de graça pra onde não existe.",
+  "type": "module",
+  "scripts": {
+    "build": "node generator/build.mjs",
+    "start": "npx serve public -l 8080"
+  }
+}
