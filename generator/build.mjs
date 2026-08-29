@@ -243,10 +243,6 @@ function buildIndexHtml(channels) {
   #poster img { width:132px; height:132px; object-fit:contain; filter:drop-shadow(0 8px 24px rgba(0,0,0,.65)); border-radius:20px; background:#11161f; border:1px solid rgba(255,255,255,.06); }
   #poster .msg { font-size:16px; font-weight:600; }
   #poster .small { font-size:13px; color:#606878; }
-  #poster .globo-fallback { margin-top:6px; display:inline-flex; align-items:center; gap:9px; background:linear-gradient(135deg,#d4000f,#8c0303); color:#fff; border:none; padding:13px 22px; border-radius:999px; font-size:15px; font-weight:800; cursor:pointer; box-shadow:0 8px 30px rgba(212,0,15,.45); transition:.16s; }
-  #poster .globo-fallback:hover { transform:translateY(-2px); box-shadow:0 12px 36px rgba(212,0,15,.6); }
-  #poster .globo-fallback:active { transform:scale(.95); }
-  #poster .globo-fallback[hidden] { display:none; }
 
   /* Barra inferior integrada */
   #now { position:absolute; bottom:0; left:0; right:0; display:flex; align-items:center; gap:16px; padding:18px 22px 26px; z-index:4; }
@@ -255,7 +251,7 @@ function buildIndexHtml(channels) {
   #now .name { font-weight:800; font-size:20px; text-shadow:0 2px 12px rgba(0,0,0,.7); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   #now .sub { font-size:12px; color:#aeb6c8; opacity:.85; text-shadow:0 1px 6px rgba(0,0,0,.7); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .controls { display:flex; gap:12px; margin-left:auto; flex:0 0 auto; }
-  .ctrl { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); color:var(--fg); width:56px; height:56px; border-radius:50%; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.14s; backdrop-filter:blur(8px); }
+  .ctrl { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); color:var(--fg); min-width:56px; height:56px; border-radius:14px; font-size:15px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0 18px; transition:.14s; backdrop-filter:blur(8px); white-space:nowrap; }
   .ctrl:hover { border-color:var(--accent2); background:rgba(34,211,238,.18); transform:translateY(-2px); }
   .ctrl:active { transform:scale(.93); }
 
@@ -281,7 +277,7 @@ function buildIndexHtml(channels) {
 <body>
 <div id="app">
   <div id="stage">
-    <video id="video" playsinline autoplay muted></video>
+    <video id="video" playsinline autoplay></video>
     <video id="previd" playsinline muted preload="metadata" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"></video>
     <div class="scrim-top"></div>
     <div class="scrim-bottom"></div>
@@ -293,8 +289,7 @@ function buildIndexHtml(channels) {
     <div id="poster">
       <img id="posterLogo" alt="">
       <div class="msg" id="posterMsg">Carregando sinal…</div>
-      <div class="small">Se ficar parado, aperte ► ou troque de canal</div>
-      <button class="globo-fallback" id="globoFallback" hidden>Assistir Globo oficial ▶</button>
+      <div class="small">Se ficar parado, troque de canal</div>
     </div>
     <div id="now">
       <img id="nowLogo" class="logo" alt="">
@@ -303,9 +298,8 @@ function buildIndexHtml(channels) {
         <div class="sub" id="nowSub"></div>
       </div>
       <div class="controls">
-        <button class="ctrl" id="prev" title="Anterior (←)">⏮</button>
-        <button class="ctrl" id="play" title="Play/Pause (Espaço)">⏯</button>
-        <button class="ctrl" id="next" title="Próximo (→)">⏭</button>
+        <button class="ctrl" id="prev" title="Canal anterior (←)"><span class="nav-txt">‹ Voltar</span></button>
+        <button class="ctrl" id="next" title="Próximo canal (→)"><span class="nav-txt">Avançar ›</span></button>
       </div>
     </div>
   </div>
@@ -334,18 +328,12 @@ const nowName = document.getElementById('nowName');
 const nowSub = document.getElementById('nowSub');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
-const playBtn = document.getElementById('play');
 const regionBtn = document.getElementById('regionBtn');
 const regionLabel = document.getElementById('regionLabel');
 const overlay = document.getElementById('overlay');
 const rmClose = document.getElementById('rmClose');
 const regionSearch = document.getElementById('regionSearch');
 const regionBody = document.getElementById('regionBody');
-const globoFallback = document.getElementById('globoFallback');
-
-// URL oficial da TV Globo ao vivo no Globoplay (afiliada é escolhida pela conta/região do usuário).
-const GLOBO_LIVE = 'https://globoplay.globo.com/tv-globo/ao-vivo/7832875/';
-const GLOBO_EXCLUDE = /sportv|multishow|globo\s*news|gnt|viva|canal\s*brasil|futura|premium|internacional|rural|off|24h|globo\.?net/i;
 
 // Proxy para canais HTTP (ex.: Globo). Preencha com a URL do seu Cloudflare Worker.
 // Dica: pode testar com  ?proxy=https://SEU-WORKER.workers.dev  sem redeploy.
@@ -368,35 +356,6 @@ function normalize(s) { return String(s||'').normalize('NFD').replace(/[^a-z0-9]
 function onlineUrl(c) {
   if (!PROXY_BASE) return c.url;
   return PROXY_BASE + (PROXY_BASE.endsWith('?') ? '' : '?') + 'url=' + encodeURIComponent(c.url);
-}
-
-// É a TV Globo ao vivo? (não Sportv/Multishow/GloboNews etc.)
-function isGloboLive(name) {
-  const n = normalize(name);
-  if (!n.includes('globo') || n.includes('dream')) return false;
-  return !GLOBO_EXCLUDE.test(name);
-}
-
-// Abre o Globoplay (TV Globo) numa nova aba / sessão (funciona como WebView no app Android).
-function openGloboOficial() {
-  const url = GLOBO_LIVE;
-  const w = window.open(url, '_blank', 'noopener');
-  if (!w) { location.href = url; }
-}
-
-function updateGloboFallback() {
-  const c = CHANNELS[idx];
-  const show = c && isGloboLive(c.name);
-  globoFallback.hidden = !show;
-}
-
-// A Globo não tocou no HLS: para aqui e oferece o globoplay oficial, sem pular o canal.
-function globoFail() {
-  clearTimeout(loadTimer);
-  const c = CHANNELS[idx];
-  setPoster(true, (c ? c.name : 'Globo') + ' não abriu aqui. Assista no Globoplay oficial:');
-  globoFallback.hidden = false;
-  globoFallback.focus();
 }
 
 // --- Geolocalização ---
@@ -480,7 +439,6 @@ function renderNow() {
   nowSub.textContent = PROXY_BASE && c.url.startsWith('http://') ? 'via proxy' : (c.url || 'sem url');
   if (c.logo) { nowLogo.src = c.logo; nowLogo.style.display = ''; } else { nowLogo.style.display = 'none'; }
   posterLogo.src = c.logo || '';
-  updateGloboFallback();
 }
 function destroyHls(el) {
   if (el._hls) { try { el._hls.destroy(); } catch (e) {} el._hls = null; }
@@ -490,8 +448,8 @@ function armLoadTimer(i) {
   clearTimeout(loadTimer);
   loadTimer = setTimeout(() => {
     if (tryingIndex === i) {
-      if (isGloboLive(CHANNELS[i].name)) { globoFail(); }
-      else { setPoster(true, 'Sinal lento/fora do ar — pulando para o proximo…'); next(); }
+      setPoster(true, 'Sinal lento/fora do ar — pulando para o próximo…');
+      next();
     }
   }, START_TIMEOUT);
 }
@@ -512,11 +470,7 @@ function playChannel(i) {
     return;
   }
   if (isHttp && !PROXY_BASE) {
-    if (isGloboLive(c.name)) {
-      globoFail();
-      return;
-    }
-    setPoster(true, '🔒 Canal via HTTP. Configure o proxy (Globo etc.) para tocar aqui.');
+    setPoster(true, '🔒 Canal via HTTP. Configure o proxy para tocar aqui.');
     let k = 1;
     while (k < CHANNELS.length) {
       const j = (i + k) % CHANNELS.length;
@@ -531,15 +485,35 @@ function playChannel(i) {
   const src = onlineUrl(c);
   if (Hls.isSupported()) {
     try {
-      const h = new Hls({ autoStartLoad: true, startLevel: -1 });
+      // Configuração otimizada para live: buffer ~15s, startLevel baixo, sobe depois
+      const h = new Hls({
+        autoStartLoad: true,
+        lowLatencyMode: false,
+        startLevel: 0,                 // começa na menor qualidade pra encher buffer rápido
+        capLevelToPlayerSize: true,
+        maxBufferLength: 45,           // segundos de buffer à frente
+        maxMaxBufferLength: 90,
+        backBufferLength: 20,
+        maxBufferSize: 150 * 1000 * 1000,
+        maxBufferHole: 0.8,
+        manifestLoadingMaxRetry: 4,
+        levelLoadingMaxRetry: 4,
+        fragLoadingMaxRetry: 4,
+        fragLoadingTimeOut: 30000,
+        liveSyncDurationCount: 6       // mantém ~6s de atraso pro live não travar
+      });
       h.on(Hls.Events.ERROR, (e, data) => {
-        if (data && data.fatal && tryingIndex === idx) {
-          if (isGloboLive(c.name)) { globoFail(); }
-          else { next(); }
-        }
+        if (data && data.fatal && tryingIndex === idx) { next(); }
       });
       h.on(Hls.Events.MANIFEST_PARSED, () => {
-        if (tryingIndex === idx) { setPoster(false); clearTimeout(loadTimer); tryingIndex = -1; preloadNext(); }
+        if (tryingIndex === idx) {
+          setPoster(false);
+          clearTimeout(loadTimer);
+          tryingIndex = -1;
+          preloadNext();
+          // Após ~15s, libera qualidade automática (auto = -1)
+          setTimeout(() => { if (h && h.currentLevel !== -1) h.currentLevel = -1; }, 15000);
+        }
       });
       video._hls = h;
       if (video.paused) video.play().catch(()=>{});
@@ -564,23 +538,36 @@ function preloadNext() {
   if (!c.url || !c.url.startsWith('https://')) return;
   if (!Hls.isSupported()) return;
   try {
-    const h = new Hls({ autoStartLoad: true, startLevel: -1 });
+    const h = new Hls({
+      autoStartLoad: true,
+      lowLatencyMode: false,
+      startLevel: 0,
+      capLevelToPlayerSize: true,
+      maxBufferLength: 45,
+      maxMaxBufferLength: 90,
+      backBufferLength: 20,
+      maxBufferSize: 150 * 1000 * 1000,
+      maxBufferHole: 0.8,
+      manifestLoadingMaxRetry: 4,
+      levelLoadingMaxRetry: 4,
+      fragLoadingMaxRetry: 4,
+      fragLoadingTimeOut: 30000,
+      liveSyncDurationCount: 6
+    });
     h.on(Hls.Events.ERROR, () => {});
     el._hls = h;
     h.loadSource(c.url);
     h.attachMedia(el);
+    setTimeout(() => { if (h && h.currentLevel !== -1) h.currentLevel = -1; }, 15000);
   } catch (e) {}
 }
 
 function next() { live = true; playChannel(idx + 1); }
 function prev() { live = true; playChannel(idx - 1); }
-function toggle() { if (video.paused) { video.play().catch(()=>{}); } else { video.pause(); } }
 
 prevBtn.onclick = prev;
 nextBtn.onclick = next;
-playBtn.onclick = toggle;
 regionBtn.onclick = openModal;
-globoFallback.onclick = openGloboOficial;
 rmClose.onclick = closeModal;
 overlay.onclick = (e) => { if (e.target === overlay) closeModal(); };
 document.addEventListener('keydown', (e) => {
@@ -590,7 +577,6 @@ document.addEventListener('keydown', (e) => {
   }
   if (e.key === 'ArrowRight') next();
   else if (e.key === 'ArrowLeft') prev();
-  else if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); toggle(); }
 });
 
 (async () => {

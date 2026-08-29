@@ -319,13 +319,13 @@
     {
       "id": "tvcultura",
       "name": "TV Cultura",
-      "logo": "https://i.ibb.co/nm0jXMM/cultura-3x.png",
+      "logo": "https://logos.imperioapps.top/CULTURA.png",
       "url": "https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8"
     },
     {
       "id": "tvbrasil",
       "name": "TV Brasil",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/TvBrasil2023.png/960px-TvBrasil2023.png",
+      "logo": "https://logos.imperioapps.top/TV_BRASIL.png",
       "url": "https://tvbrasil-stream.ebc.com.br/index.m3u8"
     },
     {
@@ -337,7 +337,7 @@
     {
       "id": "canalfutura",
       "name": "Canal Futura",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Canal_Futura.png/960px-Canal_Futura.png",
+      "logo": "https://logos.imperioapps.top/FUTURA.png",
       "url": "http://168.197.104.22/FUTURA/index.m3u8"
     },
     {
@@ -348,38 +348,74 @@
     },
     {
       "id": "globo",
-      "name": "Globo (Sinal Aberto)",
+      "name": "Globo RJ",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-      "url": "http://hls1.sua.tv/live/globotvbahiafhdbr2/s.m3u8"
+      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNjMubTN1OA==.m3u8"
+    },
+    {
+      "id": "globo-sp",
+      "name": "Globo SP",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
+      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjA0Mi5tM3U4.m3u8"
+    },
+    {
+      "id": "globo-minas",
+      "name": "Globo Minas",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
+      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNTkubTN1OA.m3u8"
+    },
+    {
+      "id": "globo-rede-bahia",
+      "name": "Globo Bahia",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
+      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzEyMTMubTN1OA.m3u8"
+    },
+    {
+      "id": "globo-rpc-curitiba",
+      "name": "Globo RPC Curitiba",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
+      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExOTkubTN1OA.m3u8"
+    },
+    {
+      "id": "globo-rbs-porto-alegre",
+      "name": "Globo RBS Porto Alegre",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
+      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExMDIubTN1OA.m3u8"
+    },
+    {
+      "id": "globo-nordeste",
+      "name": "Globo Nordeste",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
+      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjAwMy5tM3U4.m3u8"
     },
     {
       "id": "sbt",
       "name": "SBT",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SBT_logo_2022.svg/512px-SBT_logo_2022.svg.png",
+      "logo": "https://logos.imperioapps.top/sbt.png",
       "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8"
     },
     {
       "id": "record",
       "name": "Record",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Record_TV_logo_2023.svg/512px-Record_TV_logo_2023.svg.png",
+      "logo": "https://logos.imperioapps.top/RECORD.png",
       "url": "https://media.cdntvms.com.br/record_nacional_sat/index.m3u8"
     },
     {
       "id": "band",
       "name": "Band",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Band_logo_2023.svg/512px-Band_logo_2023.svg.png",
+      "logo": "https://logos.imperioapps.top/BAND.png",
       "url": "https://media.cdntvms.com.br/band_sat/index.m3u8"
     },
     {
       "id": "redetv",
       "name": "RedeTV!",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/RedeTV%21_logo_2019.svg/512px-RedeTV%21_logo_2019.svg.png",
+      "logo": "https://logos.imperioapps.top/REDE_TV.png",
       "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8"
     },
     {
       "id": "gazeta",
       "name": "TV Gazeta",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/TV_Gazeta_logo.svg/512px-TV_Gazeta_logo.svg.png",
+      "logo": "https://logos.imperioapps.top/TV_GAZETA.png",
       "url": "http://45.162.64.114/GAZETA/index.m3u8"
     },
     {
@@ -427,7 +463,7 @@
     {
       "id": "agromais",
       "name": "AgroMais",
-      "logo": "https://i.imgur.com/9f3J8I2.png",
+      "logo": "http://www.acstatic.co/logos/canais/agromais.png",
       "url": "http://45.162.64.114/AGROMAIS/index.m3u8"
     },
     {
