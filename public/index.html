@@ -8,71 +8,113 @@
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📺</text></svg>">
 <style>
-  :root { --bg:#0b0e14; --panel:#12161f; --panel2:#181d29; --fg:#e7ebf3; --muted:#8b93a7; --accent:#3f6cff; --accent2:#22d3ee; }
+  :root { --bg:#07090d; --panel:rgba(16,20,28,.72); --panel-solid:#12161f; --fg:#edf1f8; --muted:#98a0b3; --accent:#3f6cff; --accent2:#22d3ee; }
   * { box-sizing:border-box; margin:0; padding:0; }
   html,body { height:100%; }
   body { font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--fg); overflow:hidden; }
-  #app { height:100%; display:flex; flex-direction:column; }
-  header { display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--panel); border-bottom:1px solid #1f2634; flex:0 0 auto; }
-  header .brand { font-weight:800; font-size:18px; letter-spacing:.3px; }
-  header .brand span { color:var(--accent); }
-  header .hint { color:var(--muted); font-size:13px; margin-left:6px; }
-  header .ch-count { margin-left:auto; color:var(--muted); font-size:13px; }
-  #stage { flex:1 1 auto; position:relative; background:#000; }
+  #app { height:100%; position:relative; }
+
+  /* Camada de vídeo (fundo completo) */
+  #stage { position:absolute; inset:0; background:#000; }
   video { width:100%; height:100%; background:#000; outline:none; }
-  #poster { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; color:var(--muted); text-align:center; padding:24px; z-index:2; background:radial-gradient(circle at 50% 40%, #141a28, #000); }
+
+  /* Scrims para legibilidade do overlay */
+  .scrim-top { position:absolute; top:0; left:0; right:0; height:110px; background:linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,0)); pointer-events:none; z-index:3; }
+  .scrim-bottom { position:absolute; bottom:0; left:0; right:0; height:150px; background:linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.78)); pointer-events:none; z-index:3; }
+
+  /* Header integrado (overlay no vídeo) */
+  header { position:absolute; top:0; left:0; right:0; display:flex; align-items:center; gap:12px; padding:16px 20px; z-index:4; }
+  header .brand { font-weight:800; font-size:19px; letter-spacing:.4px; display:flex; align-items:center; gap:9px; }
+  header .brand .dot { width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent2)); box-shadow:0 0 12px var(--accent); }
+  header .brand span { color:var(--accent2); }
+  header .hint { color:var(--muted); font-size:12px; opacity:.9; }
+  .region-btn { margin-left:auto; display:flex; align-items:center; gap:8px; background:var(--panel); border:1px solid rgba(255,255,255,.14); color:var(--fg); padding:9px 14px; border-radius:999px; font-size:13px; font-weight:600; cursor:pointer; backdrop-filter:blur(10px); transition:.15s; }
+  .region-btn:hover { border-color:var(--accent2); background:rgba(30,40,60,.8); }
+  .region-btn .globe { font-size:15px; }
+
+  /* Poster (loading/erro/first-frame) */
+  #poster { position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; color:var(--muted); text-align:center; padding:24px; background:radial-gradient(circle at 50% 42%, #10151f, #05060a); }
   #poster.hide { display:none; }
-  #poster img { width:120px; height:120px; object-fit:contain; filter:drop-shadow(0 6px 18px rgba(0,0,0,.6)); border-radius:16px; background:#11161f; }
-  #poster .msg { font-size:15px; }
-  #poster .small { font-size:13px; color:#5c6478; }
-  #now { flex:0 0 auto; display:flex; align-items:center; gap:14px; padding:12px 18px; background:var(--panel); border-top:1px solid #1f2634; }
-  #now .logo { width:52px; height:52px; flex:0 0 auto; object-fit:contain; background:#11161f; border-radius:10px; padding:6px; }
+  #poster img { width:132px; height:132px; object-fit:contain; filter:drop-shadow(0 8px 24px rgba(0,0,0,.65)); border-radius:20px; background:#11161f; border:1px solid rgba(255,255,255,.06); }
+  #poster .msg { font-size:16px; font-weight:600; }
+  #poster .small { font-size:13px; color:#606878; }
+
+  /* Barra inferior integrada */
+  #now { position:absolute; bottom:0; left:0; right:0; display:flex; align-items:center; gap:16px; padding:18px 22px 26px; z-index:4; }
+  #now .logo { width:66px; height:66px; flex:0 0 auto; object-fit:contain; background:rgba(255,255,255,.06); border-radius:14px; padding:8px; border:1px solid rgba(255,255,255,.1); backdrop-filter:blur(6px); }
   #now .meta { min-width:0; }
-  #now .name { font-weight:700; font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  #now .sub { font-size:12px; color:var(--muted); }
-  .controls { display:flex; gap:10px; margin-left:auto; flex:0 0 auto; }
-  .ctrl { background:var(--panel2); border:1px solid #242c3d; color:var(--fg); width:52px; height:52px; border-radius:12px; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.12s; }
-  .ctrl:hover { border-color:var(--accent); background:#1d2435; }
-  .ctrl:active { transform:scale(.95); }
-  .kbd { margin-left:auto; color:#5c6478; font-size:11px; }
-  @media (max-width:560px) { .kbd{display:none;} .ctrl{width:46px;height:46px;font-size:20px;} #now .logo{width:44px;height:44px;} }
+  #now .name { font-weight:800; font-size:20px; text-shadow:0 2px 12px rgba(0,0,0,.7); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #now .sub { font-size:12px; color:#aeb6c8; opacity:.85; text-shadow:0 1px 6px rgba(0,0,0,.7); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .controls { display:flex; gap:12px; margin-left:auto; flex:0 0 auto; }
+  .ctrl { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.18); color:var(--fg); width:56px; height:56px; border-radius:50%; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:.14s; backdrop-filter:blur(8px); }
+  .ctrl:hover { border-color:var(--accent2); background:rgba(34,211,238,.18); transform:translateY(-2px); }
+  .ctrl:active { transform:scale(.93); }
+
+  /* Modal de regiões */
+  .overlay { position:absolute; inset:0; z-index:20; background:rgba(4,6,10,.6); backdrop-filter:blur(4px); display:none; }
+  .overlay.open { display:block; }
+  #regionModal { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:min(680px,92vw); max-height:80vh; display:flex; flex-direction:column; background:var(--panel-solid); border:1px solid #232c40; border-radius:20px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,.6); }
+  #regionModal .rm-head { display:flex; align-items:center; gap:12px; padding:18px 22px; border-bottom:1px solid #1d2537; }
+  #regionModal .rm-head h2 { font-size:18px; font-weight:800; }
+  #regionModal .rm-head .rm-close { margin-left:auto; background:none; border:none; color:var(--muted); font-size:26px; cursor:pointer; line-height:1; }
+  #regionModal #regionSearch { margin:14px 22px; padding:12px 16px; border-radius:12px; border:1px solid #2a3450; background:#0e1420; color:var(--fg); font-size:15px; }
+  #regionModal .rm-body { overflow-y:auto; padding:6px 22px 24px; }
+  .region-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; }
+  .region-item { display:flex; flex-direction:column; align-items:center; gap:4px; padding:14px 8px; border-radius:14px; border:1px solid #222b3f; background:#0d1320; cursor:pointer; transition:.12s; text-align:center; }
+  .region-item:hover { border-color:var(--accent2); background:#111a2c; }
+  .region-item .code { font-size:20px; font-weight:800; }
+  .region-item .nm { font-size:11px; color:var(--muted); }
+  .region-item.current { border-color:var(--accent2); background:rgba(34,211,238,.12); }
+  .rm-group { font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); margin:18px 2px 10px; }
+  @media (max-width:560px) { header .hint{display:none;} .ctrl{width:50px;height:50px;font-size:20px;} #now .logo{width:54px;height:54px;} #now .name{font-size:17px;} }
 </style>
 </head>
 <body>
 <div id="app">
-  <header>
-    <div class="brand">TV <span>3.0</span></div>
-    <div class="hint">zapeia com setas ou ▲/▼</div>
-    <div class="ch-count">154 canais</div>
-  </header>
-
   <div id="stage">
     <video id="video" playsinline autoplay muted></video>
     <video id="previd" playsinline muted preload="metadata" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none"></video>
+    <div class="scrim-top"></div>
+    <div class="scrim-bottom"></div>
+    <header>
+      <div class="brand"><span class="dot"></span>TV <span>3.0</span></div>
+      <div class="hint">zapeia com setas do teclado</div>
+      <button class="region-btn" id="regionBtn" title="Trocar região"><span class="globe">🌐</span><span id="regionLabel">Detectando…</span></button>
+    </header>
     <div id="poster">
       <img id="posterLogo" alt="">
       <div class="msg" id="posterMsg">Carregando sinal…</div>
       <div class="small">Se ficar parado, aperte ► ou troque de canal</div>
     </div>
+    <div id="now">
+      <img id="nowLogo" class="logo" alt="">
+      <div class="meta">
+        <div class="name" id="nowName">—</div>
+        <div class="sub" id="nowSub"></div>
+      </div>
+      <div class="controls">
+        <button class="ctrl" id="prev" title="Anterior (←)">⏮</button>
+        <button class="ctrl" id="play" title="Play/Pause (Espaço)">⏯</button>
+        <button class="ctrl" id="next" title="Próximo (→)">⏭</button>
+      </div>
+    </div>
   </div>
 
-  <div id="now">
-    <img id="nowLogo" class="logo" alt="">
-    <div class="meta">
-      <div class="name" id="nowName">—</div>
-      <div class="sub" id="nowSub"></div>
-    </div>
-    <div class="controls">
-      <button class="ctrl" id="prev" title="Anterior (←)">⏮</button>
-      <button class="ctrl" id="play" title="Play/Pause (Espaço)">⏯</button>
-      <button class="ctrl" id="next" title="Próximo (→)">⏭</button>
+  <div class="overlay" id="overlay">
+    <div id="regionModal">
+      <div class="rm-head">
+        <h2>Escolha sua região</h2>
+        <button class="rm-close" id="rmClose">×</button>
+      </div>
+      <input id="regionSearch" type="search" placeholder="Procure por estado ou cidade…">
+      <div class="rm-body" id="regionBody"></div>
     </div>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
 <script>
-const CHANNELS = [{"name":"AgroMais","logo":"https://i.imgur.com/9f3J8I2.png","url":"http://45.162.64.114/AGROMAIS/index.m3u8"},{"name":"Amazon Sat","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Amazon_Sat_logo.png/512px-Amazon_Sat_logo.png","url":"https://amazonsat.brasilstream.com.br/hls/amazonsat/index.m3u8"},{"name":"Aratu On","logo":"https://i.imgur.com/Ht4jCab.png","url":"https://cdn.live.br1.jmvstream.com/w/LVW-9359/LVW9359_XSyReL0QVf/playlist.m3u8"},{"name":"Arirang TV","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Arirang_TV_logo.png/512px-Arirang_TV_logo.png","url":"https://amdlive-ch01-ctnd-com.akamaized.net/arirang_1ch/smil:arirang_1ch.smil/playlist.m3u8"},{"name":"Band","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Band_logo_2023.svg/512px-Band_logo_2023.svg.png","url":"https://media.cdntvms.com.br/band_sat/index.m3u8"},{"name":"Canal Educação","logo":"https://i.imgur.com/G0x4xqa.png","url":"https://canaleducacao-stream.ebc.com.br/index.m3u8"},{"name":"Canal Futura","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Canal_Futura.png/960px-Canal_Futura.png","url":"http://168.197.104.22/FUTURA/index.m3u8"},{"name":"Canal Gov","logo":"https://i.imgur.com/rHPY0Yv.png","url":"https://canalgov-stream.ebc.com.br/index.m3u8"},{"name":"DW English","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Deutsche_Welle_Logo.svg/512px-Deutsche_Welle_Logo.svg.png","url":"https://dwamdstream103.akamaized.net/hls/live/2015526/dwstream103/index.m3u8"},{"name":"Euronews","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Euronews_2022_logo.svg/512px-Euronews_2022_logo.svg.png","url":"http://45.190.28.50/EURONEWS_HD/index.m3u8"},{"name":"Fonte TV","logo":"https://i.imgur.com/7q2BmNc.png","url":"http://flash.softhost.com.br:1935/fonte/fontetv/live.m3u8"},{"name":"France 24 English","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/France_24_logo.svg/512px-France_24_logo.svg.png","url":"https://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8"},{"name":"Globo (Sinal Aberto)","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png","url":"http://45.190.28.50/GLOBO_HD/index.m3u8"},{"name":"O Dia TV","logo":"https://i.imgur.com/1LUbAVP.png","url":"https://6836041ea1117.streamlock.net/tvodia/tvodia/playlist.m3u8"},{"name":"Record","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Record_TV_logo_2023.svg/512px-Record_TV_logo_2023.svg.png","url":"https://media.cdntvms.com.br/record_nacional_sat/index.m3u8"},{"name":"Rede Vida","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Rede_Vida_logo.png/512px-Rede_Vida_logo.png","url":"http://45.190.28.50/REDE_VIDA_HD/index.m3u8"},{"name":"RedeTV!","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/RedeTV%21_logo_2019.svg/512px-RedeTV%21_logo_2019.svg.png","url":"https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8"},{"name":"RedeTV! Parana","logo":"https://i.imgur.com/D8R0Af4.png","url":"https://tv01.zas.media:1936/redetvparana/redetvparana/playlist.m3u8"},{"name":"SBT","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SBT_logo_2022.svg/512px-SBT_logo_2022.svg.png","url":"https://media.cdntvms.com.br/sbt_sat/index.m3u8"},{"name":"TRT World","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/TRT_World_logo.svg/512px-TRT_World_logo.svg.png","url":"https://tv-trtworld.medya.trt.com.tr/master.m3u8"},{"name":"TV 3 Curitiba","logo":"https://eswqkrogupaisirwcsys.supabase.co/storage/v1/object/public/mbc-media/canais/1776133208960-o2l2f7f02f.png","url":"https://stmv.webtvninjas.com.br/tv3/tv3/playlist.m3u8"},{"name":"TV A Critica","logo":"https://i.imgur.com/j51rBro.png","url":"https://cdn.live.br1.jmvstream.com/w/LVW-20715/LVW20715_50E3x2MCm2/playlist.m3u8"},{"name":"TV A Folha","logo":"https://i.imgur.com/I7XGMhj.png","url":"https://video01.logicahost.com.br/tvafolha/tvafolha/playlist.m3u8"},{"name":"TV Aliança Catarinense","logo":"https://i.imgur.com/eqmOhtP.png","url":"https://video01.logicahost.com.br/tvalianca/tvalianca/playlist.m3u8"},{"name":"TV Aparecida","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/TV_Aparecida_logo.png/512px-TV_Aparecida_logo.png","url":"https://cdn.jmvstream.com/w/LVW-9716/LVW9716_HbtQtezcaw/playlist.m3u8"},{"name":"TV Arapuan","logo":"https://i.imgur.com/3395A2h.png","url":"https://5b7f3c45ab7c2.streamlock.net/arapuan/ngrp:arapuan_all/playlist.m3u8"},{"name":"TV Assembleia Piaui","logo":"https://i.imgur.com/eMguSjM.png","url":"https://stmv1.srvstm.com/piaui8071/piaui8071/playlist.m3u8"},{"name":"TV Brasil","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/TvBrasil2023.png/960px-TvBrasil2023.png","url":"https://tvbrasil-stream.ebc.com.br/index.m3u8"},{"name":"TV Brasil Oeste","logo":"https://i.imgur.com/noqGfuy.png","url":"https://5ad482a77183d.streamlock.net/operacaotbomt.com/operacaotbomt.com/playlist.m3u8"},{"name":"TV BRICS (PT)","logo":"https://i.imgur.com/vLpm8tN.png","url":"https://porbrics.mediacdn.ru/cdn/brics/portuguese/playlist.m3u8"},{"name":"TV Brusque","logo":"https://i.imgur.com/J2EAZPS.png","url":"https://5ad482a77183d.streamlock.net/rodrigotvbrusque.com.br/5d880199c902eb4a1e8df00d/playlist.m3u8"},{"name":"TV Câmara","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/TV_C%26%C3%A2mara_logo.png/512px-TV_C%26%C3%A2mara_logo.png","url":"https://stream3.camara.gov.br/tv1/manifest.m3u8"},{"name":"TV Canção Nova","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Logo_CN_com_RGBA.png/512px-Logo_CN_com_RGBA.png","url":"http://45.162.64.114/CANCAO_NOVA/index.m3u8"},{"name":"TV Cultura","logo":"https://i.ibb.co/nm0jXMM/cultura-3x.png","url":"https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8"},{"name":"TV Escola","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/TV_Escola_logo.png/512px-TV_Escola_logo.png","url":"http://45.190.28.50/TV_ESCOLA/index.m3u8"},{"name":"TV Fronteira","logo":"https://i.imgur.com/NtcoW6G.png","url":"https://tvfronteira.brasilstream.com.br/hls/tvfronteira/index.m3u8"},{"name":"TV Gazeta","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/TV_Gazeta_logo.svg/512px-TV_Gazeta_logo.svg.png","url":"http://45.162.64.114/GAZETA/index.m3u8"},{"name":"TV Grande Natal","logo":"https://i.imgur.com/MTuErdw.png","url":"http://tvgrandenatalhd.duckdns.org:8080/hls/live.m3u8"},{"name":"TV Guará","logo":"https://i.imgur.com/8PErNBT.png","url":"https://video02.logicahost.com.br/tvguara23/tvguara23/playlist.m3u8"},{"name":"TV Justiça","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/TV_Justi%27%C3%A7a_logo.png/512px-TV_Justi%27%C3%A7a_logo.png","url":"http://45.162.64.114/TV_JUSTICA/index.m3u8"},{"name":"TV Litoral RN","logo":"https://upload.wikimedia.org/wikipedia/commons/3/3e/TV_LITORAL_RN.jpg","url":"https://5ad482a77183d.streamlock.net/tvnordesteegmail.com/tvnordesteegmail.com/playlist.m3u8"},{"name":"TV Mais Maricá","logo":"https://i.imgur.com/lgCRX7q.png","url":"https://5cf4a2c2512a2.streamlock.net/tvmaismarica/tvmaismarica/playlist.m3u8"},{"name":"TV Marajoara","logo":"https://i.imgur.com/9d9vBN7.png","url":"https://tv02.zas.media:1936/tvmarajoara/tvmarajoara/playlist.m3u8"},{"name":"TV Natal","logo":"https://i.imgur.com/wqQmQml.png","url":"http://185.228.163.146:8000/play/a01y/index.m3u8"},{"name":"TV Pantanal MS","logo":"https://i.imgur.com/0FOmktl.png","url":"https://5a2b083e9f360.streamlock.net/tvpantanal/tvpantanal.sdp/playlist.m3u8"},{"name":"TV Paraense","logo":"https://duckduckgo.com/i/e408ea02.png","url":"https://video09.logicahost.com.br/tvparaense/tvparaense/playlist.m3u"},{"name":"TV Paraná Turismo","logo":"https://i.imgur.com/I6pKoBd.png","url":"http://200.189.113.201/hls/tve.m3u8"},{"name":"TV Passo Fundo","logo":"https://i.imgur.com/QFE6TiV.png","url":"https://5a57bda70564a.streamlock.net/tvpasso/tvpasso.sdp/playlist.m3u8"},{"name":"TV Petropolis","logo":"https://web2.petropolis.rj.gov.br/imc/film-commission/uploads/profissional/perfil/785b645d9c574b4d88504a85dbd6ef37.png","url":"https://video02.logicahost.com.br/tvpetropolis/tvpetropolis/playlist.m3u8"},{"name":"TV Rá Tim Bum","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/TV_R%C3%A1-Tim-Bum_logo.png/512px-TV_R%C3%A1-Tim-Bum_logo.png","url":"http://45.177.114.115/TV_RA_TIM_BUM/index.m3u8"},{"name":"TV São Raimundo","logo":"https://i.imgur.com/f34CQIG.png","url":"https://stmv1.voxtvhd.com.br/9030/9030/playlist.m3u8"},{"name":"TV Senado","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/TV_Senado_-_logo_2018.png/512px-TV_Senado_-_logo_2018.png","url":"http://45.162.64.114/TV_SENADO/index.m3u8"},{"name":"TV Sim Cachoeiro","logo":"https://i.imgur.com/t5oUK3C.png","url":"https://5cf4a2c2512a2.streamlock.net/8104/8104/playlist.m3u8"},{"name":"TV Sim São Mateus","logo":"https://i.imgur.com/t5oUK3C.png","url":"https://5cf4a2c2512a2.streamlock.net/8236/8236/playlist.m3u8"},{"name":"TV Sul Bahia","logo":"https://i.imgur.com/qM6nMWm.png","url":"https://live.cdn.upx.com/00046/myStream.sdp/playlist.m3u8"},{"name":"TV Sul de Minas","logo":"https://i.imgur.com/hPh8cxK.png","url":"https://5cf4a2c2512a2.streamlock.net/tvsuldeminas/tvsuldeminas/playlist.m3u8"},{"name":"TV UFOP","logo":"https://raw.githubusercontent.com/daniloroxette/tvufop/refs/heads/main/images/tvufop_logo.png","url":"https://app.tvufop.com.br/hls/tvufop.m3u8"},{"name":"TV Viçosa","logo":"https://i.imgur.com/TZF55f9.png","url":"http://wz4.dnip.com.br/fratevitv/fratevitv.sdp/playlist.m3u8"},{"name":"TVC-Rio","logo":"https://i.imgur.com/WDiikWv.png","url":"https://video05.logicahost.com.br/comunitariario/comunitariario/playlist.m3u8"},{"name":"TVCOM DF","logo":"https://i.imgur.com/uxefHY3.png","url":"https://5b7f3c45ab7c2.streamlock.net/8008/smil:8008.smil/playlist.m3u8?DVR="},{"name":"TVCOM Maceió","logo":"https://i.imgur.com/IE7IZzi.png","url":"https://srv5.zcast.com.br/tvcommaceio/tvcommaceio/playlist.m3u8"},{"name":"TVE Cultura","logo":"https://i.imgur.com/FpqoWcB.png","url":"http://45.190.28.50/TVE/index.m3u8"},{"name":"TVE RS","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/TVE_Bahia_logo.svg/960px-TVE_Bahia_logo.svg.png","url":"http://streaming.procergs.com.br:1935/tve/stve/playlist.m3u8"},{"name":"AdessoTV","logo":"","url":"https://cdn.jmvstream.com/w/LVW-9715/LVW9715_12B26T62tm/playlist.m3u8"},{"name":"AgroCanal","logo":"","url":"https://aovivo.equipea.com.br:5443/aovivort/streams/pshRLrnv6isXq7RG4747567774043229.m3u8"},{"name":"ArarunaTV","logo":"","url":"https://video05.logicahost.com.br/ararunatv/ararunatv/playlist.m3u8"},{"name":"Blitstv","logo":"","url":"https://stmv1.transmissaodigital.com/blitstv/blitstv/playlist.m3u8"},{"name":"BoasNovas","logo":"","url":"https://cdn.jmvstream.com/w/LVW-9375/LVW9375_6i0wPBCHYc/playlist.m3u8"},{"name":"BR8TV","logo":"","url":"https://cdn.live.br1.jmvstream.com/w/LVW-11668/ngrp:LVW11668_wiJpjbMrks_all/playlist.m3u8"},{"name":"Canal38","logo":"","url":"https://cdn.jmvstream.com/w/LVW-8503/LVW8503_d0V5oduFlK/playlist.m3u8"},{"name":"CanalFDR","logo":"","url":"https://v-us-01.wisestream.io/memfs/e4ade538-7924-4359-81ef-b9d4dd229e91.m3u8"},{"name":"CanalMetropolitanodeNoticias","logo":"","url":"https://stmv5.samcast.com.br/claudio8701/claudio8701/playlist.m3u8"},{"name":"CanalSaude","logo":"","url":"https://eitv7.cdn.broadpeak.io/account351-i1495/event/canalsaude/format720p.m3u8"},{"name":"CanalUOL","logo":"","url":"https://video24.mais.uol.com.br/live/6146.m3u8"},{"name":"Catve2","logo":"","url":"https://5b33b873179a2.streamlock.net:1443/catve2/catve2/playlist.m3u8"},{"name":"ChromaTV","logo":"","url":"https://5c483b9d1019c.streamlock.net/8054/8054/playlist.m3u8"},{"name":"CINDIETV","logo":"","url":"https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/352.m3u8"},{"name":"CinturaoVerde","logo":"","url":"https://play.redecinturaoverde.com.br/playlist.m3u8"},{"name":"ClassiqueTV","logo":"","url":"https://stmv1.srvif.com/classique/classique/playlist.m3u8"},{"name":"COMBrasil","logo":"","url":"https://dfr80qz435crc.cloudfront.net/EFGH/Amagi/NewCo/New_Brasil_BR/New_Brasil.m3u8"},{"name":"ConectaMaisTV","logo":"","url":"https://adylnet.streampool.net/10324/live/hls/Conecta/index.m3u8"},{"name":"ConecTVBrasil","logo":"","url":"https://stream01.msolutionbrasil.com.br/hls/conectv/live.m3u8"},{"name":"CulturaFast","logo":"","url":"https://fpa-gateway.tvcultura.com.br:8181/memfs/606caef0-a290-413d-9f1f-8fcdb3a73831.m3u8"},{"name":"DespertarTV","logo":"","url":"https://br.conectmy.com.br/DespertarTV/index.m3u8"},{"name":"ElyTV","logo":"","url":"https://stmv1.srvsite.com/ely/ely/playlist.m3u8"},{"name":"EUTV","logo":"","url":"https://cdn.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8"},{"name":"FalaLitoral","logo":"","url":"https://5c483b9d1019c.streamlock.net/falalitoraltv/falalitoraltv/playlist.m3u8"},{"name":"ForaTedioTV","logo":"","url":"https://stmv2.srvif.com/foratedio/foratedio/playlist.m3u8"},{"name":"GeFast","logo":"","url":"https://amg00716-globo-amg00716c1-tcl-br-9495.playouts.now.amagi.tv/playlist.m3u8"},{"name":"GospelCartoon","logo":"","url":"https://stmv1.srvif.com/gospelcartoon/gospelcartoon/playlist.m3u8"},{"name":"GospelMovieTV","logo":"","url":"https://stmv1.srvif.com/gospelf/gospelf/playlist.m3u8"},{"name":"IMPDTVWorldwide","logo":"","url":"https://igrejamundial.nuvemplay.live/hls/stream.m3u8"},{"name":"J3NEWSTV","logo":"","url":"https://video01.brascast.com/d92ebb4f/d92ebb4f/playlist.m3u8"},{"name":"KpopTVPlay","logo":"","url":"https://giatv.bozztv.com/giatv/giatv-kpoptvplay/kpoptvplay/playlist.m3u8"},{"name":"KuriakosCine","logo":"","url":"https://w2.manasat.com/kcine/smil:kcine.smil/playlist.m3u8"},{"name":"KuriakosKids","logo":"","url":"https://w2.manasat.com/kkids/smil:kkids.smil/playlist.m3u8"},{"name":"LaboralTV","logo":"","url":"https://tv.laboralsst.com.br/hls/stream.m3u8"},{"name":"LamoreRockShowWebTV","logo":"","url":"https://a.cdni.live/rodrigo2364/rodrigo2364/playlist.m3u8"},{"name":"Lke","logo":"","url":"https://cnl-cl.otteravision.com/cnl/cl_h265/cl_h265.m3u8"},{"name":"Loading","logo":"","url":"https://stmv1.srvif.com/loadingtv/loadingtv/playlist.m3u8"},{"name":"MBCBrasilTV","logo":"","url":"https://play.mbcbrasil.tv.br/playlist.m3u8"},{"name":"NickOnline","logo":"","url":"https://x1colegal.com/hls/stream.m3u8"},{"name":"NickToonsBrasil","logo":"","url":"https://stmv2.srvif.com/nicktoons/nicktoons/playlist.m3u8"},{"name":"NSports","logo":"","url":"https://ogc-nsprt-tcl-roku-syndication.otteravision.com/ogc/nsprt/nsprt.m3u8"},{"name":"NTV","logo":"","url":"https://cdn.livespanel.com/nossatv/nossatv/playlist.m3u8"},{"name":"PetloversTV","logo":"","url":"https://video04.logicahost.com.br/petloverstv/petloverstv/playlist.m3u8"},{"name":"PlayTV","logo":"","url":"https://isaocorp.cloudecast.com/playtv/index.m3u8"},{"name":"PlenaTV","logo":"","url":"https://cdn.jmvstream.com/w/LVW-9591/LVW9591_PmXtgATnaS/playlist.m3u8"},{"name":"PlenitudeTV","logo":"","url":"https://strv.painelvox.top/plenitude/plenitude/playlist.m3u8"},{"name":"RBATV","logo":"","url":"https://cdn.live.br1.jmvstream.com/w/LVW-15748/LVW15748_Yed7yzLuRC/playlist.m3u8"},{"name":"RCTVBrasil","logo":"","url":"https://stmv.webtvninjas.com.br/rctv/rctv/playlist.m3u8"},{"name":"RecordNews","logo":"","url":"https://rnw-rn.otteravision.com/rnw/rn/rnw_rn.m3u8"},{"name":"RedeBrasil","logo":"","url":"https://redebrasil.nuvemplay.live/hls/stream.m3u8"},{"name":"RedeGospel","logo":"","url":"https://cdn.live.br1.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8"},{"name":"RedeMeioNorte","logo":"","url":"https://maystreaming.cloudecast.com/redemeio/index.m3u8"},{"name":"RedeMinas","logo":"","url":"https://8hzcavccys.zoeweb.tv/redeminas/ngrp:redeminas_all/playlist.m3u8"},{"name":"RedeNGT","logo":"","url":"https://isaocorp.cloudecast.com/ngt/index.m3u8"},{"name":"RedeSPTV","logo":"","url":"https://video01.logicahost.com.br/websptv/websptv/playlist.m3u8"},{"name":"RedeTVMais","logo":"","url":"https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8"},{"name":"RITTV","logo":"","url":"https://acesso.ecast.site:3648/live/ritlive.m3u8"},{"name":"SBTInterior","logo":"","url":"https://cdn.jmvstream.com/w/LVW-10801/LVW10801_Xvg4R0u57n/playlist.m3u8"},{"name":"SBTNacional","logo":"","url":"https://6836041ea1117.streamlock.net/cverde/cverde/playlist.m3u8"},{"name":"SBTNews","logo":"","url":"https://dai.google.com/linear/hls/event/1XSOdtQ0SH2G8OEmEfGgjQ/master.m3u8"},{"name":"SICTV","logo":"","url":"https://parecisfmlive.brasilstream.com.br/hls/parecisfmlive/index.m3u8"},{"name":"SOUTV","logo":"","url":"https://video10.logicahost.com.br/soutv/soutv/playlist.m3u8"},{"name":"STZTV","logo":"","url":"https://cdn.live.br1.jmvstream.com/webtv/AVJ-12952/playlist/playlist.m3u8"},{"name":"TCM10HD","logo":"","url":"https://live.tcm10.com.br/tcm10hd/stream.m3u8"},{"name":"TerraViva","logo":"","url":"https://9ada494d.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctYnJfVXBseW5rLU5ld2NvX0hMUw/playlist.m3u8"},{"name":"TikTokRadioBrasil","logo":"","url":"https://d1bl6tskrpq9ze.cloudfront.net/hls/master.m3u8?ads.xumo_channelId=99992529"},{"name":"TVAldeia","logo":"","url":"https://stmv1.samcast.com.br/giovane7843/giovane7843/playlist.m3u8"},{"name":"TVAlternativa","logo":"","url":"https://stmv5.samcast.com.br/wagner7919/wagner7919/playlist.m3u8"},{"name":"TVCidadeVerdeCuiaba","logo":"","url":"https://televisaocidadeverde.brasilstream.com.br/hls/televisaocidadeverde/index.m3u8"},{"name":"TVClube","logo":"","url":"https://5c483b9d1019c.streamlock.net/8186/8186/playlist.m3u8"},{"name":"TVComunitaria","logo":"","url":"https://5b7f3c45ab7c2.streamlock.net/8008/smil:8008.smil/playlist.m3u8?DVR="},{"name":"TVCuruca","logo":"","url":"https://stmv1.srvif.com/tvcurucasp/tvcurucasp/playlist.m3u8"},{"name":"TVDifusao","logo":"","url":"https://tvdsoultv.acessaradios.com.br/tvdsoultv/tvdsoultv.stream/playlist.m3u8"},{"name":"TVFuturo","logo":"","url":"https://tv02.zas.media:1936/tvfuturo/tvfuturo/playlist.m3u8"},{"name":"TVitape","logo":"","url":"https://stream01.msolutionbrasil.com.br/hls/tvitape/live.m3u8"},{"name":"TVLatinaSat","logo":"","url":"https://www.latinasat.com.br/hls/live/stream/index.m3u8"},{"name":"TVLifeAmerica","logo":"","url":"https://streaming.cloudecast.com/hls/tvlifeamerica/index.m3u8"},{"name":"TVNBN","logo":"","url":"https://cdn.jmvstream.com/w/LVW-8410/LVW8410_uiZOVm6vz1/playlist.m3u8"},{"name":"TVPadreCicero","logo":"","url":"https://video01.logicahost.com.br/tvpadrecicero/tvpadrecicero/playlist.m3u8"},{"name":"TVPaiEterno","logo":"","url":"https://video09.logicahost.com.br/paieterno/paieterno/playlist.m3u8"},{"name":"TVPlusPet","logo":"","url":"https://stmv5.samcast.com.br/tvmaispet6354/tvmaispet6354/playlist.m3u8"},{"name":"TVProfissao","logo":"","url":"https://stmv.webtvninjas.com.br/tvprofissao/tvprofissao/playlist.m3u8"},{"name":"TVSeries","logo":"","url":"https://stmv1.srvif.com/tvserie/tvserie/playlist.m3u8"},{"name":"TVShowFortaleza","logo":"","url":"https://stmv8.samcast.com.br/raimundoanselmolimamororo1908/raimundoanselmolimamororo1908/playlist.m3u8"},{"name":"TVTerceiroAnjo","logo":"","url":"https://streamer1.streamhost.org/salive/GMI3anjoh/playlist.m3u8"},{"name":"TVUniversal","logo":"","url":"https://644398c.ha.azioncdn.net/primary/tvuniversal_480p.sdp/playlist.m3u8"},{"name":"TVVilaReal","logo":"","url":"https://cdn.jmvstream.com/w/LVW-10841/LVW10841_mT77z9o2cP/playlist.m3u8"},{"name":"TVZoom","logo":"","url":"https://cdn.jmvstream.com/w/LVW-9730/LVW9730_LmUwslM8jt/playlist.m3u8"},{"name":"UMATV","logo":"","url":"https://umatv.nuvemplay.live/hls/stream.m3u8"},{"name":"UnisulTV","logo":"","url":"https://sitetv.brasilstream.com.br/hls/sitetv/index.m3u8?token="},{"name":"VEJAPlusTV","logo":"","url":"https://gpa-vja.otteravision.com/gpa/vja/vja.m3u8"}];
+const CHANNELS = [{"name":"AgroMais","logo":"https://i.imgur.com/9f3J8I2.png","url":"http://45.162.64.114/AGROMAIS/index.m3u8","uf":[],"national":false},{"name":"Amazon Sat","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Amazon_Sat_logo.png/512px-Amazon_Sat_logo.png","url":"https://amazonsat.brasilstream.com.br/hls/amazonsat/index.m3u8","uf":[],"national":false},{"name":"Aratu On","logo":"https://i.imgur.com/Ht4jCab.png","url":"https://cdn.live.br1.jmvstream.com/w/LVW-9359/LVW9359_XSyReL0QVf/playlist.m3u8","uf":["BA"],"national":false},{"name":"Arirang TV","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Arirang_TV_logo.png/512px-Arirang_TV_logo.png","url":"https://amdlive-ch01-ctnd-com.akamaized.net/arirang_1ch/smil:arirang_1ch.smil/playlist.m3u8","uf":[],"national":false},{"name":"Band","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Band_logo_2023.svg/512px-Band_logo_2023.svg.png","url":"https://media.cdntvms.com.br/band_sat/index.m3u8","uf":[],"national":true},{"name":"Canal Educação","logo":"https://i.imgur.com/G0x4xqa.png","url":"https://canaleducacao-stream.ebc.com.br/index.m3u8","uf":[],"national":false},{"name":"Canal Futura","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Canal_Futura.png/960px-Canal_Futura.png","url":"http://168.197.104.22/FUTURA/index.m3u8","uf":[],"national":false},{"name":"Canal Gov","logo":"https://i.imgur.com/rHPY0Yv.png","url":"https://canalgov-stream.ebc.com.br/index.m3u8","uf":[],"national":false},{"name":"DW English","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Deutsche_Welle_Logo.svg/512px-Deutsche_Welle_Logo.svg.png","url":"https://dwamdstream103.akamaized.net/hls/live/2015526/dwstream103/index.m3u8","uf":[],"national":false},{"name":"Euronews","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Euronews_2022_logo.svg/512px-Euronews_2022_logo.svg.png","url":"http://45.190.28.50/EURONEWS_HD/index.m3u8","uf":[],"national":false},{"name":"Fonte TV","logo":"https://i.imgur.com/7q2BmNc.png","url":"http://flash.softhost.com.br:1935/fonte/fontetv/live.m3u8","uf":["PE"],"national":false},{"name":"France 24 English","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/France_24_logo.svg/512px-France_24_logo.svg.png","url":"https://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8","uf":[],"national":false},{"name":"Globo (Sinal Aberto)","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png","url":"http://45.190.28.50/GLOBO_HD/index.m3u8","uf":[],"national":true},{"name":"O Dia TV","logo":"https://i.imgur.com/1LUbAVP.png","url":"https://6836041ea1117.streamlock.net/tvodia/tvodia/playlist.m3u8","uf":["RJ"],"national":false},{"name":"Record","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Record_TV_logo_2023.svg/512px-Record_TV_logo_2023.svg.png","url":"https://media.cdntvms.com.br/record_nacional_sat/index.m3u8","uf":[],"national":true},{"name":"Rede Vida","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Rede_Vida_logo.png/512px-Rede_Vida_logo.png","url":"http://45.190.28.50/REDE_VIDA_HD/index.m3u8","uf":[],"national":false},{"name":"RedeTV!","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/RedeTV%21_logo_2019.svg/512px-RedeTV%21_logo_2019.svg.png","url":"https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8","uf":[],"national":true},{"name":"RedeTV! Parana","logo":"https://i.imgur.com/D8R0Af4.png","url":"https://tv01.zas.media:1936/redetvparana/redetvparana/playlist.m3u8","uf":["PR"],"national":true},{"name":"SBT","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/SBT_logo_2022.svg/512px-SBT_logo_2022.svg.png","url":"https://media.cdntvms.com.br/sbt_sat/index.m3u8","uf":[],"national":true},{"name":"TRT World","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/TRT_World_logo.svg/512px-TRT_World_logo.svg.png","url":"https://tv-trtworld.medya.trt.com.tr/master.m3u8","uf":[],"national":false},{"name":"TV 3 Curitiba","logo":"https://eswqkrogupaisirwcsys.supabase.co/storage/v1/object/public/mbc-media/canais/1776133208960-o2l2f7f02f.png","url":"https://stmv.webtvninjas.com.br/tv3/tv3/playlist.m3u8","uf":["PR"],"national":false},{"name":"TV A Critica","logo":"https://i.imgur.com/j51rBro.png","url":"https://cdn.live.br1.jmvstream.com/w/LVW-20715/LVW20715_50E3x2MCm2/playlist.m3u8","uf":["AM"],"national":false},{"name":"TV A Folha","logo":"https://i.imgur.com/I7XGMhj.png","url":"https://video01.logicahost.com.br/tvafolha/tvafolha/playlist.m3u8","uf":["RN"],"national":false},{"name":"TV Aliança Catarinense","logo":"https://i.imgur.com/eqmOhtP.png","url":"https://video01.logicahost.com.br/tvalianca/tvalianca/playlist.m3u8","uf":["SC"],"national":false},{"name":"TV Aparecida","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/TV_Aparecida_logo.png/512px-TV_Aparecida_logo.png","url":"https://cdn.jmvstream.com/w/LVW-9716/LVW9716_HbtQtezcaw/playlist.m3u8","uf":[],"national":false},{"name":"TV Arapuan","logo":"https://i.imgur.com/3395A2h.png","url":"https://5b7f3c45ab7c2.streamlock.net/arapuan/ngrp:arapuan_all/playlist.m3u8","uf":["PB"],"national":false},{"name":"TV Assembleia Piaui","logo":"https://i.imgur.com/eMguSjM.png","url":"https://stmv1.srvstm.com/piaui8071/piaui8071/playlist.m3u8","uf":["PI"],"national":false},{"name":"TV Brasil","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/TvBrasil2023.png/960px-TvBrasil2023.png","url":"https://tvbrasil-stream.ebc.com.br/index.m3u8","uf":[],"national":false},{"name":"TV Brasil Oeste","logo":"https://i.imgur.com/noqGfuy.png","url":"https://5ad482a77183d.streamlock.net/operacaotbomt.com/operacaotbomt.com/playlist.m3u8","uf":["MT"],"national":false},{"name":"TV BRICS (PT)","logo":"https://i.imgur.com/vLpm8tN.png","url":"https://porbrics.mediacdn.ru/cdn/brics/portuguese/playlist.m3u8","uf":[],"national":false},{"name":"TV Brusque","logo":"https://i.imgur.com/J2EAZPS.png","url":"https://5ad482a77183d.streamlock.net/rodrigotvbrusque.com.br/5d880199c902eb4a1e8df00d/playlist.m3u8","uf":["SC"],"national":false},{"name":"TV Câmara","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/TV_C%26%C3%A2mara_logo.png/512px-TV_C%26%C3%A2mara_logo.png","url":"https://stream3.camara.gov.br/tv1/manifest.m3u8","uf":[],"national":false},{"name":"TV Canção Nova","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Logo_CN_com_RGBA.png/512px-Logo_CN_com_RGBA.png","url":"http://45.162.64.114/CANCAO_NOVA/index.m3u8","uf":[],"national":false},{"name":"TV Cultura","logo":"https://i.ibb.co/nm0jXMM/cultura-3x.png","url":"https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8","uf":[],"national":true},{"name":"TV Escola","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/TV_Escola_logo.png/512px-TV_Escola_logo.png","url":"http://45.190.28.50/TV_ESCOLA/index.m3u8","uf":[],"national":false},{"name":"TV Fronteira","logo":"https://i.imgur.com/NtcoW6G.png","url":"https://tvfronteira.brasilstream.com.br/hls/tvfronteira/index.m3u8","uf":["SP"],"national":false},{"name":"TV Gazeta","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/TV_Gazeta_logo.svg/512px-TV_Gazeta_logo.svg.png","url":"http://45.162.64.114/GAZETA/index.m3u8","uf":[],"national":false},{"name":"TV Grande Natal","logo":"https://i.imgur.com/MTuErdw.png","url":"http://tvgrandenatalhd.duckdns.org:8080/hls/live.m3u8","uf":["RN"],"national":false},{"name":"TV Guará","logo":"https://i.imgur.com/8PErNBT.png","url":"https://video02.logicahost.com.br/tvguara23/tvguara23/playlist.m3u8","uf":["DF"],"national":false},{"name":"TV Justiça","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/TV_Justi%27%C3%A7a_logo.png/512px-TV_Justi%27%C3%A7a_logo.png","url":"http://45.162.64.114/TV_JUSTICA/index.m3u8","uf":[],"national":false},{"name":"TV Litoral RN","logo":"https://upload.wikimedia.org/wikipedia/commons/3/3e/TV_LITORAL_RN.jpg","url":"https://5ad482a77183d.streamlock.net/tvnordesteegmail.com/tvnordesteegmail.com/playlist.m3u8","uf":["RN"],"national":false},{"name":"TV Mais Maricá","logo":"https://i.imgur.com/lgCRX7q.png","url":"https://5cf4a2c2512a2.streamlock.net/tvmaismarica/tvmaismarica/playlist.m3u8","uf":["RJ"],"national":false},{"name":"TV Marajoara","logo":"https://i.imgur.com/9d9vBN7.png","url":"https://tv02.zas.media:1936/tvmarajoara/tvmarajoara/playlist.m3u8","uf":["PA"],"national":false},{"name":"TV Natal","logo":"https://i.imgur.com/wqQmQml.png","url":"http://185.228.163.146:8000/play/a01y/index.m3u8","uf":["RN"],"national":false},{"name":"TV Pantanal MS","logo":"https://i.imgur.com/0FOmktl.png","url":"https://5a2b083e9f360.streamlock.net/tvpantanal/tvpantanal.sdp/playlist.m3u8","uf":["MS"],"national":false},{"name":"TV Paraense","logo":"https://duckduckgo.com/i/e408ea02.png","url":"https://video09.logicahost.com.br/tvparaense/tvparaense/playlist.m3u","uf":["PA"],"national":false},{"name":"TV Paraná Turismo","logo":"https://i.imgur.com/I6pKoBd.png","url":"http://200.189.113.201/hls/tve.m3u8","uf":["PR"],"national":false},{"name":"TV Passo Fundo","logo":"https://i.imgur.com/QFE6TiV.png","url":"https://5a57bda70564a.streamlock.net/tvpasso/tvpasso.sdp/playlist.m3u8","uf":["RS"],"national":false},{"name":"TV Petropolis","logo":"https://web2.petropolis.rj.gov.br/imc/film-commission/uploads/profissional/perfil/785b645d9c574b4d88504a85dbd6ef37.png","url":"https://video02.logicahost.com.br/tvpetropolis/tvpetropolis/playlist.m3u8","uf":["RJ"],"national":false},{"name":"TV Rá Tim Bum","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/TV_R%C3%A1-Tim-Bum_logo.png/512px-TV_R%C3%A1-Tim-Bum_logo.png","url":"http://45.177.114.115/TV_RA_TIM_BUM/index.m3u8","uf":[],"national":false},{"name":"TV São Raimundo","logo":"https://i.imgur.com/f34CQIG.png","url":"https://stmv1.voxtvhd.com.br/9030/9030/playlist.m3u8","uf":["RR"],"national":false},{"name":"TV Senado","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/TV_Senado_-_logo_2018.png/512px-TV_Senado_-_logo_2018.png","url":"http://45.162.64.114/TV_SENADO/index.m3u8","uf":[],"national":false},{"name":"TV Sim Cachoeiro","logo":"https://i.imgur.com/t5oUK3C.png","url":"https://5cf4a2c2512a2.streamlock.net/8104/8104/playlist.m3u8","uf":["ES"],"national":false},{"name":"TV Sim São Mateus","logo":"https://i.imgur.com/t5oUK3C.png","url":"https://5cf4a2c2512a2.streamlock.net/8236/8236/playlist.m3u8","uf":["ES"],"national":false},{"name":"TV Sul Bahia","logo":"https://i.imgur.com/qM6nMWm.png","url":"https://live.cdn.upx.com/00046/myStream.sdp/playlist.m3u8","uf":["BA"],"national":false},{"name":"TV Sul de Minas","logo":"https://i.imgur.com/hPh8cxK.png","url":"https://5cf4a2c2512a2.streamlock.net/tvsuldeminas/tvsuldeminas/playlist.m3u8","uf":["MG"],"national":false},{"name":"TV UFOP","logo":"https://raw.githubusercontent.com/daniloroxette/tvufop/refs/heads/main/images/tvufop_logo.png","url":"https://app.tvufop.com.br/hls/tvufop.m3u8","uf":["MG"],"national":false},{"name":"TV Viçosa","logo":"https://i.imgur.com/TZF55f9.png","url":"http://wz4.dnip.com.br/fratevitv/fratevitv.sdp/playlist.m3u8","uf":["MG"],"national":false},{"name":"TVC-Rio","logo":"https://i.imgur.com/WDiikWv.png","url":"https://video05.logicahost.com.br/comunitariario/comunitariario/playlist.m3u8","uf":["RJ"],"national":false},{"name":"TVCOM DF","logo":"https://i.imgur.com/uxefHY3.png","url":"https://5b7f3c45ab7c2.streamlock.net/8008/smil:8008.smil/playlist.m3u8?DVR=","uf":["DF"],"national":false},{"name":"TVCOM Maceió","logo":"https://i.imgur.com/IE7IZzi.png","url":"https://srv5.zcast.com.br/tvcommaceio/tvcommaceio/playlist.m3u8","uf":["AL"],"national":false},{"name":"TVE Cultura","logo":"https://i.imgur.com/FpqoWcB.png","url":"http://45.190.28.50/TVE/index.m3u8","uf":[],"national":true},{"name":"TVE RS","logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/TVE_Bahia_logo.svg/960px-TVE_Bahia_logo.svg.png","url":"http://streaming.procergs.com.br:1935/tve/stve/playlist.m3u8","uf":["RS"],"national":false},{"name":"AdessoTV","logo":"","url":"https://cdn.jmvstream.com/w/LVW-9715/LVW9715_12B26T62tm/playlist.m3u8","uf":[],"national":false},{"name":"AgroCanal","logo":"","url":"https://aovivo.equipea.com.br:5443/aovivort/streams/pshRLrnv6isXq7RG4747567774043229.m3u8","uf":[],"national":false},{"name":"ArarunaTV","logo":"","url":"https://video05.logicahost.com.br/ararunatv/ararunatv/playlist.m3u8","uf":[],"national":false},{"name":"Blitstv","logo":"","url":"https://stmv1.transmissaodigital.com/blitstv/blitstv/playlist.m3u8","uf":[],"national":false},{"name":"BoasNovas","logo":"","url":"https://cdn.jmvstream.com/w/LVW-9375/LVW9375_6i0wPBCHYc/playlist.m3u8","uf":[],"national":false},{"name":"BR8TV","logo":"","url":"https://cdn.live.br1.jmvstream.com/w/LVW-11668/ngrp:LVW11668_wiJpjbMrks_all/playlist.m3u8","uf":[],"national":false},{"name":"Canal38","logo":"","url":"https://cdn.jmvstream.com/w/LVW-8503/LVW8503_d0V5oduFlK/playlist.m3u8","uf":[],"national":false},{"name":"CanalFDR","logo":"","url":"https://v-us-01.wisestream.io/memfs/e4ade538-7924-4359-81ef-b9d4dd229e91.m3u8","uf":[],"national":false},{"name":"CanalMetropolitanodeNoticias","logo":"","url":"https://stmv5.samcast.com.br/claudio8701/claudio8701/playlist.m3u8","uf":[],"national":false},{"name":"CanalSaude","logo":"","url":"https://eitv7.cdn.broadpeak.io/account351-i1495/event/canalsaude/format720p.m3u8","uf":[],"national":false},{"name":"CanalUOL","logo":"","url":"https://video24.mais.uol.com.br/live/6146.m3u8","uf":[],"national":false},{"name":"Catve2","logo":"","url":"https://5b33b873179a2.streamlock.net:1443/catve2/catve2/playlist.m3u8","uf":[],"national":false},{"name":"ChromaTV","logo":"","url":"https://5c483b9d1019c.streamlock.net/8054/8054/playlist.m3u8","uf":[],"national":false},{"name":"CINDIETV","logo":"","url":"https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/352.m3u8","uf":[],"national":false},{"name":"CinturaoVerde","logo":"","url":"https://play.redecinturaoverde.com.br/playlist.m3u8","uf":[],"national":false},{"name":"ClassiqueTV","logo":"","url":"https://stmv1.srvif.com/classique/classique/playlist.m3u8","uf":[],"national":false},{"name":"COMBrasil","logo":"","url":"https://dfr80qz435crc.cloudfront.net/EFGH/Amagi/NewCo/New_Brasil_BR/New_Brasil.m3u8","uf":[],"national":false},{"name":"ConectaMaisTV","logo":"","url":"https://adylnet.streampool.net/10324/live/hls/Conecta/index.m3u8","uf":[],"national":false},{"name":"ConecTVBrasil","logo":"","url":"https://stream01.msolutionbrasil.com.br/hls/conectv/live.m3u8","uf":[],"national":false},{"name":"CulturaFast","logo":"","url":"https://fpa-gateway.tvcultura.com.br:8181/memfs/606caef0-a290-413d-9f1f-8fcdb3a73831.m3u8","uf":[],"national":true},{"name":"DespertarTV","logo":"","url":"https://br.conectmy.com.br/DespertarTV/index.m3u8","uf":[],"national":false},{"name":"ElyTV","logo":"","url":"https://stmv1.srvsite.com/ely/ely/playlist.m3u8","uf":[],"national":false},{"name":"EUTV","logo":"","url":"https://cdn.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8","uf":[],"national":false},{"name":"FalaLitoral","logo":"","url":"https://5c483b9d1019c.streamlock.net/falalitoraltv/falalitoraltv/playlist.m3u8","uf":[],"national":false},{"name":"ForaTedioTV","logo":"","url":"https://stmv2.srvif.com/foratedio/foratedio/playlist.m3u8","uf":[],"national":false},{"name":"GeFast","logo":"","url":"https://amg00716-globo-amg00716c1-tcl-br-9495.playouts.now.amagi.tv/playlist.m3u8","uf":[],"national":false},{"name":"GospelCartoon","logo":"","url":"https://stmv1.srvif.com/gospelcartoon/gospelcartoon/playlist.m3u8","uf":[],"national":false},{"name":"GospelMovieTV","logo":"","url":"https://stmv1.srvif.com/gospelf/gospelf/playlist.m3u8","uf":[],"national":false},{"name":"IMPDTVWorldwide","logo":"","url":"https://igrejamundial.nuvemplay.live/hls/stream.m3u8","uf":[],"national":false},{"name":"J3NEWSTV","logo":"","url":"https://video01.brascast.com/d92ebb4f/d92ebb4f/playlist.m3u8","uf":[],"national":false},{"name":"KpopTVPlay","logo":"","url":"https://giatv.bozztv.com/giatv/giatv-kpoptvplay/kpoptvplay/playlist.m3u8","uf":[],"national":false},{"name":"KuriakosCine","logo":"","url":"https://w2.manasat.com/kcine/smil:kcine.smil/playlist.m3u8","uf":[],"national":false},{"name":"KuriakosKids","logo":"","url":"https://w2.manasat.com/kkids/smil:kkids.smil/playlist.m3u8","uf":[],"national":false},{"name":"LaboralTV","logo":"","url":"https://tv.laboralsst.com.br/hls/stream.m3u8","uf":[],"national":false},{"name":"LamoreRockShowWebTV","logo":"","url":"https://a.cdni.live/rodrigo2364/rodrigo2364/playlist.m3u8","uf":[],"national":false},{"name":"Lke","logo":"","url":"https://cnl-cl.otteravision.com/cnl/cl_h265/cl_h265.m3u8","uf":[],"national":false},{"name":"Loading","logo":"","url":"https://stmv1.srvif.com/loadingtv/loadingtv/playlist.m3u8","uf":[],"national":false},{"name":"MBCBrasilTV","logo":"","url":"https://play.mbcbrasil.tv.br/playlist.m3u8","uf":[],"national":false},{"name":"NickOnline","logo":"","url":"https://x1colegal.com/hls/stream.m3u8","uf":[],"national":false},{"name":"NickToonsBrasil","logo":"","url":"https://stmv2.srvif.com/nicktoons/nicktoons/playlist.m3u8","uf":[],"national":false},{"name":"NSports","logo":"","url":"https://ogc-nsprt-tcl-roku-syndication.otteravision.com/ogc/nsprt/nsprt.m3u8","uf":[],"national":false},{"name":"NTV","logo":"","url":"https://cdn.livespanel.com/nossatv/nossatv/playlist.m3u8","uf":[],"national":false},{"name":"PetloversTV","logo":"","url":"https://video04.logicahost.com.br/petloverstv/petloverstv/playlist.m3u8","uf":[],"national":false},{"name":"PlayTV","logo":"","url":"https://isaocorp.cloudecast.com/playtv/index.m3u8","uf":[],"national":false},{"name":"PlenaTV","logo":"","url":"https://cdn.jmvstream.com/w/LVW-9591/LVW9591_PmXtgATnaS/playlist.m3u8","uf":[],"national":false},{"name":"PlenitudeTV","logo":"","url":"https://strv.painelvox.top/plenitude/plenitude/playlist.m3u8","uf":[],"national":false},{"name":"RBATV","logo":"","url":"https://cdn.live.br1.jmvstream.com/w/LVW-15748/LVW15748_Yed7yzLuRC/playlist.m3u8","uf":[],"national":false},{"name":"RCTVBrasil","logo":"","url":"https://stmv.webtvninjas.com.br/rctv/rctv/playlist.m3u8","uf":[],"national":false},{"name":"RecordNews","logo":"","url":"https://rnw-rn.otteravision.com/rnw/rn/rnw_rn.m3u8","uf":[],"national":true},{"name":"RedeBrasil","logo":"","url":"https://redebrasil.nuvemplay.live/hls/stream.m3u8","uf":[],"national":false},{"name":"RedeGospel","logo":"","url":"https://cdn.live.br1.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8","uf":[],"national":false},{"name":"RedeMeioNorte","logo":"","url":"https://maystreaming.cloudecast.com/redemeio/index.m3u8","uf":[],"national":true},{"name":"RedeMinas","logo":"","url":"https://8hzcavccys.zoeweb.tv/redeminas/ngrp:redeminas_all/playlist.m3u8","uf":[],"national":false},{"name":"RedeNGT","logo":"","url":"https://isaocorp.cloudecast.com/ngt/index.m3u8","uf":[],"national":false},{"name":"RedeSPTV","logo":"","url":"https://video01.logicahost.com.br/websptv/websptv/playlist.m3u8","uf":[],"national":false},{"name":"RedeTVMais","logo":"","url":"https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8","uf":[],"national":true},{"name":"RITTV","logo":"","url":"https://acesso.ecast.site:3648/live/ritlive.m3u8","uf":[],"national":false},{"name":"SBTInterior","logo":"","url":"https://cdn.jmvstream.com/w/LVW-10801/LVW10801_Xvg4R0u57n/playlist.m3u8","uf":[],"national":true},{"name":"SBTNacional","logo":"","url":"https://6836041ea1117.streamlock.net/cverde/cverde/playlist.m3u8","uf":[],"national":true},{"name":"SBTNews","logo":"","url":"https://dai.google.com/linear/hls/event/1XSOdtQ0SH2G8OEmEfGgjQ/master.m3u8","uf":[],"national":true},{"name":"SICTV","logo":"","url":"https://parecisfmlive.brasilstream.com.br/hls/parecisfmlive/index.m3u8","uf":[],"national":false},{"name":"SOUTV","logo":"","url":"https://video10.logicahost.com.br/soutv/soutv/playlist.m3u8","uf":[],"national":false},{"name":"STZTV","logo":"","url":"https://cdn.live.br1.jmvstream.com/webtv/AVJ-12952/playlist/playlist.m3u8","uf":[],"national":false},{"name":"TCM10HD","logo":"","url":"https://live.tcm10.com.br/tcm10hd/stream.m3u8","uf":[],"national":false},{"name":"TerraViva","logo":"","url":"https://9ada494d.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctYnJfVXBseW5rLU5ld2NvX0hMUw/playlist.m3u8","uf":[],"national":false},{"name":"TikTokRadioBrasil","logo":"","url":"https://d1bl6tskrpq9ze.cloudfront.net/hls/master.m3u8?ads.xumo_channelId=99992529","uf":[],"national":false},{"name":"TVAldeia","logo":"","url":"https://stmv1.samcast.com.br/giovane7843/giovane7843/playlist.m3u8","uf":[],"national":false},{"name":"TVAlternativa","logo":"","url":"https://stmv5.samcast.com.br/wagner7919/wagner7919/playlist.m3u8","uf":[],"national":false},{"name":"TVCidadeVerdeCuiaba","logo":"","url":"https://televisaocidadeverde.brasilstream.com.br/hls/televisaocidadeverde/index.m3u8","uf":["MT"],"national":false},{"name":"TVClube","logo":"","url":"https://5c483b9d1019c.streamlock.net/8186/8186/playlist.m3u8","uf":[],"national":false},{"name":"TVComunitaria","logo":"","url":"https://5b7f3c45ab7c2.streamlock.net/8008/smil:8008.smil/playlist.m3u8?DVR=","uf":[],"national":false},{"name":"TVCuruca","logo":"","url":"https://stmv1.srvif.com/tvcurucasp/tvcurucasp/playlist.m3u8","uf":[],"national":false},{"name":"TVDifusao","logo":"","url":"https://tvdsoultv.acessaradios.com.br/tvdsoultv/tvdsoultv.stream/playlist.m3u8","uf":[],"national":false},{"name":"TVFuturo","logo":"","url":"https://tv02.zas.media:1936/tvfuturo/tvfuturo/playlist.m3u8","uf":[],"national":false},{"name":"TVitape","logo":"","url":"https://stream01.msolutionbrasil.com.br/hls/tvitape/live.m3u8","uf":[],"national":false},{"name":"TVLatinaSat","logo":"","url":"https://www.latinasat.com.br/hls/live/stream/index.m3u8","uf":[],"national":false},{"name":"TVLifeAmerica","logo":"","url":"https://streaming.cloudecast.com/hls/tvlifeamerica/index.m3u8","uf":[],"national":false},{"name":"TVNBN","logo":"","url":"https://cdn.jmvstream.com/w/LVW-8410/LVW8410_uiZOVm6vz1/playlist.m3u8","uf":[],"national":false},{"name":"TVPadreCicero","logo":"","url":"https://video01.logicahost.com.br/tvpadrecicero/tvpadrecicero/playlist.m3u8","uf":[],"national":false},{"name":"TVPaiEterno","logo":"","url":"https://video09.logicahost.com.br/paieterno/paieterno/playlist.m3u8","uf":[],"national":false},{"name":"TVPlusPet","logo":"","url":"https://stmv5.samcast.com.br/tvmaispet6354/tvmaispet6354/playlist.m3u8","uf":[],"national":false},{"name":"TVProfissao","logo":"","url":"https://stmv.webtvninjas.com.br/tvprofissao/tvprofissao/playlist.m3u8","uf":[],"national":false},{"name":"TVSeries","logo":"","url":"https://stmv1.srvif.com/tvserie/tvserie/playlist.m3u8","uf":[],"national":false},{"name":"TVShowFortaleza","logo":"","url":"https://stmv8.samcast.com.br/raimundoanselmolimamororo1908/raimundoanselmolimamororo1908/playlist.m3u8","uf":["CE"],"national":false},{"name":"TVTerceiroAnjo","logo":"","url":"https://streamer1.streamhost.org/salive/GMI3anjoh/playlist.m3u8","uf":[],"national":false},{"name":"TVUniversal","logo":"","url":"https://644398c.ha.azioncdn.net/primary/tvuniversal_480p.sdp/playlist.m3u8","uf":[],"national":false},{"name":"TVVilaReal","logo":"","url":"https://cdn.jmvstream.com/w/LVW-10841/LVW10841_mT77z9o2cP/playlist.m3u8","uf":[],"national":false},{"name":"TVZoom","logo":"","url":"https://cdn.jmvstream.com/w/LVW-9730/LVW9730_LmUwslM8jt/playlist.m3u8","uf":[],"national":false},{"name":"UMATV","logo":"","url":"https://umatv.nuvemplay.live/hls/stream.m3u8","uf":[],"national":false},{"name":"UnisulTV","logo":"","url":"https://sitetv.brasilstream.com.br/hls/sitetv/index.m3u8?token=","uf":[],"national":false},{"name":"VEJAPlusTV","logo":"","url":"https://gpa-vja.otteravision.com/gpa/vja/vja.m3u8","uf":[],"national":false}];
 const video = document.getElementById('video');
 const poster = document.getElementById('poster');
 const posterMsg = document.getElementById('posterMsg');
@@ -83,14 +125,107 @@ const nowSub = document.getElementById('nowSub');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 const playBtn = document.getElementById('play');
+const regionBtn = document.getElementById('regionBtn');
+const regionLabel = document.getElementById('regionLabel');
+const overlay = document.getElementById('overlay');
+const rmClose = document.getElementById('rmClose');
+const regionSearch = document.getElementById('regionSearch');
+const regionBody = document.getElementById('regionBody');
+
+// Proxy para canais HTTP (ex.: Globo). Preencha com a URL do seu Cloudflare Worker.
+// Dica: pode testar com  ?proxy=https://SEU-WORKER.workers.dev  sem redeploy.
+const PROXY_BASE = (new URLSearchParams(location.search).get('proxy'))
+  || localStorage.getItem('tv30_proxy') || '';
+
+const START_TIMEOUT = 10000;
 
 let idx = 0;
 let live = true;
 let loadTimer = null;
 let tryingIndex = -1;
+let currentUF = '';
 
-const START_TIMEOUT = 10000; // 10s sem iniciar -> pula para o proximo canal
+const UF_NAMES = { AC:'Acre', AL:'Alagoas', AP:'Amapá', AM:'Amazonas', BA:'Bahia', CE:'Ceará', DF:'Distrito Federal', ES:'Espírito Santo', GO:'Goiás', MA:'Maranhão', MT:'Mato Grosso', MS:'Mato Grosso do Sul', MG:'Minas Gerais', PA:'Pará', PB:'Paraíba', PR:'Paraná', PE:'Pernambuco', PI:'Piauí', RJ:'Rio de Janeiro', RN:'Rio Grande do Norte', RS:'Rio Grande do Sul', RO:'Rondônia', RR:'Roraima', SC:'Santa Catarina', SP:'São Paulo', SE:'Sergipe', TO:'Tocantins' };
+const UF_ORDER = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'];
 
+function normalize(s) { return String(s||'').normalize('NFD').replace(/[^a-z0-9]/gi,'').toLowerCase(); }
+
+function onlineUrl(c) {
+  if (!PROXY_BASE) return c.url;
+  return PROXY_BASE + (PROXY_BASE.endsWith('?') ? '' : '?') + 'url=' + encodeURIComponent(c.url);
+}
+
+// --- Geolocalização ---
+async function detectRegion() {
+  const apis = [
+    { url: 'https://ipwho.is/', pick: (j) => j.region_code },
+    { url: 'https://ipapi.co/json', pick: (j) => j.region_code },
+    { url: 'https://get.geojs.io/v1/ip/geo.json', pick: (j) => j.region },
+    { url: 'https://ipinfo.io/json', pick: (j) => (j.region || '').substring(0,2).toUpperCase() },
+  ];
+  for (const api of apis) {
+    try {
+      const r = await fetch(api.url, { signal: AbortSignal.timeout(6000) });
+      if (!r.ok) continue;
+      const j = await r.json();
+      let code = api.pick(j);
+      if (code) {
+        code = String(code).toUpperCase().trim();
+        if (code.length === 2 && UF_NAMES[code]) return code;
+        // se veio nome do estado, tenta casar com a lista
+        const hit = Object.keys(UF_NAMES).find((uf) => normalize(UF_NAMES[uf]) === normalize(code)) ||
+                    Object.keys(UF_NAMES).find((uf) => normalize(UF_NAMES[uf]).includes(normalize(code)) || normalize(code).includes(normalize(UF_NAMES[uf])));
+        if (hit) return hit;
+      }
+    } catch (e) {}
+  }
+  return '';
+}
+
+function reorderByRegion(uf) {
+  const ranked = CHANNELS.map((c, i) => {
+    let score = 2; // outros estados
+    if (uf && (c.uf || []).includes(uf)) score = 0;      // do estado
+    else if (c.national) score = 1;                        // nacional
+    else if (!uf) score = c.national ? 0 : (c.uf.length ? 2 : 1);
+    return { c, i, score };
+  });
+  if (uf) ranked.sort((a, b) => a.score - b.score || a.i - b.i);
+  const order = ranked.map((x) => x.c);
+  order.forEach((c, k) => { CHANNELS[k] = c; });
+}
+
+function setRegion(uf, label) {
+  currentUF = uf || '';
+  if (uf) reorderByRegion(uf);
+  regionLabel.textContent = label || (uf ? (UF_NAMES[uf] ? UF_NAMES[uf] : uf) : 'Todas');
+  renderRegionModal();
+  playChannel(0);
+}
+
+// --- Modal de regiões ---
+function openModal() { overlay.classList.add('open'); regionSearch.value = ''; renderRegionModal(); regionSearch.focus(); }
+function closeModal() { overlay.classList.remove('open'); }
+function renderRegionModal() {
+  const q = normalize(regionSearch.value);
+  let html = '<div class="rm-group">Nacional</div><div class="region-grid">';
+  const mk = (uf, name) => {
+    if (q && !normalize(name).includes(q)) return '';
+    const cur = currentUF === (uf || '');
+    return '<div class="region-item' + (cur ? ' current' : '') + '" data-uf="' + (uf || '') + '"><span class="code">' + (uf || '★') + '</span><span class="nm">' + name + '</span></div>';
+  };
+  html += mk('', 'Todas as regiões');
+  html += mk('BR', 'Nacional') + '</div>';
+  html += '<div class="rm-group">Estados</div><div class="region-grid">';
+  for (const uf of UF_ORDER) html += mk(uf, UF_NAMES[uf]);
+  html += '</div>';
+  regionBody.innerHTML = html;
+  regionBody.querySelectorAll('.region-item').forEach((el) => {
+    el.onclick = () => { setRegion(el.dataset.uf, el.querySelector('.nm').textContent); closeModal(); };
+  });
+}
+
+// --- Player ---
 function setPoster(show, msg) {
   poster.classList.toggle('hide', !show);
   if (msg) posterMsg.textContent = msg;
@@ -98,7 +233,7 @@ function setPoster(show, msg) {
 function renderNow() {
   const c = CHANNELS[idx];
   nowName.textContent = (idx + 1) + '. ' + c.name;
-  nowSub.textContent = c.url || 'sem url';
+  nowSub.textContent = PROXY_BASE && c.url.startsWith('http://') ? 'via proxy' : (c.url || 'sem url');
   if (c.logo) { nowLogo.src = c.logo; nowLogo.style.display = ''; } else { nowLogo.style.display = 'none'; }
   posterLogo.src = c.logo || '';
 }
@@ -124,24 +259,27 @@ function playChannel(i) {
   destroyHls(video);
   clearTimeout(loadTimer);
   renderNow();
-  if (!c.url || !(c.url.startsWith('https://') || c.url.startsWith('http://'))) {
+  const isHttp = c.url.startsWith('http://');
+  const isHttps = c.url.startsWith('https://');
+  if (!c.url || !(isHttps || isHttp)) {
     setPoster(true, 'Sem link para este canal.');
     next();
     return;
   }
-  if (c.url.startsWith('http://')) {
-    // HTTP nao toca na pagina segura; pula automaticamente continuando a busca por um HTTPS.
-    setPoster(true, '🔒 Pulo canal HTTP (só na playlist.m3u). Buscando o próximo…');
+  if (isHttp && !PROXY_BASE) {
+    setPoster(true, '🔒 Canal via HTTP. Configure o proxy (Globo etc.) para tocar aqui.');
     let k = 1;
     while (k < CHANNELS.length) {
       const j = (i + k) % CHANNELS.length;
-      if (CHANNELS[j].url && CHANNELS[j].url.startsWith('https://')) break;
+      const u = CHANNELS[j].url;
+      if (u.startsWith('https://') || (u.startsWith('http://') && PROXY_BASE)) break;
       k++;
     }
     playChannel(i + k);
     return;
   }
   setPoster(true, 'Carregando: ' + c.name + '…');
+  const src = onlineUrl(c);
   if (Hls.isSupported()) {
     try {
       const h = new Hls({ autoStartLoad: true, startLevel: -1 });
@@ -153,12 +291,12 @@ function playChannel(i) {
       });
       video._hls = h;
       if (video.paused) video.play().catch(()=>{});
-      h.loadSource(c.url);
+      h.loadSource(src);
       h.attachMedia(video);
       armLoadTimer(i);
     } catch (e) { setPoster(true, 'Erro no player.'); }
   } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = c.url;
+    video.src = src;
     if (video.paused) video.play().catch(()=>{});
     setPoster(false); clearTimeout(loadTimer); tryingIndex = -1; preloadNext();
   } else {
@@ -189,14 +327,30 @@ function toggle() { if (video.paused) { video.play().catch(()=>{}); } else { vid
 prevBtn.onclick = prev;
 nextBtn.onclick = next;
 playBtn.onclick = toggle;
-
+regionBtn.onclick = openModal;
+rmClose.onclick = closeModal;
+overlay.onclick = (e) => { if (e.target === overlay) closeModal(); };
 document.addEventListener('keydown', (e) => {
+  if (overlay.classList.contains('open')) {
+    if (e.key === 'Escape') closeModal();
+    return;
+  }
   if (e.key === 'ArrowRight') next();
   else if (e.key === 'ArrowLeft') prev();
   else if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); toggle(); }
 });
 
-playChannel(0);
+(async () => {
+  const detected = await detectRegion();
+  if (detected) {
+    setRegion(detected, UF_NAMES[detected]);
+  } else {
+    regionLabel.textContent = 'Todas';
+    renderRegionModal();
+    playChannel(0);
+  }
+})();
 </script>
+
 </body>
 </html>
