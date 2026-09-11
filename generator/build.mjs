@@ -322,6 +322,14 @@ async function main() {
     }
   }
 
+  const logosDir = path.join(ROOT, 'logos')
+  if (existsSync(logosDir)) {
+    mkdirSync(path.join(OUT, 'logos'), { recursive: true })
+    for (const f of readdirSync(logosDir)) {
+      if (statSync(path.join(logosDir, f)).isFile()) copyFileSync(path.join(logosDir, f), path.join(OUT, 'logos', f))
+    }
+  }
+
   writeFileSync(path.join(OUT, 'index.html'), buildIndexHtml(finalList), 'utf8')
   writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify(buildManifest(), null, 2), 'utf8')
 

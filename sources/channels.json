@@ -4,7 +4,7 @@
     {
       "id": "tvcultura",
       "name": "TV Cultura Rio",
-      "logo": "https://logos.imperioapps.top/CULTURA.png",
+      "logo": "logos/cultura.png",
       "url": "https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8",
       "links": [
         {
@@ -36,7 +36,7 @@
     {
       "id": "globo",
       "name": "Globo RJ",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
+      "logo": "logos/globo.png",
       "url": "http://praia13.com:80/live/939041/8SA9sh/131163.m3u8",
       "links": [
         {
@@ -64,7 +64,7 @@
     {
       "id": "redetv",
       "name": "RedeTV Rio",
-      "logo": "https://logos.imperioapps.top/REDE_TV.png",
+      "logo": "logos/redetv.png",
       "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8",
       "links": [
         {
@@ -96,7 +96,7 @@
     {
       "id": "band",
       "name": "Band",
-      "logo": "https://logos.imperioapps.top/BAND.png",
+      "logo": "logos/band.png",
       "url": "https://media.cdntvms.com.br/band_sat/index.m3u8",
       "uf": [],
       "links": [
@@ -122,7 +122,7 @@
     {
       "id": "cnt-rio",
       "name": "Rede CNT Rio de Janeiro",
-      "logo": "",
+      "logo": "logos/cnt.png",
       "url": "http://45.162.64.114/CNT/index.m3u8",
       "uf": [
         "RJ"
@@ -150,7 +150,7 @@
     {
       "id": "sbt",
       "name": "SBT Rio",
-      "logo": "https://logos.imperioapps.top/sbt.png",
+      "logo": "logos/sbt.png",
       "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8",
       "links": [
         {
@@ -182,7 +182,7 @@
     {
       "id": "record",
       "name": "Record Rio",
-      "logo": "https://logos.imperioapps.top/RECORD.png",
+      "logo": "logos/record.png",
       "url": "https://media.cdntvms.com.br/record_nacional_sat/index.m3u8",
       "links": [
         {
