@@ -208,14 +208,15 @@ const healthLink = document.getElementById('healthLink');
 const clockEl = document.getElementById('clock');
 
 /* ---------- configuração ---------- */
-// PROXY_BASE: proxy próprio da TV. Na internet usa o Cloudflare Worker (funciona no GitHub
-// Pages e aceita nossa origem); em localhost (serve.mjs) usa o proxy local. ?proxy= ou
-// tv30_proxy sobrescreve; "0"/"off"/"none"/"false" desliga.
+// PROXY_BASE: proxy próprio da TV (Netlify Function). No GitHub Pages usa o proxy do
+// site Netlify; no próprio Netlify e em localhost usa o proxy local (/api/proxy).
+// ?proxy= ou tv30_proxy sobrescreve; "0"/"off"/"none"/"false" desliga.
 const PROXY_BASE = (() => {
   const v = new URLSearchParams(location.search).get('proxy') || localStorage.getItem('tv30_proxy');
   if (!v) {
     if (['localhost', '127.0.0.1', '0.0.0.0'].includes(location.hostname)) return location.origin + '/api/proxy';
-    return 'https://tv30-proxy.som-wagner.workers.dev';
+    if (location.hostname.endsWith('.netlify.app')) return location.origin + '/api/proxy';
+    return 'https://tv30.netlify.app/api/proxy';
   }
   if (['0', 'off', 'none', 'false'].includes(String(v).toLowerCase())) return '';
   return String(v).trim();

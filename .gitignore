@@ -5,3 +5,6 @@ node_modules/
 *_err.txt
 *_out.txt
 CHECKPOINT.md
+
+# Local Netlify folder
+.netlify
