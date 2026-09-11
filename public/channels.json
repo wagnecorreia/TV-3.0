@@ -1,1364 +1,277 @@
 [
   {
-    "id": "agromais",
-    "name": "AgroMais",
-    "logo": "http://www.acstatic.co/logos/canais/agromais.png",
-    "url": "http://45.162.64.114/AGROMAIS/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "amazonsat",
-    "name": "Amazon Sat",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Amazon_Sat_logo.png/512px-Amazon_Sat_logo.png",
-    "url": "https://amazonsat.brasilstream.com.br/hls/amazonsat/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "aratu-on",
-    "name": "Aratu On",
-    "logo": "https://i.imgur.com/Ht4jCab.png",
-    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-9359/LVW9359_XSyReL0QVf/playlist.m3u8",
-    "uf": [
-      "BA"
+    "id": "tvcultura",
+    "name": "TV Cultura Rio",
+    "logo": "https://logos.imperioapps.top/CULTURA.png",
+    "url": "https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8",
+    "links": [
+      {
+        "q": "4K",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/103513.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "FHD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/71851.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "HD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/71853.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "SD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/71854.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "UOL",
+        "url": "https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8",
+        "globo": false,
+        "yt": ""
+      }
     ],
-    "national": false
+    "uf": [
+      "RJ"
+    ],
+    "national": true,
+    "num": "2.1"
   },
   {
-    "id": "arirang",
-    "name": "Arirang TV",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Arirang_TV_logo.png/512px-Arirang_TV_logo.png",
-    "url": "https://amdlive-ch01-ctnd-com.akamaized.net/arirang_1ch/smil:arirang_1ch.smil/playlist.m3u8",
-    "uf": [],
-    "national": false
+    "id": "globo",
+    "name": "Globo RJ",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
+    "url": "http://praia13.com:80/live/939041/8SA9sh/131163.m3u8",
+    "links": [
+      {
+        "q": "OFICIAL",
+        "url": "",
+        "globo": true,
+        "yt": ""
+      },
+      {
+        "q": "FHD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/72025.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "HD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/131163.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "SD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/131182.m3u8",
+        "globo": false,
+        "yt": ""
+      }
+    ],
+    "uf": [
+      "RJ"
+    ],
+    "national": true,
+    "num": "4.1"
+  },
+  {
+    "id": "redetv",
+    "name": "RedeTV Rio",
+    "logo": "https://logos.imperioapps.top/REDE_TV.png",
+    "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8",
+    "links": [
+      {
+        "q": "4K",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/178532.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "FHD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/72297.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "HD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/72299.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "SD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/72300.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "WEB",
+        "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8",
+        "globo": false,
+        "yt": ""
+      }
+    ],
+    "uf": [
+      "RJ"
+    ],
+    "national": true,
+    "num": "6.1"
   },
   {
     "id": "band",
     "name": "Band",
     "logo": "https://logos.imperioapps.top/BAND.png",
     "url": "https://media.cdntvms.com.br/band_sat/index.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "canaleducacao",
-    "name": "Canal Educação",
-    "logo": "https://i.imgur.com/G0x4xqa.png",
-    "url": "https://canaleducacao-stream.ebc.com.br/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "canalfutura",
-    "name": "Canal Futura",
-    "logo": "https://logos.imperioapps.top/FUTURA.png",
-    "url": "http://168.197.104.22/FUTURA/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "canalgov",
-    "name": "Canal Gov",
-    "logo": "https://i.imgur.com/rHPY0Yv.png",
-    "url": "https://canalgov-stream.ebc.com.br/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "dw_en",
-    "name": "DW English",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Deutsche_Welle_Logo.svg/512px-Deutsche_Welle_Logo.svg.png",
-    "url": "https://dwamdstream103.akamaized.net/hls/live/2015526/dwstream103/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "euronews",
-    "name": "Euronews",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Euronews_2022_logo.svg/512px-Euronews_2022_logo.svg.png",
-    "url": "http://45.190.28.50/EURONEWS_HD/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "fonte-tv",
-    "name": "Fonte TV",
-    "logo": "https://i.imgur.com/7q2BmNc.png",
-    "url": "http://flash.softhost.com.br:1935/fonte/fontetv/live.m3u8",
-    "uf": [
-      "PE"
+    "links": [
+      {
+        "q": "FHD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/79311.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "HD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/72597.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "SD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/79312.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "SAT",
+        "url": "https://media.cdntvms.com.br/band_sat/index.m3u8",
+        "globo": false,
+        "yt": ""
+      }
     ],
-    "national": false
-  },
-  {
-    "id": "france24_en",
-    "name": "France 24 English",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/France_24_logo.svg/512px-France_24_logo.svg.png",
-    "url": "https://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8",
     "uf": [],
-    "national": false
+    "national": true,
+    "num": "7.1"
   },
   {
-    "id": "globo-rede-bahia",
-    "name": "Globo Bahia",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-    "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzEyMTMubTN1OA.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "globo-minas",
-    "name": "Globo Minas",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-    "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNTkubTN1OA.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "globo-nordeste",
-    "name": "Globo Nordeste",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-    "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjAwMy5tM3U4.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "globo-rbs-porto-alegre",
-    "name": "Globo RBS Porto Alegre",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-    "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExMDIubTN1OA.m3u8",
-    "uf": [
-      "RS"
+    "id": "cnt-rio",
+    "name": "Rede CNT Rio de Janeiro",
+    "logo": "",
+    "url": "http://45.162.64.114/CNT/index.m3u8",
+    "links": [
+      {
+        "q": "L1",
+        "url": "http://45.162.64.114/CNT/index.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "L2",
+        "url": "http://168.197.104.22/CNT/index.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "L3",
+        "url": "http://170.83.49.66:8083/REDECNTHD/index.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "L4",
+        "url": "http://186.219.52.187/cnt/index.m3u8",
+        "globo": false,
+        "yt": ""
+      }
     ],
-    "national": true
-  },
-  {
-    "id": "globo",
-    "name": "Globo RJ",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-    "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNjMubTN1OA==.m3u8",
     "uf": [
       "RJ"
     ],
-    "national": true
-  },
-  {
-    "id": "globo-rpc-curitiba",
-    "name": "Globo RPC Curitiba",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-    "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExOTkubTN1OA.m3u8",
-    "uf": [
-      "PR"
-    ],
-    "national": true
-  },
-  {
-    "id": "globo-sp",
-    "name": "Globo SP",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-    "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjA0Mi5tM3U4.m3u8",
-    "uf": [
-      "SP"
-    ],
-    "national": true
-  },
-  {
-    "id": "o-dia-tv",
-    "name": "O Dia TV",
-    "logo": "https://i.imgur.com/1LUbAVP.png",
-    "url": "https://6836041ea1117.streamlock.net/tvodia/tvodia/playlist.m3u8",
-    "uf": [
-      "RJ"
-    ],
-    "national": false
-  },
-  {
-    "id": "record",
-    "name": "Record",
-    "logo": "https://logos.imperioapps.top/RECORD.png",
-    "url": "https://media.cdntvms.com.br/record_nacional_sat/index.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "redevida",
-    "name": "Rede Vida",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Rede_Vida_logo.png/512px-Rede_Vida_logo.png",
-    "url": "http://45.190.28.50/REDE_VIDA_HD/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "redetv",
-    "name": "RedeTV!",
-    "logo": "https://logos.imperioapps.top/REDE_TV.png",
-    "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "redetv-parana",
-    "name": "RedeTV! Parana",
-    "logo": "https://i.imgur.com/D8R0Af4.png",
-    "url": "https://tv01.zas.media:1936/redetvparana/redetvparana/playlist.m3u8",
-    "uf": [
-      "PR"
-    ],
-    "national": true
+    "national": false,
+    "num": "9.1"
   },
   {
     "id": "sbt",
-    "name": "SBT",
+    "name": "SBT Rio",
     "logo": "https://logos.imperioapps.top/sbt.png",
     "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "trtworld",
-    "name": "TRT World",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/TRT_World_logo.svg/512px-TRT_World_logo.svg.png",
-    "url": "https://tv-trtworld.medya.trt.com.tr/master.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tv-3-curitiba",
-    "name": "TV 3 Curitiba",
-    "logo": "https://eswqkrogupaisirwcsys.supabase.co/storage/v1/object/public/mbc-media/canais/1776133208960-o2l2f7f02f.png",
-    "url": "https://stmv.webtvninjas.com.br/tv3/tv3/playlist.m3u8",
-    "uf": [
-      "PR"
+    "links": [
+      {
+        "q": "FHD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/108681.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "HD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/108682.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "SD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/108683.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "SAT",
+        "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "YT",
+        "url": "",
+        "globo": false,
+        "yt": "ABVQXgr2LW4"
+      }
     ],
-    "national": false
-  },
-  {
-    "id": "tv-a-critica",
-    "name": "TV A Critica",
-    "logo": "https://i.imgur.com/j51rBro.png",
-    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-20715/LVW20715_50E3x2MCm2/playlist.m3u8",
-    "uf": [
-      "AM"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-a-folha",
-    "name": "TV A Folha",
-    "logo": "https://i.imgur.com/I7XGMhj.png",
-    "url": "https://video01.logicahost.com.br/tvafolha/tvafolha/playlist.m3u8",
-    "uf": [
-      "RN"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-alianca-catarinense",
-    "name": "TV Aliança Catarinense",
-    "logo": "https://i.imgur.com/eqmOhtP.png",
-    "url": "https://video01.logicahost.com.br/tvalianca/tvalianca/playlist.m3u8",
-    "uf": [
-      "SC"
-    ],
-    "national": false
-  },
-  {
-    "id": "aparecida",
-    "name": "TV Aparecida",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/TV_Aparecida_logo.png/512px-TV_Aparecida_logo.png",
-    "url": "https://cdn.jmvstream.com/w/LVW-9716/LVW9716_HbtQtezcaw/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tv-arapuan",
-    "name": "TV Arapuan",
-    "logo": "https://i.imgur.com/3395A2h.png",
-    "url": "https://5b7f3c45ab7c2.streamlock.net/arapuan/ngrp:arapuan_all/playlist.m3u8",
-    "uf": [
-      "PB"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-assembleia-piaui",
-    "name": "TV Assembleia Piaui",
-    "logo": "https://i.imgur.com/eMguSjM.png",
-    "url": "https://stmv1.srvstm.com/piaui8071/piaui8071/playlist.m3u8",
-    "uf": [
-      "PI"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvbrasil",
-    "name": "TV Brasil",
-    "logo": "https://logos.imperioapps.top/TV_BRASIL.png",
-    "url": "https://tvbrasil-stream.ebc.com.br/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tv-brasil-oeste",
-    "name": "TV Brasil Oeste",
-    "logo": "https://i.imgur.com/noqGfuy.png",
-    "url": "https://5ad482a77183d.streamlock.net/operacaotbomt.com/operacaotbomt.com/playlist.m3u8",
-    "uf": [
-      "MT"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvbrics",
-    "name": "TV BRICS (PT)",
-    "logo": "https://i.imgur.com/vLpm8tN.png",
-    "url": "https://porbrics.mediacdn.ru/cdn/brics/portuguese/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tv-brusque",
-    "name": "TV Brusque",
-    "logo": "https://i.imgur.com/J2EAZPS.png",
-    "url": "https://5ad482a77183d.streamlock.net/rodrigotvbrusque.com.br/5d880199c902eb4a1e8df00d/playlist.m3u8",
-    "uf": [
-      "SC"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvcamara",
-    "name": "TV Câmara",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/TV_C%26%C3%A2mara_logo.png/512px-TV_C%26%C3%A2mara_logo.png",
-    "url": "https://stream3.camara.gov.br/tv1/manifest.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "cancaonova",
-    "name": "TV Canção Nova",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Logo_CN_com_RGBA.png/512px-Logo_CN_com_RGBA.png",
-    "url": "http://45.162.64.114/CANCAO_NOVA/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvcultura",
-    "name": "TV Cultura",
-    "logo": "https://logos.imperioapps.top/CULTURA.png",
-    "url": "https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "tvescola",
-    "name": "TV Escola",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/TV_Escola_logo.png/512px-TV_Escola_logo.png",
-    "url": "http://45.190.28.50/TV_ESCOLA/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tv-fronteira",
-    "name": "TV Fronteira",
-    "logo": "https://i.imgur.com/NtcoW6G.png",
-    "url": "https://tvfronteira.brasilstream.com.br/hls/tvfronteira/index.m3u8",
-    "uf": [
-      "SP"
-    ],
-    "national": false
-  },
-  {
-    "id": "gazeta",
-    "name": "TV Gazeta",
-    "logo": "https://logos.imperioapps.top/TV_GAZETA.png",
-    "url": "http://45.162.64.114/GAZETA/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tv-grande-natal",
-    "name": "TV Grande Natal",
-    "logo": "https://i.imgur.com/MTuErdw.png",
-    "url": "http://tvgrandenatalhd.duckdns.org:8080/hls/live.m3u8",
-    "uf": [
-      "RN"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-guara",
-    "name": "TV Guará",
-    "logo": "https://i.imgur.com/8PErNBT.png",
-    "url": "https://video02.logicahost.com.br/tvguara23/tvguara23/playlist.m3u8",
-    "uf": [
-      "DF"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvjustica",
-    "name": "TV Justiça",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/TV_Justi%27%C3%A7a_logo.png/512px-TV_Justi%27%C3%A7a_logo.png",
-    "url": "http://45.162.64.114/TV_JUSTICA/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tv-litoral-rn",
-    "name": "TV Litoral RN",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3e/TV_LITORAL_RN.jpg",
-    "url": "https://5ad482a77183d.streamlock.net/tvnordesteegmail.com/tvnordesteegmail.com/playlist.m3u8",
-    "uf": [
-      "RN"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-mais-marica",
-    "name": "TV Mais Maricá",
-    "logo": "https://i.imgur.com/lgCRX7q.png",
-    "url": "https://5cf4a2c2512a2.streamlock.net/tvmaismarica/tvmaismarica/playlist.m3u8",
     "uf": [
       "RJ"
     ],
-    "national": false
+    "national": true,
+    "num": "11.1"
   },
   {
-    "id": "tv-marajoara",
-    "name": "TV Marajoara",
-    "logo": "https://i.imgur.com/9d9vBN7.png",
-    "url": "https://tv02.zas.media:1936/tvmarajoara/tvmarajoara/playlist.m3u8",
-    "uf": [
-      "PA"
+    "id": "record",
+    "name": "Record Rio",
+    "logo": "https://logos.imperioapps.top/RECORD.png",
+    "url": "https://media.cdntvms.com.br/record_nacional_sat/index.m3u8",
+    "links": [
+      {
+        "q": "FHD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/106638.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "HD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/72594.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "SD",
+        "url": "http://praia13.com:80/live/939041/8SA9sh/96526.m3u8",
+        "globo": false,
+        "yt": ""
+      },
+      {
+        "q": "SAT",
+        "url": "https://media.cdntvms.com.br/record_nacional_sat/index.m3u8",
+        "globo": false,
+        "yt": ""
+      }
     ],
-    "national": false
-  },
-  {
-    "id": "tv-natal",
-    "name": "TV Natal",
-    "logo": "https://i.imgur.com/wqQmQml.png",
-    "url": "http://185.228.163.146:8000/play/a01y/index.m3u8",
-    "uf": [
-      "RN"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-pantanal-ms",
-    "name": "TV Pantanal MS",
-    "logo": "https://i.imgur.com/0FOmktl.png",
-    "url": "https://5a2b083e9f360.streamlock.net/tvpantanal/tvpantanal.sdp/playlist.m3u8",
-    "uf": [
-      "MS"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-paraense",
-    "name": "TV Paraense",
-    "logo": "https://duckduckgo.com/i/e408ea02.png",
-    "url": "https://video09.logicahost.com.br/tvparaense/tvparaense/playlist.m3u",
-    "uf": [
-      "PA"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-parana-turismo",
-    "name": "TV Paraná Turismo",
-    "logo": "https://i.imgur.com/I6pKoBd.png",
-    "url": "http://200.189.113.201/hls/tve.m3u8",
-    "uf": [
-      "PR"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-passo-fundo",
-    "name": "TV Passo Fundo",
-    "logo": "https://i.imgur.com/QFE6TiV.png",
-    "url": "https://5a57bda70564a.streamlock.net/tvpasso/tvpasso.sdp/playlist.m3u8",
-    "uf": [
-      "RS"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-petropolis",
-    "name": "TV Petropolis",
-    "logo": "https://web2.petropolis.rj.gov.br/imc/film-commission/uploads/profissional/perfil/785b645d9c574b4d88504a85dbd6ef37.png",
-    "url": "https://video02.logicahost.com.br/tvpetropolis/tvpetropolis/playlist.m3u8",
     "uf": [
       "RJ"
     ],
-    "national": false
-  },
-  {
-    "id": "ratimbum",
-    "name": "TV Rá Tim Bum",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/TV_R%C3%A1-Tim-Bum_logo.png/512px-TV_R%C3%A1-Tim-Bum_logo.png",
-    "url": "http://45.177.114.115/TV_RA_TIM_BUM/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tv-sao-raimundo",
-    "name": "TV São Raimundo",
-    "logo": "https://i.imgur.com/f34CQIG.png",
-    "url": "https://stmv1.voxtvhd.com.br/9030/9030/playlist.m3u8",
-    "uf": [
-      "RR"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvsenado",
-    "name": "TV Senado",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/TV_Senado_-_logo_2018.png/512px-TV_Senado_-_logo_2018.png",
-    "url": "http://45.162.64.114/TV_SENADO/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tv-sim-cachoeiro",
-    "name": "TV Sim Cachoeiro",
-    "logo": "https://i.imgur.com/t5oUK3C.png",
-    "url": "https://5cf4a2c2512a2.streamlock.net/8104/8104/playlist.m3u8",
-    "uf": [
-      "ES"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-sim-sao-mateus",
-    "name": "TV Sim São Mateus",
-    "logo": "https://i.imgur.com/t5oUK3C.png",
-    "url": "https://5cf4a2c2512a2.streamlock.net/8236/8236/playlist.m3u8",
-    "uf": [
-      "ES"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-sul-bahia",
-    "name": "TV Sul Bahia",
-    "logo": "https://i.imgur.com/qM6nMWm.png",
-    "url": "https://live.cdn.upx.com/00046/myStream.sdp/playlist.m3u8",
-    "uf": [
-      "BA"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-sul-de-minas",
-    "name": "TV Sul de Minas",
-    "logo": "https://i.imgur.com/hPh8cxK.png",
-    "url": "https://5cf4a2c2512a2.streamlock.net/tvsuldeminas/tvsuldeminas/playlist.m3u8",
-    "uf": [
-      "MG"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-ufop",
-    "name": "TV UFOP",
-    "logo": "https://raw.githubusercontent.com/daniloroxette/tvufop/refs/heads/main/images/tvufop_logo.png",
-    "url": "https://app.tvufop.com.br/hls/tvufop.m3u8",
-    "uf": [
-      "MG"
-    ],
-    "national": false
-  },
-  {
-    "id": "tv-vicosa",
-    "name": "TV Viçosa",
-    "logo": "https://i.imgur.com/TZF55f9.png",
-    "url": "http://wz4.dnip.com.br/fratevitv/fratevitv.sdp/playlist.m3u8",
-    "uf": [
-      "MG"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvc-rio",
-    "name": "TVC-Rio",
-    "logo": "https://i.imgur.com/WDiikWv.png",
-    "url": "https://video05.logicahost.com.br/comunitariario/comunitariario/playlist.m3u8",
-    "uf": [
-      "RJ"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvcom-df",
-    "name": "TVCOM DF",
-    "logo": "https://i.imgur.com/uxefHY3.png",
-    "url": "https://5b7f3c45ab7c2.streamlock.net/8008/smil:8008.smil/playlist.m3u8?DVR=",
-    "uf": [
-      "DF"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvcom-maceio",
-    "name": "TVCOM Maceió",
-    "logo": "https://i.imgur.com/IE7IZzi.png",
-    "url": "https://srv5.zcast.com.br/tvcommaceio/tvcommaceio/playlist.m3u8",
-    "uf": [
-      "AL"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvecultura",
-    "name": "TVE Cultura",
-    "logo": "https://i.imgur.com/FpqoWcB.png",
-    "url": "http://45.190.28.50/TVE/index.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "tve-rs",
-    "name": "TVE RS",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/TVE_Bahia_logo.svg/960px-TVE_Bahia_logo.svg.png",
-    "url": "http://streaming.procergs.com.br:1935/tve/stve/playlist.m3u8",
-    "uf": [
-      "RS"
-    ],
-    "national": false
-  },
-  {
-    "id": "adessotv",
-    "name": "AdessoTV",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-9715/LVW9715_12B26T62tm/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "agrocanal",
-    "name": "AgroCanal",
-    "logo": "",
-    "url": "https://aovivo.equipea.com.br:5443/aovivort/streams/pshRLrnv6isXq7RG4747567774043229.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "ararunatv",
-    "name": "ArarunaTV",
-    "logo": "",
-    "url": "https://video05.logicahost.com.br/ararunatv/ararunatv/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "blitstv",
-    "name": "Blitstv",
-    "logo": "",
-    "url": "https://stmv1.transmissaodigital.com/blitstv/blitstv/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "boasnovas",
-    "name": "BoasNovas",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-9375/LVW9375_6i0wPBCHYc/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "br8tv",
-    "name": "BR8TV",
-    "logo": "",
-    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-11668/ngrp:LVW11668_wiJpjbMrks_all/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "canal38",
-    "name": "Canal38",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-8503/LVW8503_d0V5oduFlK/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "canalfdr",
-    "name": "CanalFDR",
-    "logo": "",
-    "url": "https://v-us-01.wisestream.io/memfs/e4ade538-7924-4359-81ef-b9d4dd229e91.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "canalmetropolitanodenoticias",
-    "name": "CanalMetropolitanodeNoticias",
-    "logo": "",
-    "url": "https://stmv5.samcast.com.br/claudio8701/claudio8701/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "canalsaude",
-    "name": "CanalSaude",
-    "logo": "",
-    "url": "https://eitv7.cdn.broadpeak.io/account351-i1495/event/canalsaude/format720p.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "canaluol",
-    "name": "CanalUOL",
-    "logo": "",
-    "url": "https://video24.mais.uol.com.br/live/6146.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "catve2",
-    "name": "Catve2",
-    "logo": "",
-    "url": "https://5b33b873179a2.streamlock.net:1443/catve2/catve2/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "chromatv",
-    "name": "ChromaTV",
-    "logo": "",
-    "url": "https://5c483b9d1019c.streamlock.net/8054/8054/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "cindietv",
-    "name": "CINDIETV",
-    "logo": "",
-    "url": "https://cc-hqw8u5r1nshjc.akamaized.net/scheduler/scheduleMaster/352.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "cinturaoverde",
-    "name": "CinturaoVerde",
-    "logo": "",
-    "url": "https://play.redecinturaoverde.com.br/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "classiquetv",
-    "name": "ClassiqueTV",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/classique/classique/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "combrasil",
-    "name": "COMBrasil",
-    "logo": "",
-    "url": "https://dfr80qz435crc.cloudfront.net/EFGH/Amagi/NewCo/New_Brasil_BR/New_Brasil.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "conectamaistv",
-    "name": "ConectaMaisTV",
-    "logo": "",
-    "url": "https://adylnet.streampool.net/10324/live/hls/Conecta/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "conectvbrasil",
-    "name": "ConecTVBrasil",
-    "logo": "",
-    "url": "https://stream01.msolutionbrasil.com.br/hls/conectv/live.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "culturafast",
-    "name": "CulturaFast",
-    "logo": "",
-    "url": "https://fpa-gateway.tvcultura.com.br:8181/memfs/606caef0-a290-413d-9f1f-8fcdb3a73831.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "despertartv",
-    "name": "DespertarTV",
-    "logo": "",
-    "url": "https://br.conectmy.com.br/DespertarTV/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "elytv",
-    "name": "ElyTV",
-    "logo": "",
-    "url": "https://stmv1.srvsite.com/ely/ely/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "eutv",
-    "name": "EUTV",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "falalitoral",
-    "name": "FalaLitoral",
-    "logo": "",
-    "url": "https://5c483b9d1019c.streamlock.net/falalitoraltv/falalitoraltv/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "foratediotv",
-    "name": "ForaTedioTV",
-    "logo": "",
-    "url": "https://stmv2.srvif.com/foratedio/foratedio/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "gefast",
-    "name": "GeFast",
-    "logo": "",
-    "url": "https://amg00716-globo-amg00716c1-tcl-br-9495.playouts.now.amagi.tv/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "gospelcartoon",
-    "name": "GospelCartoon",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/gospelcartoon/gospelcartoon/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "gospelmovietv",
-    "name": "GospelMovieTV",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/gospelf/gospelf/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "impdtvworldwide",
-    "name": "IMPDTVWorldwide",
-    "logo": "",
-    "url": "https://igrejamundial.nuvemplay.live/hls/stream.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "j3newstv",
-    "name": "J3NEWSTV",
-    "logo": "",
-    "url": "https://video01.brascast.com/d92ebb4f/d92ebb4f/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "kpoptvplay",
-    "name": "KpopTVPlay",
-    "logo": "",
-    "url": "https://giatv.bozztv.com/giatv/giatv-kpoptvplay/kpoptvplay/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "kuriakoscine",
-    "name": "KuriakosCine",
-    "logo": "",
-    "url": "https://w2.manasat.com/kcine/smil:kcine.smil/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "kuriakoskids",
-    "name": "KuriakosKids",
-    "logo": "",
-    "url": "https://w2.manasat.com/kkids/smil:kkids.smil/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "laboraltv",
-    "name": "LaboralTV",
-    "logo": "",
-    "url": "https://tv.laboralsst.com.br/hls/stream.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "lamorerockshowwebtv",
-    "name": "LamoreRockShowWebTV",
-    "logo": "",
-    "url": "https://a.cdni.live/rodrigo2364/rodrigo2364/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "lke",
-    "name": "Lke",
-    "logo": "",
-    "url": "https://cnl-cl.otteravision.com/cnl/cl_h265/cl_h265.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "loading",
-    "name": "Loading",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/loadingtv/loadingtv/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "mbcbrasiltv",
-    "name": "MBCBrasilTV",
-    "logo": "",
-    "url": "https://play.mbcbrasil.tv.br/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "nickonline",
-    "name": "NickOnline",
-    "logo": "",
-    "url": "https://x1colegal.com/hls/stream.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "nicktoonsbrasil",
-    "name": "NickToonsBrasil",
-    "logo": "",
-    "url": "https://stmv2.srvif.com/nicktoons/nicktoons/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "nsports",
-    "name": "NSports",
-    "logo": "",
-    "url": "https://ogc-nsprt-tcl-roku-syndication.otteravision.com/ogc/nsprt/nsprt.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "ntv",
-    "name": "NTV",
-    "logo": "",
-    "url": "https://cdn.livespanel.com/nossatv/nossatv/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "petloverstv",
-    "name": "PetloversTV",
-    "logo": "",
-    "url": "https://video04.logicahost.com.br/petloverstv/petloverstv/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "playtv",
-    "name": "PlayTV",
-    "logo": "",
-    "url": "https://isaocorp.cloudecast.com/playtv/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "plenatv",
-    "name": "PlenaTV",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-9591/LVW9591_PmXtgATnaS/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "plenitudetv",
-    "name": "PlenitudeTV",
-    "logo": "",
-    "url": "https://strv.painelvox.top/plenitude/plenitude/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "rbatv",
-    "name": "RBATV",
-    "logo": "",
-    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-15748/LVW15748_Yed7yzLuRC/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "rctvbrasil",
-    "name": "RCTVBrasil",
-    "logo": "",
-    "url": "https://stmv.webtvninjas.com.br/rctv/rctv/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "recordnews",
-    "name": "RecordNews",
-    "logo": "",
-    "url": "https://rnw-rn.otteravision.com/rnw/rn/rnw_rn.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "redebrasil",
-    "name": "RedeBrasil",
-    "logo": "",
-    "url": "https://redebrasil.nuvemplay.live/hls/stream.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "redegospel",
-    "name": "RedeGospel",
-    "logo": "",
-    "url": "https://cdn.live.br1.jmvstream.com/w/LVW-8719/LVW8719_AcLVAxWy5J/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "redemeionorte",
-    "name": "RedeMeioNorte",
-    "logo": "",
-    "url": "https://maystreaming.cloudecast.com/redemeio/index.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "redeminas",
-    "name": "RedeMinas",
-    "logo": "",
-    "url": "https://8hzcavccys.zoeweb.tv/redeminas/ngrp:redeminas_all/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "redengt",
-    "name": "RedeNGT",
-    "logo": "",
-    "url": "https://isaocorp.cloudecast.com/ngt/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "redesptv",
-    "name": "RedeSPTV",
-    "logo": "",
-    "url": "https://video01.logicahost.com.br/websptv/websptv/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "redetvmais",
-    "name": "RedeTVMais",
-    "logo": "",
-    "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "rittv",
-    "name": "RITTV",
-    "logo": "",
-    "url": "https://acesso.ecast.site:3648/live/ritlive.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "sbtinterior",
-    "name": "SBTInterior",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-10801/LVW10801_Xvg4R0u57n/playlist.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "sbtnacional",
-    "name": "SBTNacional",
-    "logo": "",
-    "url": "https://6836041ea1117.streamlock.net/cverde/cverde/playlist.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "sbtnews",
-    "name": "SBTNews",
-    "logo": "",
-    "url": "https://dai.google.com/linear/hls/event/1XSOdtQ0SH2G8OEmEfGgjQ/master.m3u8",
-    "uf": [],
-    "national": true
-  },
-  {
-    "id": "sictv",
-    "name": "SICTV",
-    "logo": "",
-    "url": "https://parecisfmlive.brasilstream.com.br/hls/parecisfmlive/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "soutv",
-    "name": "SOUTV",
-    "logo": "",
-    "url": "https://video10.logicahost.com.br/soutv/soutv/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "stztv",
-    "name": "STZTV",
-    "logo": "",
-    "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-12952/playlist/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tcm10hd",
-    "name": "TCM10HD",
-    "logo": "",
-    "url": "https://live.tcm10.com.br/tcm10hd/stream.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "terraviva",
-    "name": "TerraViva",
-    "logo": "",
-    "url": "https://9ada494d.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/TEctYnJfVXBseW5rLU5ld2NvX0hMUw/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tiktokradiobrasil",
-    "name": "TikTokRadioBrasil",
-    "logo": "",
-    "url": "https://d1bl6tskrpq9ze.cloudfront.net/hls/master.m3u8?ads.xumo_channelId=99992529",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvaldeia",
-    "name": "TVAldeia",
-    "logo": "",
-    "url": "https://stmv1.samcast.com.br/giovane7843/giovane7843/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvalternativa",
-    "name": "TVAlternativa",
-    "logo": "",
-    "url": "https://stmv5.samcast.com.br/wagner7919/wagner7919/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvcidadeverdecuiaba",
-    "name": "TVCidadeVerdeCuiaba",
-    "logo": "",
-    "url": "https://televisaocidadeverde.brasilstream.com.br/hls/televisaocidadeverde/index.m3u8",
-    "uf": [
-      "MT"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvclube",
-    "name": "TVClube",
-    "logo": "",
-    "url": "https://5c483b9d1019c.streamlock.net/8186/8186/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvcomunitaria",
-    "name": "TVComunitaria",
-    "logo": "",
-    "url": "https://5b7f3c45ab7c2.streamlock.net/8008/smil:8008.smil/playlist.m3u8?DVR=",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvcuruca",
-    "name": "TVCuruca",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/tvcurucasp/tvcurucasp/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvdifusao",
-    "name": "TVDifusao",
-    "logo": "",
-    "url": "https://tvdsoultv.acessaradios.com.br/tvdsoultv/tvdsoultv.stream/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvfuturo",
-    "name": "TVFuturo",
-    "logo": "",
-    "url": "https://tv02.zas.media:1936/tvfuturo/tvfuturo/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvitape",
-    "name": "TVitape",
-    "logo": "",
-    "url": "https://stream01.msolutionbrasil.com.br/hls/tvitape/live.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvlatinasat",
-    "name": "TVLatinaSat",
-    "logo": "",
-    "url": "https://www.latinasat.com.br/hls/live/stream/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvlifeamerica",
-    "name": "TVLifeAmerica",
-    "logo": "",
-    "url": "https://streaming.cloudecast.com/hls/tvlifeamerica/index.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvnbn",
-    "name": "TVNBN",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-8410/LVW8410_uiZOVm6vz1/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvpadrecicero",
-    "name": "TVPadreCicero",
-    "logo": "",
-    "url": "https://video01.logicahost.com.br/tvpadrecicero/tvpadrecicero/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvpaieterno",
-    "name": "TVPaiEterno",
-    "logo": "",
-    "url": "https://video09.logicahost.com.br/paieterno/paieterno/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvpluspet",
-    "name": "TVPlusPet",
-    "logo": "",
-    "url": "https://stmv5.samcast.com.br/tvmaispet6354/tvmaispet6354/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvprofissao",
-    "name": "TVProfissao",
-    "logo": "",
-    "url": "https://stmv.webtvninjas.com.br/tvprofissao/tvprofissao/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvseries",
-    "name": "TVSeries",
-    "logo": "",
-    "url": "https://stmv1.srvif.com/tvserie/tvserie/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvshowfortaleza",
-    "name": "TVShowFortaleza",
-    "logo": "",
-    "url": "https://stmv8.samcast.com.br/raimundoanselmolimamororo1908/raimundoanselmolimamororo1908/playlist.m3u8",
-    "uf": [
-      "CE"
-    ],
-    "national": false
-  },
-  {
-    "id": "tvterceiroanjo",
-    "name": "TVTerceiroAnjo",
-    "logo": "",
-    "url": "https://streamer1.streamhost.org/salive/GMI3anjoh/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvuniversal",
-    "name": "TVUniversal",
-    "logo": "",
-    "url": "https://644398c.ha.azioncdn.net/primary/tvuniversal_480p.sdp/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvvilareal",
-    "name": "TVVilaReal",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-10841/LVW10841_mT77z9o2cP/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "tvzoom",
-    "name": "TVZoom",
-    "logo": "",
-    "url": "https://cdn.jmvstream.com/w/LVW-9730/LVW9730_LmUwslM8jt/playlist.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "umatv",
-    "name": "UMATV",
-    "logo": "",
-    "url": "https://umatv.nuvemplay.live/hls/stream.m3u8",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "unisultv",
-    "name": "UnisulTV",
-    "logo": "",
-    "url": "https://sitetv.brasilstream.com.br/hls/sitetv/index.m3u8?token=",
-    "uf": [],
-    "national": false
-  },
-  {
-    "id": "vejaplustv",
-    "name": "VEJAPlusTV",
-    "logo": "",
-    "url": "https://gpa-vja.otteravision.com/gpa/vja/vja.m3u8",
-    "uf": [],
-    "national": false
+    "national": true,
+    "num": "13.1"
   }
 ]
