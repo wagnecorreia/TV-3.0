@@ -335,9 +335,9 @@ async function globoResolve() {
   const j = await r2.json();
   const src = (j.sources || []).find((s) => s.type === 'primary');
   if (!src || !src.url) throw new Error('Sem source primary na API Globo');
-  // m3u8 da Globo só aceita ACAO=https://www.globo.com (CORS). Passa pelo proxy:
-  // o proxy baixa via servidor (sem CORS) e reescreve variantes/segmentos p/ origem própria.
-  return proxyUrl(src.url);
+  // m3u8 direto (sem proxy): a TV/player nativo ignora o CORS restrito da Globo (ACAO só p/ *.globo.com).
+  // Datacenter (Netlify US) apanha 488 da Globo, então NÃO passa pelo proxy. Se falhar, failover -> FrostView.
+  return src.url;
 }
 
 /* link -> m3u8/pré-play real (Globo resolve na hora; YT vira src de resgate; link normal vira proxy+buster se já tentado) */

@@ -14,7 +14,10 @@ export async function proxyFetch(target, selfBase) {
       redirect: 'follow',
       signal: ctrl.signal,
     })
-    if (!res.ok) return { status: res.status, text: 'erro ' + res.status + ' ' + res.statusText }
+    if (!res.ok) {
+      const t = await res.text().catch(() => '')
+      return { status: res.status, text: 'erro ' + res.status + ' ' + res.statusText + ' :: ' + t.slice(0, 300) }
+    }
     const buf = Buffer.from(await res.arrayBuffer())
     const ct = res.headers.get('content-type') || ''
     const head = buf.subarray(0, 32).toString('latin1')
