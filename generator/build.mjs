@@ -225,17 +225,6 @@ function buildManifest() {
   }
 }
 
-function buildM3u(channels) {
-  const lines = ['#EXTM3U']
-  for (const c of channels) {
-    if (!c.url) continue
-    const logo = c.logo ? ` tvg-logo="${c.logo}"` : ''
-    lines.push(`#EXTINF:-1${logo},${c.name}`)
-    lines.push(c.url)
-  }
-  return lines.join('\n') + '\n'
-}
-
 // Ordena: canais numerados do dial (ex: 2.1, 4.1) na frente na ordem do canais.json, depois curados em ordem alfabética, depois iptv-org.
 function orderLists(merged) {
   const curated = merged.filter((c) => c.source === 'curada')
@@ -334,19 +323,7 @@ async function main() {
   }
 
   writeFileSync(path.join(OUT, 'index.html'), buildIndexHtml(finalList), 'utf8')
-  writeFileSync(path.join(OUT, 'playlist.m3u'), buildM3u(finalList), 'utf8')
   writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify(buildManifest(), null, 2), 'utf8')
-  writeFileSync(path.join(OUT, '_redirects'), '/api/epg  /.netlify/functions/epg  200\n/api/*  /.netlify/functions/proxy  200\n', 'utf8')
-  writeFileSync(
-    path.join(OUT, 'channels.json'),
-    JSON.stringify(finalList.map((c) => ({ id: c.id, name: c.name, logo: c.logo, url: c.url, links: c.links || [], uf: c.uf, national: c.national, num: c.num || '' })), null, 2),
-    'utf8'
-  )
-  writeFileSync(
-    path.join(OUT, 'channels-status.json'),
-    JSON.stringify({ generatedAt: new Date().toISOString(), total: finalList.length, fromCurated: fromBase, fromIptvOrg: fromIptv, removedDead: dead }, null, 2),
-    'utf8'
-  )
 
   log(`  destino: public/ (${finalList.length} canais: ${fromBase} curados + ${fromIptv} do iptv-org)`)
   log('TV 3.0 · OK')

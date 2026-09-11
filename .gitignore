@@ -1,3 +1,7 @@
 node_modules/
 *.log
 .env
+*.bat
+*_err.txt
+*_out.txt
+CHECKPOINT.md

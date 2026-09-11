@@ -1,3 +1,0 @@
-name = "tv30-proxy"
-main = "proxy-worker.js"
-compatibility_date = "2026-08-29"
