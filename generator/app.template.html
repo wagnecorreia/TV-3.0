@@ -800,6 +800,8 @@ function warmBest() {
   if (state.active.yt) return;
   const links = linksOf(c);
   if (links.length < 2) return;
+  /* link preferido ativo (Globo oficial/rdcanais ou YT): não enche o pool com praia13 p/ não promover sinal instável */
+  if (state.linkIdx < links.length && (links[state.linkIdx].globo || links[state.linkIdx].yt)) return;
   const target = pickTarget();
   linkSrc(links[target]).then((url) => {
     if (!url) return;

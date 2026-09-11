@@ -154,6 +154,14 @@
       "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8",
       "links": [
         {
+          "q": "YT",
+          "yt": "ABVQXgr2LW4"
+        },
+        {
+          "q": "SAT",
+          "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8"
+        },
+        {
           "q": "FHD",
           "url": "http://praia13.com:80/live/939041/8SA9sh/108681.m3u8"
         },
@@ -164,14 +172,6 @@
         {
           "q": "SD",
           "url": "http://praia13.com:80/live/939041/8SA9sh/108683.m3u8"
-        },
-        {
-          "q": "SAT",
-          "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8"
-        },
-        {
-          "q": "YT",
-          "yt": "ABVQXgr2LW4"
         }
       ],
       "uf": [
