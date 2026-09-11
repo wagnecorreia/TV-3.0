@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07090d">
+<title>TV 3.0 · Sinal de TV, de graça, pra onde não existe.</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" href="./favicon.png">
+<link rel="apple-touch-icon" href="./icon.png">
+<style>
+  /* Reset & Base */
+  * { box-sizing:border-box; margin:0; padding:0; user-select:none; -webkit-tap-highlight-color:transparent; }
+  body, html { width:100%; height:100%; background-color:#000; color:#fff; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; overflow:hidden; }
+
+  /* Layout Principal (Vertical por Padrão) */
+  .app-container { display:flex; flex-direction:column; width:100vw; height:100vh; background:#000; }
+
+  /* Player Canvas Container */
+  .player-canvas { position:relative; width:100%; height:35vh; background:linear-gradient(135deg,#e60000 0%,#ff007f 50%,#b000ff 100%); display:flex; align-items:center; justify-content:center; overflow:hidden; transition:all .3s ease; }
+  #stage { position:absolute; inset:0; background:#000; }
+  #stage video { position:absolute; inset:0; width:100%; height:100%; background:#000; outline:none; object-fit:contain; }
+  #stage video.reserve { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+
+  /* Logo provisório enquanto carrega (estilo do mockup) */
+  .player-logo-placeholder { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#e60000 0%,#ff007f 50%,#b000ff 100%); z-index:0; }
+  .player-logo-inner { width:80px; height:80px; background:radial-gradient(circle,#fff 40%,#a5c7f8 70%,#2b70e4 100%); border-radius:50%; box-shadow:0 10px 25px rgba(0,0,0,.4); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:2rem; color:#fff; text-transform:uppercase; }
+  .player-logo-inner img { width:100%; height:100%; object-fit:contain; border-radius:50%; }
+
+  /* Overlay YouTube (resgate) — sobre o canvas, abaixo das abas/interface */
+  .yt-overlay { position:absolute; inset:0; z-index:5; display:none; background:#000; }
+  .yt-overlay iframe { width:100%; height:100%; border:0; background:#000; }
+
+  /* Botão de Rotacionar / Fullscreen */
+  .rotate-btn { position:absolute; bottom:12px; right:12px; width:44px; height:44px; background:rgba(0,0,0,.4); border:1px solid rgba(255,255,255,.2); border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; backdrop-filter:blur(8px); z-index:10; transition:transform .2s ease; }
+  .rotate-btn:active { transform:scale(.9); }
+  .rotate-btn svg { width:24px; height:24px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+  /* Toast de link/troca */
+  #linkToast { position:absolute; top:12px; left:50%; transform:translateX(-50%); z-index:30; background:rgba(0,0,0,.65); border:1px solid rgba(255,255,255,.18); color:#fff; font-size:12px; font-weight:600; padding:7px 16px; border-radius:999px; backdrop-filter:blur(10px); opacity:0; transition:opacity .25s; pointer-events:none; white-space:nowrap; max-width:92vw; }
+  #linkToast.show { opacity:1; }
+
+  /* Lista Vertical de Canais */
+  .channel-list-vertical { flex:1; background-color:#0a0a0a; overflow-y:auto; padding:10px 0; -webkit-overflow-scrolling:touch; }
+  .channel-item-vertical { padding:16px 24px; font-size:1.1rem; font-weight:600; display:flex; align-items:center; gap:14px; border-bottom:1px solid rgba(255,255,255,.08); cursor:pointer; transition:background .2s; }
+  .channel-item-vertical:active { background-color:rgba(255,255,255,.1); }
+  .channel-item-vertical .ch-logo { width:34px; height:34px; flex:0 0 auto; object-fit:contain; background:rgba(255,255,255,.06); border-radius:8px; padding:4px; }
+  .channel-item-vertical .ch-name { flex:1; min-width:0; }
+  .channel-item-vertical .ch-q { font-size:10px; font-weight:700; color:#22d3ee; background:rgba(34,211,238,.14); border:1px solid rgba(34,211,238,.3); padding:2px 8px; border-radius:999px; }
+  .channel-item-vertical .ch-num, .side-channel-item .ch-num { font-size:11px; font-weight:800; color:rgba(255,255,255,.9); background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14); padding:2px 9px; border-radius:999px; flex:0 0 auto; font-variant-numeric:tabular-nums; }
+  .channel-item-vertical.current { background:rgba(34,211,238,.08); }
+  .channel-item-vertical.current .ch-name::before { content:'▶ '; color:#22d3ee; }
+
+  /* Efeito Glass/Aero/Mica */
+  .glass-panel { background:rgba(20,10,25,.55); backdrop-filter:blur(25px) saturate(180%); -webkit-backdrop-filter:blur(25px) saturate(180%); border:1px solid rgba(255,255,255,.12); box-shadow:0 8px 32px 0 rgba(0,0,0,.37); }
+
+  /* MODO FULLSCREEN / LANDSCAPE OVERLAYS */
+  .fullscreen-mode .player-canvas { position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:100; }
+  .fullscreen-mode .channel-list-vertical { display:none; }
+
+  /* Painel Lateral (Seleção de Canais) */
+  .side-panel { position:absolute; top:0; left:0; width:260px; height:100%; transform:translateX(-100%); transition:transform .35s cubic-bezier(.16,1,.3,1); z-index:110; display:none; flex-direction:column; padding:20px 0; border-radius:0 16px 16px 0; }
+  .side-panel.open { transform:translateX(0); }
+  .side-panel-content { flex:1; overflow-y:auto; }
+  .side-channel-item { padding:14px 20px; font-weight:600; font-size:.95rem; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,.05); cursor:pointer; }
+  .side-channel-item:hover, .side-channel-item:active { background:rgba(255,255,255,.15); }
+  .side-channel-item.current { color:#22d3ee; }
+  .side-channel-item .ch-logo { width:28px; height:28px; flex:0 0 auto; object-fit:contain; }
+
+  /* Orelhinha/Puxador Lateral */
+  .side-tab-handle { position:absolute; right:-32px; top:50%; transform:translateY(-50%); width:32px; height:64px; border-radius:0 16px 16px 0; display:flex; align-items:center; justify-content:center; cursor:pointer; border-left:none; }
+
+  /* Painel Inferior (Canal Atual) */
+  .bottom-panel { position:absolute; bottom:0; left:0; width:100%; height:90px; transform:translateY(100%); transition:transform .35s cubic-bezier(.16,1,.3,1); z-index:110; display:none; align-items:center; justify-content:space-between; padding:0 24px; border-radius:16px 16px 0 0; }
+  .bottom-panel.open { transform:translateY(0); }
+  .bottom-info { display:flex; align-items:center; gap:16px; min-width:0; flex:1; }
+  .channel-badge { width:44px; height:44px; flex:0 0 auto; object-fit:contain; border-radius:50%; background:rgba(255,255,255,.1); padding:4px; color:#fff; font-weight:bold; font-size:1rem; display:flex; align-items:center; justify-content:center; }
+  .program-details { min-width:0; }
+  .program-details h3 { font-size:1.2rem; font-weight:700; letter-spacing:.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .program-details p { font-size:.85rem; color:rgba(255,255,255,.7); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+  /* Medidor de saúde do sinal */
+  .bottom-health { flex:0 0 auto; width:180px; margin-left:12px; margin-right:6px; }
+  .health-top { display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:11px; font-weight:700; margin-bottom:5px; }
+  .health-pct { color:#2fd573; }
+  .health-q { color:#22d3ee; background:rgba(34,211,238,.14); border:1px solid rgba(34,211,238,.3); padding:1px 8px; border-radius:999px; }
+  .health-track { height:6px; border-radius:6px; background:rgba(255,255,255,.1); overflow:hidden; }
+  .health-fill { height:100%; width:100%; border-radius:6px; background:#2fd573; transition:width .4s ease, background .4s ease; }
+  .health-sub { display:flex; justify-content:space-between; margin-top:4px; font-size:9px; color:rgba(255,255,255,.5); font-weight:600; letter-spacing:.3px; white-space:nowrap; gap:6px; }
+
+  .clock-display { font-size:1.4rem; font-weight:600; letter-spacing:1px; flex:0 0 auto; }
+
+  /* Orelhinha/Puxador Inferior */
+  .bottom-tab-handle { position:absolute; top:-28px; left:50%; transform:translateX(-50%); width:64px; height:28px; border-radius:14px 14px 0 0; display:flex; align-items:center; justify-content:center; cursor:pointer; border-bottom:none; }
+
+  /* Animação e Estados das Orelhinhas */
+  .handles-layer { opacity:1; transition:opacity .8s ease; pointer-events:auto; }
+  .handles-layer.fade-out { opacity:0; pointer-events:none; }
+  .chevron-icon { width:16px; height:16px; fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; transition:transform .3s ease; }
+
+  /* Inverter setas quando abertos */
+  .side-panel.open .side-tab-handle .chevron-icon { transform:rotate(180deg); }
+  .bottom-panel.open .bottom-tab-handle .chevron-icon { transform:rotate(180deg); }
+
+  /* Esconder elementos de fullscreen por padrão */
+  .side-panel, .bottom-panel { display:none; }
+  .fullscreen-mode .side-panel, .fullscreen-mode .bottom-panel { display:flex; }
+
+  @media (max-width:560px) { .bottom-health{width:130px;} .bottom-panel{padding:0 16px;} }
+</style>
+</head>
+<body>
+<div class="app-container" id="app">
+
+  <!-- Canvas do Player -->
+  <div class="player-canvas" id="playerCanvas">
+    <div id="stage">
+      <video id="video" playsinline autoplay></video>
+      <video id="previd" class="reserve" playsinline muted preload="metadata"></video>
+    </div>
+
+    <!-- Logo provisório (some quando o vídeo carrega) -->
+    <div class="player-logo-placeholder" id="logoPlaceholder">
+      <div class="player-logo-inner" id="logoInner">—</div>
+    </div>
+
+    <!-- Overlay YouTube (resgate quando todos os links de HLS falham) -->
+    <div id="ytOverlay" class="yt-overlay"><iframe id="ytFrame" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Emissão ao vivo"></iframe></div>
+
+    <!-- Botão de Alternar Tela Cheia / Rotacionar -->
+    <button class="rotate-btn" id="rotateBtn" title="Alternar Tela Cheia">
+      <svg viewBox="0 0 24 24"><path d="M20 9V4h-5M4 15v5h5M20 4l-5 5M4 20l5-5"/></svg>
+    </button>
+
+    <!-- Toast de troca de link -->
+    <div id="linkToast"></div>
+
+    <!-- PAINEL LATERAL (Fullscreen) -->
+    <aside class="side-panel glass-panel" id="sidePanel">
+      <div class="side-panel-content" id="sideChannelList"></div>
+      <!-- Puxador Lateral -->
+      <div class="side-tab-handle glass-panel handles-layer" id="sideHandle">
+        <svg class="chevron-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </div>
+    </aside>
+
+    <!-- PAINEL INFERIOR (Fullscreen) -->
+    <footer class="bottom-panel glass-panel" id="bottomPanel">
+      <!-- Puxador Inferior -->
+      <div class="bottom-tab-handle glass-panel handles-layer" id="bottomHandle">
+        <svg class="chevron-icon" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+      </div>
+
+      <div class="bottom-info">
+        <div class="channel-badge" id="currentLogo">—</div>
+        <div class="program-details">
+          <h3 id="currentChannelName">—</h3>
+          <p id="currentProgram">sinal · link 0/0</p>
+        </div>
+      </div>
+
+      <div class="bottom-health">
+        <div class="health-top">
+          <span class="health-pct" id="healthPct">100%</span>
+          <span class="health-q" id="healthQ">auto</span>
+        </div>
+        <div class="health-track"><div class="health-fill" id="healthFill"></div></div>
+        <div class="health-sub"><span id="healthState">saudável</span><span id="healthLink">1/1</span></div>
+      </div>
+
+      <div class="clock-display" id="clock">--:--</div>
+    </footer>
+  </div>
+
+  <!-- Lista Vertical de Canais (Modo Portrait) -->
+  <main class="channel-list-vertical" id="verticalChannelList"></main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+<script>
+const CHANNELS = /*__DATA__*/;
+
+/* ---------- elementos ---------- */
+const video = document.getElementById('video');
+const previd = document.getElementById('previd');
+const app = document.getElementById('app');
+const playerCanvas = document.getElementById('playerCanvas');
+const logoPlaceholder = document.getElementById('logoPlaceholder');
+const logoInner = document.getElementById('logoInner');
+const ytOverlay = document.getElementById('ytOverlay');
+const ytFrame = document.getElementById('ytFrame');
+const linkToast = document.getElementById('linkToast');
+const rotateBtn = document.getElementById('rotateBtn');
+const sidePanel = document.getElementById('sidePanel');
+const bottomPanel = document.getElementById('bottomPanel');
+const sideHandle = document.getElementById('sideHandle');
+const bottomHandle = document.getElementById('bottomHandle');
+const verticalChannelList = document.getElementById('verticalChannelList');
+const sideChannelList = document.getElementById('sideChannelList');
+const currentLogo = document.getElementById('currentLogo');
+const currentChannelName = document.getElementById('currentChannelName');
+const currentProgram = document.getElementById('currentProgram');
+const healthPct = document.getElementById('healthPct');
+const healthQ = document.getElementById('healthQ');
+const healthFill = document.getElementById('healthFill');
+const healthState = document.getElementById('healthState');
+const healthLink = document.getElementById('healthLink');
+const clockEl = document.getElementById('clock');
+
+/* ---------- configuração ---------- */
+// PROXY_BASE: proxy próprio da TV (Netlify Function + espelho no serve.mjs local).
+// Auto-deriva do origin; ?proxy= ou tv30_proxy sobrescreve; "0"/"off" desliga.
+const PROXY_BASE = (() => {
+  const v = new URLSearchParams(location.search).get('proxy') || localStorage.getItem('tv30_proxy');
+  if (!v) return location.origin + '/api/proxy';
+  if (['0', 'off', 'none', 'false'].includes(String(v).toLowerCase())) return '';
+  return String(v).trim();
+})();
+
+const START_TIMEOUT = 10000;
+const WARM_DELAY = 5000;
+const STALL_GRACE = 8000;
+const FAIL_SCORE = 35;
+const FAIL_SUSTAIN = 2000;
+const MAX_FAIL_WAIT = 9000;
+const TRY_LIMIT = 6;
+const SLOW_KBPS = 1200;
+
+const state = {
+  idx: 0,
+  channel: null,
+  active: { el: video, hls: null, urlKey: '', yt: null },
+  reserve: { el: previd, hls: null, urlKey: '', yt: null },
+  linkIdx: 0,
+  linkCount: 1,
+  quality: 'auto',
+  tried: {},
+  fatal: false,
+  lastData: 0,
+  lastPaint: 0,
+  lastLoad: 0,
+  stallStart: 0,
+  lowSince: 0,
+  working: false,
+  deadStreak: 0,
+  failStart: 0,
+  errs: [],
+  speedKbps: 0,
+};
+
+const HLS_CFG = {
+  autoStartLoad: true,
+  lowLatencyMode: false,
+  startLevel: 0,
+  capLevelToPlayerSize: true,
+  maxBufferLength: 45,
+  maxMaxBufferLength: 90,
+  backBufferLength: 20,
+  maxBufferSize: 150 * 1000 * 1000,
+  maxBufferHole: 0.8,
+  manifestLoadingMaxRetry: 4,
+  levelLoadingMaxRetry: 4,
+  fragLoadingMaxRetry: 4,
+  fragLoadingTimeOut: 30000,
+  liveSyncDurationCount: 6
+};
+
+function linksOf(c) { return (c.links && c.links.length) ? c.links : [{ q: '', url: c.url }]; }
+function lk(l) { return (l && l.globo) ? 'globo' : (l && l.yt) ? 'yt:' + l.yt : (l && l.url) || ''; }
+function lkey(url) { return url.indexOf('?') >= 0 ? url + '&_b=' : url + '?_b='; }
+function bust(url) { return lkey(url) + Date.now(); }
+/* envia qualquer alvo pelo nosso proxy (https + CORS + reescrita de m3u8) */
+function proxyUrl(u) {
+  if (!PROXY_BASE) return u;
+  return PROXY_BASE + (PROXY_BASE.endsWith('?') ? '' : '?') + 'url=' + encodeURIComponent(u);
+}
+function resolveUrl(u) {
+  if (u.startsWith('http://')) return proxyUrl(u); // praia13 só existe em http
+  return u;
+}
+
+/* ---------- YouTube (resgate) ---------- */
+function ytSrc(v) { return 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(v) + '?autoplay=1&rel=0'; }
+function showYt(v) {
+  if (ytFrame.dataset.v !== v) { ytFrame.dataset.v = v; ytFrame.src = ytSrc(v); }
+  ytOverlay.style.display = '';
+  setPoster(false);
+}
+function hideYt() {
+  if (ytOverlay.style.display !== 'none') {
+    ytOverlay.style.display = 'none';
+    ytFrame.removeAttribute('src'); /* descarrega áudio/banda */
+    delete ytFrame.dataset.v;
+  }
+}
+
+/* ---------- Globo via API (playback oficial, sem DRM, JWT ~6h) ---------- */
+// Resolve do browser: Chromium OK. Firefox (ETP) bloqueia o fetch à API -> cai no failover p/ FHD. 
+const GLOBO_ID = '6120663';
+const GLOBO_LAT = '-22.9068467';
+const GLOBO_LONG = '-43.1728965';
+
+async function globoResolve() {
+  if (!PROXY_BASE) throw new Error('Globo oficial exige proxy (PROXY_BASE)');
+
+  // 1) player.php (via proxy: site não envia CORS p/ browser) -> token
+  const readUrl = proxyUrl('https://localhost.tattoo/globo/player.php?id=' + GLOBO_ID
+    + '&lat=' + GLOBO_LAT + '&long=' + GLOBO_LONG);
+  const r1 = await fetch(readUrl, { signal: AbortSignal.timeout(20000) });
+  const html = await r1.text();
+  const m = html.match(/token:\s+"([^"]+)"/);
+  if (!m) throw new Error('Token Globo não encontrado');
+
+  // 2) video-session (API só aceita TLS de navegador real; por isso resolve daqui) -> m3u8 JWT
+  const body = {
+    player_type: 'desktop', video_id: GLOBO_ID, quality: 'max', content_protection: 'widevine',
+    vsid: (crypto.randomUUID ? crypto.randomUUID() : 'x-' + Date.now()),
+    tz: '-03:00',
+    capabilities: { low_latency: true, smart_mosaic: true, max_frame_rate: '60', dvr: true },
+    consumption: 'streaming',
+    metadata: { name: 'web', device: { type: 'desktop', os: {} } },
+    version: 2, ts: Date.now(), lat: GLOBO_LAT, long: GLOBO_LONG,
+  };
+  const r2 = await fetch('https://playback.video.globo.com/v5/video-session', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + m[1] },
+    body: JSON.stringify(body), signal: AbortSignal.timeout(20000),
+  });
+  const j = await r2.json();
+  const src = (j.sources || []).find((s) => s.type === 'primary');
+  if (!src || !src.url) throw new Error('Sem source primary na API Globo');
+  return src.url;
+}
+
+/* link -> m3u8/pré-play real (Globo resolve na hora; YT vira src de resgate; link normal vira proxy+buster se já tentado) */
+async function linkSrc(l) {
+  if (l && l.yt) return 'yt:' + l.yt;
+  if (l && l.globo) return globoResolve();
+  const base = resolveUrl(l.url);
+  return state.tried[lk(l)] ? bust(base) : base;
+}
+
+/* ---------- região (detecção automática, sem UI) ---------- */
+const UF_NAMES = { AC:'Acre', AL:'Alagoas', AP:'Amapá', AM:'Amazonas', BA:'Bahia', CE:'Ceará', DF:'Distrito Federal', ES:'Espírito Santo', GO:'Goiás', MA:'Maranhão', MT:'Mato Grosso', MS:'Mato Grosso do Sul', MG:'Minas Gerais', PA:'Pará', PB:'Paraíba', PR:'Paraná', PE:'Pernambuco', PI:'Piauí', RJ:'Rio de Janeiro', RN:'Rio Grande do Norte', RS:'Rio Grande do Sul', RO:'Rondônia', RR:'Roraima', SC:'Santa Catarina', SP:'São Paulo', SE:'Sergipe', TO:'Tocantins' };
+
+function normalize(s) { return String(s||'').normalize('NFD').replace(/[^a-z0-9]/gi,'').toLowerCase(); }
+
+async function detectRegion() {
+  const apis = [
+    { url: 'https://ipwho.is/', pick: (j) => j.region_code },
+    { url: 'https://ipapi.co/json', pick: (j) => j.region_code },
+    { url: 'https://get.geojs.io/v1/ip/geo.json', pick: (j) => j.region },
+    { url: 'https://ipinfo.io/json', pick: (j) => (j.region || '').substring(0,2).toUpperCase() },
+  ];
+  for (const api of apis) {
+    try {
+      const r = await fetch(api.url, { signal: AbortSignal.timeout(6000) });
+      if (!r.ok) continue;
+      const j = await r.json();
+      let code = api.pick(j);
+      if (code) {
+        code = String(code).toUpperCase().trim();
+        if (code.length === 2 && UF_NAMES[code]) return code;
+        const hit = Object.keys(UF_NAMES).find((uf) => normalize(UF_NAMES[uf]) === normalize(code)) ||
+                    Object.keys(UF_NAMES).find((uf) => normalize(UF_NAMES[uf]).includes(normalize(code)) || normalize(code).includes(normalize(UF_NAMES[uf])));
+        if (hit) return hit;
+      }
+    } catch (e) {}
+  }
+  return '';
+}
+
+function reorderByRegion(uf) {
+  /* canais numerados (0 dial analógico) ficam fixos no topo, na ordem do canais.json */
+  const pinned = CHANNELS.filter((c) => c.num);
+  const rest = CHANNELS.filter((c) => !c.num);
+  const ranked = rest.map((c, i) => {
+    let score = 2;
+    if (uf && (c.uf || []).includes(uf)) score = 0;
+    else if (c.national) score = 1;
+    else if (!uf) score = c.national ? 0 : (c.uf.length ? 2 : 1);
+    return { c, i, score };
+  });
+  if (uf) ranked.sort((a, b) => a.score - b.score || a.i - b.i);
+  const order = pinned.concat(ranked.map((x) => x.c));
+  order.forEach((c, k) => { CHANNELS[k] = c; });
+}
+
+/* ---------- UI ---------- */
+const current = { c: null, i: -1 };
+
+function setBadge(c) {
+  currentLogo.textContent = c.logo ? '' : (c.name ? c.name[0].toUpperCase() : '—');
+  currentLogo.style.background = c.logo ? 'transparent' : 'rgba(255,255,255,.1)';
+  if (c.logo) {
+    const im = new Image();
+    im.onload = () => { currentLogo.style.backgroundImage = 'url(' + c.logo + ')'; currentLogo.style.backgroundSize = 'contain'; currentLogo.style.backgroundRepeat = 'no-repeat'; currentLogo.style.backgroundPosition = 'center'; currentLogo.textContent = ''; };
+    im.onerror = () => { if (current.c && current.c.logo === c.logo) { currentLogo.textContent = (c.name||'—')[0].toUpperCase(); currentLogo.style.backgroundImage = ''; } };
+    im.src = c.logo;
+  } else {
+    currentLogo.style.backgroundImage = '';
+  }
+  if (c.logo) {
+    logoInner.style.backgroundImage = 'url(' + c.logo + ')';
+    logoInner.style.backgroundSize = 'contain';
+    logoInner.style.backgroundRepeat = 'no-repeat';
+    logoInner.style.backgroundPosition = 'center';
+    logoInner.textContent = '';
+  } else {
+    logoInner.style.backgroundImage = '';
+    logoInner.textContent = c.name ? c.name[0].toUpperCase() : '—';
+  }
+}
+
+function renderChannelsList() {
+  verticalChannelList.innerHTML = '';
+  sideChannelList.innerHTML = '';
+  CHANNELS.forEach((c, i) => {
+    const iv = document.createElement('div');
+    iv.className = 'channel-item-vertical' + (i === state.idx ? ' current' : '');
+    iv.dataset.i = i;
+    if (c.num) { const nb = document.createElement('span'); nb.className = 'ch-num'; nb.textContent = c.num; iv.appendChild(nb); }
+    if (c.logo) { const im = document.createElement('img'); im.className = 'ch-logo'; im.src = c.logo; im.alt = ''; iv.appendChild(im); }
+    const nm = document.createElement('span'); nm.className = 'ch-name'; nm.textContent = c.name; iv.appendChild(nm);
+    const qi = linksOf(c).length;
+    if (qi > 1) { const q = document.createElement('span'); q.className = 'ch-q'; q.textContent = qi + ' lk'; iv.appendChild(q); }
+    iv.onclick = () => selectChannel(i);
+    verticalChannelList.appendChild(iv);
+
+    const iside = document.createElement('div');
+    iside.className = 'side-channel-item' + (i === state.idx ? ' current' : '');
+    iside.dataset.i = i;
+    if (c.num) { const nb = document.createElement('span'); nb.className = 'ch-num'; nb.textContent = c.num; iside.appendChild(nb); }
+    if (c.logo) { const im = document.createElement('img'); im.className = 'ch-logo'; im.src = c.logo; im.alt = ''; iside.appendChild(im); }
+    const sn = document.createElement('span'); sn.textContent = c.name; iside.appendChild(sn);
+    iside.onclick = (e) => { e.stopPropagation(); selectChannel(i); closePanels(); };
+    sideChannelList.appendChild(iside);
+  });
+}
+function updateListCurrent() {
+  verticalChannelList.querySelectorAll('.channel-item-vertical').forEach((el) => el.classList.toggle('current', +el.dataset.i === state.idx));
+  sideChannelList.querySelectorAll('.side-channel-item').forEach((el) => el.classList.toggle('current', +el.dataset.i === state.idx));
+  const cur = verticalChannelList.querySelector('.channel-item-vertical.current');
+  if (cur) cur.scrollIntoView({ block: 'nearest' });
+}
+
+function setPoster(showForKey) {
+  logoPlaceholder.style.display = showForKey ? '' : 'none';
+}
+function toast(msg) { linkToast.textContent = msg; linkToast.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => linkToast.classList.remove('show'), 3200); }
+
+function setCurrent(c, i) {
+  current.c = c; current.i = i;
+  setBadge(c);
+  currentChannelName.textContent = (c.num ? c.num + ' · ' : '') + c.name;
+}
+
+function setMeta() {
+  const c = state.channel || {};
+  if (current.c !== c) setCurrent(c, -1);
+  state.epgFallback = 'sinal · ' + state.quality + ' · link ' + (state.linkIdx + 1) + '/' + state.linkCount + (PROXY_BASE ? ' · via proxy' : '');
+  currentProgram.textContent = state.epgFallback;
+  refreshEpg();
+}
+
+/* ---------- EPG (agora/em seguida) ---------- */
+const EPG_BASE = location.origin + '/api/epg';
+const epgCache = new Map();
+async function epgFor(c) {
+  try {
+    const k = c.name;
+    const hit = epgCache.get(k);
+    if (hit && Date.now() - hit.at < 4 * 60000) return hit.data;
+    const r = await fetch(EPG_BASE + '?ch=' + encodeURIComponent(k), { signal: AbortSignal.timeout(8000) });
+    if (!r.ok) return null;
+    const d = await r.json();
+    const data = (d && d.now && d.next && d.now.title) ? d : null;
+    epgCache.set(k, { at: Date.now(), data });
+    return data;
+  } catch (e) { return null; }
+}
+let epgGen = 0;
+async function refreshEpg() {
+  const gen = ++epgGen;
+  const c = state.channel;
+  const fallback = state.epgFallback || '';
+  if (!c) { currentProgram.textContent = fallback; return; }
+  const data = await epgFor(c);
+  if (gen !== epgGen || state.channel !== c) return;
+  if (data) {
+    currentProgram.textContent = data.now.title + ' - ' + data.now.tt + (data.next && data.next.title && data.next.tt ? ' | Próx. ' + data.next.title + ' - ' + data.next.tt : '');
+  } else {
+    currentProgram.textContent = fallback;
+  }
+}
+
+function renderHealth(score) {
+  healthPct.textContent = score + '%';
+  healthFill.style.width = score + '%';
+  const col = score > 60 ? '#2fd573' : (score > 30 ? '#f6c344' : '#ff5252');
+  healthFill.style.background = col;
+  healthPct.style.color = col;
+  healthState.textContent = score > 60 ? 'saudável' : (score > 30 ? 'instável' : 'crítico');
+  healthQ.textContent = state.quality || 'auto';
+  healthLink.textContent = (state.linkIdx + 1) + '/' + state.linkCount + ' · ' + state.speedKbps + ' Kb/s';
+}
+
+/* ---------- fullscreen / painéis (mockup) ---------- */
+let isFullscreen = false;
+let fadeTimeout = null;
+
+function openPanels() { sidePanel.classList.add('open'); bottomPanel.classList.add('open'); resetFadeTimer(); }
+function closePanels() { sidePanel.classList.remove('open'); bottomPanel.classList.remove('open'); startFadeTimer(); }
+function startFadeTimer() {
+  clearTimeout(fadeTimeout);
+  document.querySelectorAll('.handles-layer').forEach((el) => el.classList.remove('fade-out'));
+  fadeTimeout = setTimeout(() => {
+    if (!sidePanel.classList.contains('open') && !bottomPanel.classList.contains('open')) {
+      document.querySelectorAll('.handles-layer').forEach((el) => el.classList.add('fade-out'));
+    }
+  }, 4000);
+}
+function resetFadeTimer() { clearTimeout(fadeTimeout); document.querySelectorAll('.handles-layer').forEach((el) => el.classList.remove('fade-out')); }
+function showHandlesTemporarily() { resetFadeTimer(); startFadeTimer(); }
+
+function toggleFullscreen() {
+  isFullscreen = !isFullscreen;
+  app.classList.toggle('fullscreen-mode', isFullscreen);
+  if (isFullscreen) { openPanels(); try { if (app.requestFullscreen) app.requestFullscreen().catch(()=>{}); } catch (e) {} }
+  else { closePanels(); try { if (document.exitFullscreen) document.exitFullscreen().catch(()=>{}); } catch (e) {} }
+}
+
+rotateBtn.onclick = (e) => { e.stopPropagation(); toggleFullscreen(); };
+sideHandle.onclick = (e) => { e.stopPropagation(); sidePanel.classList.toggle('open'); resetFadeTimer(); };
+bottomHandle.onclick = (e) => { e.stopPropagation(); bottomPanel.classList.toggle('open'); resetFadeTimer(); };
+playerCanvas.addEventListener('click', (e) => {
+  if (!isFullscreen) return;
+  if (!sidePanel.contains(e.target) && !bottomPanel.contains(e.target)) {
+    if (sidePanel.classList.contains('open') || bottomPanel.classList.contains('open')) closePanels();
+    else showHandlesTemporarily();
+  }
+});
+const handlesHidden = () => !sidePanel.classList.contains('open') && !bottomPanel.classList.contains('open');
+  document.addEventListener('mousemove', () => { if (isFullscreen || handlesHidden()) showHandlesTemporarily(); });
+  document.addEventListener('pointermove', () => { if (isFullscreen || handlesHidden()) showHandlesTemporarily(); });
+
+function tickClock() {
+  const n = new Date();
+  clockEl.textContent = String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0');
+}
+
+/* ---------- núcleo HLS / saúde ---------- */
+function destroyHls(which) {
+  if (which.hls) { try { which.hls.destroy(); } catch (e) {} which.hls = null; }
+  try { which.el.pause(); which.el.removeAttribute('src'); which.el.load(); } catch (e) {}
+}
+
+function loadInto(which, url, muted) {
+  destroyHls(which);
+  which.el.muted = !!muted;
+  which.urlKey = url;
+  if (url && String(url).startsWith('yt:')) {
+    which.hls = null;
+    which.yt = String(url).slice(3);
+    return;
+  }
+  which.yt = null;
+  if (which === state.active) {
+    state.lastPaint = 0;
+    state.lastLoad = Date.now();
+  }
+  try {
+    const h = new Hls(HLS_CFG);
+    which.hls = h;
+    h.on(Hls.Events.FRAG_LOADED, (e, data) => {
+      if (h !== state.active.hls) return;
+      state.lastData = Date.now();
+      const s = data && data.stats;
+      if (s) {
+        const ms = (s.loading && s.loading.ms) || (s.trequest && s.tload ? s.tload - s.trequest : 0) || 0;
+        const bytes = s.loaded || 0;
+        if (ms > 0) { const kbps = Math.round((bytes * 8) / ms); state.speedKbps = state.speedKbps ? Math.round(state.speedKbps * 0.7 + kbps * 0.3) : kbps; }
+      }
+    });
+    h.on(Hls.Events.LEVEL_LOADED, () => { if (h === state.active.hls) state.lastData = Date.now(); });
+    h.on(Hls.Events.ERROR, (e, data) => {
+      if (h !== state.active.hls) return;
+      state.errs.push(Date.now());
+      if (state.errs.length > 20) state.errs = state.errs.slice(-20);
+      if (data && data.fatal) { state.fatal = true; state.lastData = 0; }
+    });
+    h.on(Hls.Events.MANIFEST_PARSED, () => {
+      if (h === state.active.hls) {
+        setPoster(false);
+        clearTimeout(state._loadT);
+        if (state.active.el.paused) state.active.el.play().catch(() => {});
+      }
+    });
+    h.loadSource(url);
+    h.attachMedia(which.el);
+    if (which.el.paused) which.el.play().catch(() => {});
+  } catch (e) {}
+}
+
+function wireVideoEl(el) {
+  el.addEventListener('playing', () => {
+    if (el !== state.active.el) return;
+    state.stallStart = 0; state.lastData = Date.now(); state.lastPaint = Date.now();
+  });
+  el.addEventListener('waiting', () => { if (el === state.active.el && !state.stallStart) state.stallStart = Date.now(); });
+  el.addEventListener('stalled', () => { if (el === state.active.el && !state.stallStart) state.stallStart = Date.now(); });
+  el.addEventListener('timeupdate', () => { if (el === state.active.el) { state.lastData = Date.now(); state.lastPaint = Date.now(); } });
+}
+wireVideoEl(video);
+wireVideoEl(previd);
+
+function bufferAhead(el) {
+  try {
+    if (el.readyState >= 3) return true;
+    if (!el.buffered || !el.buffered.length) return false;
+    const t = el.currentTime || 0;
+    for (let i = 0; i < el.buffered.length; i++) {
+      if (el.buffered.start(i) <= t && t <= el.buffered.end(i)) return (el.buffered.end(i) - t) > 2;
+    }
+  } catch (e) {}
+  return false;
+}
+
+function detectScore() {
+  const now = Date.now();
+  if (state.fatal) return 0;
+  let score = 100;
+  const since = now - state.lastData;
+  if (state.lastData > 0 && since > STALL_GRACE) score -= Math.min(70, ((since - STALL_GRACE) / 1000) * 7);
+  const errRecent = state.errs.filter((t) => now - t < 20000).length;
+  if (errRecent > 2) score -= Math.min(40, (errRecent - 2) * 12);
+  if (state.stallStart) {
+    const dur = now - state.stallStart;
+    if (dur > 3000) score -= Math.min(50, ((dur - 3000) / 1000) * 6);
+  }
+  const sincePaint = now - state.lastPaint;
+  const sinceLoad = now - state.lastLoad;
+  if (state.lastData > 0 && sinceLoad > 6000 && state.lastPaint === 0) {
+    return 20 + Math.max(0, 40 - (sinceLoad - 6000) / 1000 * 6);
+  }
+  if (state.lastPaint > 0 && sincePaint > 8000) {
+    const frozen = (sincePaint - 8000) / 1000;
+    score -= Math.min(60, 20 + frozen * 8);
+  }
+  return Math.max(0, Math.min(100, Math.round(score)));
+}
+
+/* seleciona link-alvo: prefere link vivo != atual; se lento, prefere SD; senão o menos recentemente tentado */
+function pickTarget() {
+  const c = state.channel;
+  if (!c) return 0;
+  const links = linksOf(c);
+  const n = links.length;
+  const now = Date.now();
+  const alive = [];
+  const dead = [];
+  for (let i = 0; i < n; i++) {
+    const k = state.tried[lk(links[i])];
+    (k && now - k < 60000 ? dead : alive).push(i);
+  }
+  let pool = alive.length ? alive : dead;
+  if (state.speedKbps > 0 && state.speedKbps < SLOW_KBPS) {
+    const sd = pool.find((i) => /SD|240p|360p|480p|720p/i.test(links[i].q || ''));
+    if (sd !== undefined) return sd;
+  }
+  const cand = pool.filter((i) => i !== state.linkIdx);
+  if (!cand.length) cand.push.apply(cand, dead.filter((i) => i !== state.linkIdx));
+  if (!cand.length) cand.push.apply(cand, dead);
+  return cand.length ? cand.slice().sort((a, b) => (state.tried[lk(links[a])] || 0) - (state.tried[lk(links[b])] || 0))[0] : state.linkIdx;
+}
+
+function loadActiveFromUrl(src) {
+  clearTimeout(state._loadT);
+  state.active.urlKey = src;
+  state.fatal = false;
+  state.lastData = 0;
+  state.errs = [];
+  state.stallStart = 0;
+  state.lowSince = 0;
+  if (src && String(src).startsWith('yt:')) {
+    state.active.hls && destroyHls(state.active);
+    state.active.hls = null;
+    state.active.yt = String(src).slice(3);
+    showYt(state.active.yt);
+    setMeta();
+    updateListCurrent();
+    return;
+  }
+  state.active.yt = null;
+  hideYt();
+  setPoster(true);
+  loadInto(state.active, src, false);
+  state._loadT = setTimeout(() => {
+    if (state.working) return;
+    const s = detectScore();
+    if (s <= 0 || (!bufferAhead(state.active.el) && state.active.el.currentTime === 0)) {
+      toast('Sinal não carregou — procurando outro link…');
+      failoverNow();
+    }
+  }, START_TIMEOUT);
+}
+
+function selectChannel(i) {
+  i = ((i % CHANNELS.length) + CHANNELS.length) % CHANNELS.length;
+  state.idx = i;
+  state.channel = CHANNELS[i];
+  state.linkIdx = 0;
+  state.linkCount = linksOf(state.channel).length;
+  state.quality = (linksOf(state.channel)[0].q) || 'auto';
+  state.working = false;
+  state.deadStreak = 0;
+  state.fatal = false;
+  state.lastData = 0;
+  state.stallStart = 0;
+  state.lowSince = 0;
+  state.errs = [];
+  state.speedKbps = 0;
+  try { delete state.tried[(state.active || {}).urlKey]; } catch (e) {}
+  hideYt();
+  state.active.yt = null;
+  destroyHls(state.active);
+  destroyHls(state.reserve);
+  state.reserve.urlKey = '';
+  state.reserve.yt = null;
+  setCurrent(state.channel, state.idx);
+  updateListCurrent();
+  epgGen++;
+  state.epgFallback = 'sinal · ' + state.quality + ' · link 1/' + state.linkCount + (PROXY_BASE ? ' · via proxy' : '');
+  currentProgram.textContent = state.epgFallback;
+  refreshEpg();
+  const links = linksOf(state.channel);
+  const preferred = links[0] || { url: state.channel.url };
+  if (!lk(preferred) && !preferred.url) { setPoster(true); toast('Sem link para este canal.'); return; }
+  loadPreferred(preferred);
+  scheduleWarm();
+}
+
+async function loadPreferred(l) {
+  const keep = state.channel;
+  let src;
+  try { src = await linkSrc(l); } catch (e) { state.tried[lk(l)] = Date.now(); failoverNow(); return; }
+  if (src && state.channel === keep) loadActiveFromUrl(src);
+}
+
+/* ---------- aquecimento & failover ---------- */
+function scheduleWarm() {
+  clearTimeout(state._warmT);
+  state._warmT = setTimeout(() => warmBest(), WARM_DELAY);
+}
+
+function warmBest() {
+  const c = state.channel;
+  if (!c || state.working) return;
+  if (state.active.yt) return;
+  const links = linksOf(c);
+  if (links.length < 2) return;
+  const target = pickTarget();
+  linkSrc(links[target]).then((url) => {
+    if (!url) return;
+    if (target === state.linkIdx || (state.reserve.urlKey === url && (state.reserve.hls || state.reserve.yt))) return;
+    destroyHls(state.reserve);
+    state.reserve.urlKey = url;
+    state.reserve.q = links[target].q || '';
+    loadInto(state.reserve, url, true);
+  }).catch(() => {
+    state.tried[lk(links[target])] = Date.now();
+  });
+}
+
+function attemptPromote() {
+  const np = state.reserve;
+  if (!np.urlKey) return false;
+  if (np.yt) {
+    const oldEl = state.active.el;
+    const oldUrl = state.active.urlKey;
+    oldEl.classList.add('reserve');
+    oldEl.muted = true;
+    destroyHls(state.active);
+    if (oldUrl) state.tried[oldUrl] = Date.now();
+    state.active = { el: oldEl, hls: null, urlKey: np.urlKey, yt: np.yt };
+    state.reserve = { el: np.el, hls: null, urlKey: '', yt: null };
+    state.fatal = false;
+    state.lastData = Date.now();
+    state.stallStart = 0;
+    state.lowSince = 0;
+    state.working = false;
+    state.deadStreak = 0;
+    showYt(state.active.yt);
+    toast('Links caíram — resgate no YouTube');
+    setMeta();
+    updateListCurrent();
+    return true;
+  }
+  if (!np.hls) return false;
+  const ready = bufferAhead(np.el) || np.el.readyState >= 2;
+  if (!ready) return false;
+
+  const oldEl = state.active.el;
+  const oldUrl = state.active.urlKey;
+  try { if (isFinite(oldEl.currentTime) && oldEl.currentTime > 0 && np.el.currentTime < 2) np.el.currentTime = oldEl.currentTime; } catch (e) {}
+
+  oldEl.classList.add('reserve');
+  np.el.classList.remove('reserve');
+  np.el.muted = false;
+  oldEl.muted = true;
+  destroyHls(state.active);
+
+  state.tried[oldUrl] = Date.now();
+  state.active = np;
+  state.reserve = { el: oldEl, hls: null, urlKey: '' };
+  state.fatal = false;
+  state.lastData = Date.now();
+  state.stallStart = 0;
+  state.lowSince = 0;
+  state.working = false;
+  state.deadStreak = 0;
+  if (state.active.el.paused) state.active.el.play().catch(() => {});
+  toast('Trocou de link: ' + (state.quality || 'auto'));
+  setMeta();
+  updateListCurrent();
+  scheduleWarm();
+  return true;
+}
+
+function failoverNow() {
+  const c = state.channel;
+  if (!c || state.working) return;
+  state.working = true;
+  state.failStart = Date.now();
+  state.deadStreak++;
+  state.linkCount = linksOf(c).length;
+
+  if (state.deadStreak > TRY_LIMIT) {
+    toast('Sinal indisponível — avançando…');
+    state.working = false;
+    setTimeout(() => nextChannel(), 500);
+    return;
+  }
+
+  if (attemptPromote()) return;
+
+  const target = pickTarget();
+  state.linkIdx = target;
+  const link = linksOf(c)[target];
+  state.quality = link.q || 'auto';
+  linkSrc(link).then((src) => {
+    if (!src || state.channel !== c) { state.working = false; return; }
+    const finalSrc = src;
+    state.linkCount = linksOf(c).length;
+    setMeta();
+    if (state.reserve.urlKey === finalSrc && state.reserve.hls && bufferAhead(state.reserve.el)) {
+      if (attemptPromote()) return;
+    }
+    toast('Saúde baixa — aquecendo link ' + (state.quality || 'auto') + '…');
+    destroyHls(state.reserve);
+    state.reserve.urlKey = finalSrc;
+    state.reserve.q = state.quality;
+    loadInto(state.reserve, finalSrc, true);
+  }).catch(() => {
+    if (state.channel !== c) { state.working = false; return; }
+    state.tried[lk(link)] = Date.now();
+    state.working = false;
+    scheduleWarm();
+  });
+}
+
+function forceFailoverSwap() {
+  const c = state.channel;
+  if (!c) return;
+  state.working = false;
+  if (state.reserve.hls && state.reserve.el.readyState >= 2) { attemptPromote(); return; }
+  const target = pickTarget();
+  state.linkIdx = target;
+  const link = linksOf(c)[target];
+  state.quality = link.q || 'auto';
+  linkSrc(link).then((src) => {
+    if (!src || state.channel !== c) return;
+    const finalSrc = src;
+    state.linkCount = linksOf(c).length;
+    setMeta();
+    toast('Trocando para ' + state.quality + '…');
+    loadActiveFromUrl(finalSrc);
+    scheduleWarm();
+  }).catch(() => {
+    if (state.channel !== c) return;
+    state.tried[lk(link)] = Date.now();
+    scheduleWarm();
+  });
+}
+
+function tickHealth() {
+  const now = Date.now();
+  if (state.active.yt) { renderHealth(90); return; }
+  if (!state.active.hls) return;
+  const score = detectScore();
+  renderHealth(score);
+
+  if (state.working) {
+    if (attemptPromote()) return;
+    if (now - state.failStart > MAX_FAIL_WAIT) forceFailoverSwap();
+    return;
+  }
+
+  if (score <= 0) { state.lowSince = 0; failoverNow(); return; }
+  if (score < FAIL_SCORE) {
+    if (!state.lowSince) state.lowSince = now;
+    else if (now - state.lowSince > FAIL_SUSTAIN) { toast('Saúde do sinal baixa — trocando link…'); state.lowSince = 0; failoverNow(); }
+  } else {
+    state.lowSince = 0;
+  }
+}
+
+function nextChannel() { selectChannel(state.idx + 1); }
+function prevChannel() { selectChannel(state.idx - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') nextChannel();
+  else if (e.key === 'ArrowLeft') prevChannel();
+  else if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+});
+
+setInterval(tickClock, 1000);
+setInterval(tickHealth, 1000);
+setInterval(refreshEpg, 60000);
+
+/* ---------- boot ---------- */
+renderChannelsList();
+if (window.matchMedia && window.matchMedia('(orientation: landscape)').matches && !('ontouchstart' in window)) {
+  app.classList.add('fullscreen-mode');
+  openPanels();
+}
+
+(async () => {
+  const detected = await detectRegion();
+  if (detected) reorderByRegion(detected);
+  renderChannelsList();
+  selectChannel(0);
+})();
+</script>
+</body>
+</html>

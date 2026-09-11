@@ -2,6 +2,212 @@
   "version": "1.1.0",
   "channels": [
     {
+      "id": "tvcultura",
+      "name": "TV Cultura Rio",
+      "logo": "https://logos.imperioapps.top/CULTURA.png",
+      "url": "https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8",
+      "links": [
+        {
+          "q": "4K",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/103513.m3u8"
+        },
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/71851.m3u8"
+        },
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/71853.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/71854.m3u8"
+        },
+        {
+          "q": "UOL",
+          "url": "https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8"
+        }
+      ],
+      "uf": [
+        "RJ"
+      ],
+      "num": "2.1"
+    },
+    {
+      "id": "globo",
+      "name": "Globo RJ",
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
+      "url": "http://praia13.com:80/live/939041/8SA9sh/131163.m3u8",
+      "links": [
+        {
+          "q": "OFICIAL",
+          "globo": true
+        },
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72025.m3u8"
+        },
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131163.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131182.m3u8"
+        }
+      ],
+      "uf": [
+        "RJ"
+      ],
+      "num": "4.1"
+    },
+    {
+      "id": "redetv",
+      "name": "RedeTV Rio",
+      "logo": "https://logos.imperioapps.top/REDE_TV.png",
+      "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8",
+      "links": [
+        {
+          "q": "4K",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/178532.m3u8"
+        },
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72297.m3u8"
+        },
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72299.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72300.m3u8"
+        },
+        {
+          "q": "WEB",
+          "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8"
+        }
+      ],
+      "uf": [
+        "RJ"
+      ],
+      "num": "6.1"
+    },
+    {
+      "id": "band",
+      "name": "Band",
+      "logo": "https://logos.imperioapps.top/BAND.png",
+      "url": "https://media.cdntvms.com.br/band_sat/index.m3u8",
+      "uf": [],
+      "links": [
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/79311.m3u8"
+        },
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72597.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/79312.m3u8"
+        },
+        {
+          "q": "SAT",
+          "url": "https://media.cdntvms.com.br/band_sat/index.m3u8"
+        }
+      ],
+      "num": "7.1"
+    },
+    {
+      "id": "cnt-rio",
+      "name": "Rede CNT Rio de Janeiro",
+      "logo": "",
+      "url": "http://45.162.64.114/CNT/index.m3u8",
+      "uf": [
+        "RJ"
+      ],
+      "links": [
+        {
+          "q": "L1",
+          "url": "http://45.162.64.114/CNT/index.m3u8"
+        },
+        {
+          "q": "L2",
+          "url": "http://168.197.104.22/CNT/index.m3u8"
+        },
+        {
+          "q": "L3",
+          "url": "http://170.83.49.66:8083/REDECNTHD/index.m3u8"
+        },
+        {
+          "q": "L4",
+          "url": "http://186.219.52.187/cnt/index.m3u8"
+        }
+      ],
+      "num": "9.1"
+    },
+    {
+      "id": "sbt",
+      "name": "SBT Rio",
+      "logo": "https://logos.imperioapps.top/sbt.png",
+      "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8",
+      "links": [
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/108681.m3u8"
+        },
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/108682.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/108683.m3u8"
+        },
+        {
+          "q": "SAT",
+          "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8"
+        },
+        {
+          "q": "YT",
+          "yt": "ABVQXgr2LW4"
+        }
+      ],
+      "uf": [
+        "RJ"
+      ],
+      "num": "11.1"
+    },
+    {
+      "id": "record",
+      "name": "Record Rio",
+      "logo": "https://logos.imperioapps.top/RECORD.png",
+      "url": "https://media.cdntvms.com.br/record_nacional_sat/index.m3u8",
+      "links": [
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/106638.m3u8"
+        },
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72594.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/96526.m3u8"
+        },
+        {
+          "q": "SAT",
+          "url": "https://media.cdntvms.com.br/record_nacional_sat/index.m3u8"
+        }
+      ],
+      "uf": [
+        "RJ"
+      ],
+      "num": "13.1"
+    },
+    {
       "id": "tvcom-maceio",
       "name": "TVCOM Maceió",
       "logo": "https://i.imgur.com/IE7IZzi.png",
@@ -50,7 +256,7 @@
       "id": "tvcom-df",
       "name": "TVCOM DF",
       "logo": "https://i.imgur.com/uxefHY3.png",
-      "url": "https://5b7f3c45ab7c2.streamlock.net/8008/smil:8008.smil/playlist.m3u8?DVR=",
+      "url": "https://5b7f3c45ab7c2.streamlock.net/8008/smil:8008.smil/playlist.m3u8",
       "uf": [
         "DF"
       ]
@@ -317,12 +523,6 @@
       ]
     },
     {
-      "id": "tvcultura",
-      "name": "TV Cultura",
-      "logo": "https://logos.imperioapps.top/CULTURA.png",
-      "url": "https://player-tvcultura.stream.uol.com.br/live/tvcultura.m3u8"
-    },
-    {
       "id": "tvbrasil",
       "name": "TV Brasil",
       "logo": "https://logos.imperioapps.top/TV_BRASIL.png",
@@ -347,70 +547,124 @@
       "url": "https://canalgov-stream.ebc.com.br/index.m3u8"
     },
     {
-      "id": "globo",
-      "name": "Globo RJ",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNjMubTN1OA==.m3u8"
-    },
-    {
       "id": "globo-sp",
       "name": "Globo SP",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjA0Mi5tM3U4.m3u8"
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
+      "url": "http://praia13.com:80/live/939041/8SA9sh/72042.m3u8",
+      "links": [
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131212.m3u8"
+        },
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72040.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72042.m3u8"
+        }
+      ]
     },
     {
       "id": "globo-minas",
       "name": "Globo Minas",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNTkubTN1OA.m3u8"
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
+      "url": "http://praia13.com:80/live/939041/8SA9sh/131159.m3u8",
+      "links": [
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131159.m3u8"
+        },
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131200.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131209.m3u8"
+        }
+      ]
     },
     {
       "id": "globo-rede-bahia",
       "name": "Globo Bahia",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzEyMTMubTN1OA.m3u8"
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
+      "url": "http://praia13.com:80/live/939041/8SA9sh/131213.m3u8",
+      "links": [
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131123.m3u8"
+        },
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131213.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72024.m3u8"
+        }
+      ]
     },
     {
       "id": "globo-rpc-curitiba",
       "name": "Globo RPC Curitiba",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExOTkubTN1OA.m3u8"
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
+      "url": "http://praia13.com:80/live/939041/8SA9sh/131199.m3u8",
+      "links": [
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72626.m3u8"
+        },
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131199.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131127.m3u8"
+        }
+      ]
     },
     {
       "id": "globo-rbs-porto-alegre",
       "name": "Globo RBS Porto Alegre",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExMDIubTN1OA.m3u8"
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
+      "url": "http://praia13.com:80/live/939041/8SA9sh/131102.m3u8",
+      "links": [
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72017.m3u8"
+        },
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131102.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131198.m3u8"
+        }
+      ]
     },
     {
       "id": "globo-nordeste",
       "name": "Globo Nordeste",
-      "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Rede_Globo_logo.svg/512px-Rede_Globo_logo.svg.png",
-      "url": "https://frostview.cloutteam.com/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjAwMy5tM3U4.m3u8"
-    },
-    {
-      "id": "sbt",
-      "name": "SBT",
-      "logo": "https://logos.imperioapps.top/sbt.png",
-      "url": "https://media.cdntvms.com.br/sbt_sat/index.m3u8"
-    },
-    {
-      "id": "record",
-      "name": "Record",
-      "logo": "https://logos.imperioapps.top/RECORD.png",
-      "url": "https://media.cdntvms.com.br/record_nacional_sat/index.m3u8"
-    },
-    {
-      "id": "band",
-      "name": "Band",
-      "logo": "https://logos.imperioapps.top/BAND.png",
-      "url": "https://media.cdntvms.com.br/band_sat/index.m3u8"
-    },
-    {
-      "id": "redetv",
-      "name": "RedeTV!",
-      "logo": "https://logos.imperioapps.top/REDE_TV.png",
-      "url": "https://cdn.live.br1.jmvstream.com/webtv/AVJ-15235/playlist/playlist.m3u8"
+      "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
+      "url": "http://praia13.com:80/live/939041/8SA9sh/72003.m3u8",
+      "links": [
+        {
+          "q": "HD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/131157.m3u8"
+        },
+        {
+          "q": "FHD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72001.m3u8"
+        },
+        {
+          "q": "SD",
+          "url": "http://praia13.com:80/live/939041/8SA9sh/72003.m3u8"
+        }
+      ]
     },
     {
       "id": "gazeta",
