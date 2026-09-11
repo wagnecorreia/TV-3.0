@@ -9,19 +9,19 @@
       "links": [
         {
           "q": "4K",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/103513.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMDM1MTMubTN1OA.m3u8"
         },
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/71851.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MTg1MS5tM3U4.m3u8"
         },
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/71853.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MTg1My5tM3U4.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/71854.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MTg1NC5tM3U4.m3u8"
         },
         {
           "q": "UOL",
@@ -37,7 +37,7 @@
       "id": "globo",
       "name": "Globo RJ",
       "logo": "logos/globo.png",
-      "url": "http://praia13.com:80/live/939041/8SA9sh/131163.m3u8",
+      "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNjMubTN1OA.m3u8",
       "links": [
         {
           "q": "OFICIAL",
@@ -45,15 +45,15 @@
         },
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72025.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjAyNS5tM3U4.m3u8"
         },
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131163.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNjMubTN1OA.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131182.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExODIubTN1OA.m3u8"
         }
       ],
       "uf": [
@@ -69,19 +69,19 @@
       "links": [
         {
           "q": "4K",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/178532.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xNzg1MzIubTN1OA.m3u8"
         },
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72297.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjI5Ny5tM3U4.m3u8"
         },
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72299.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjI5OS5tM3U4.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72300.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjMwMC5tM3U4.m3u8"
         },
         {
           "q": "WEB",
@@ -102,15 +102,15 @@
       "links": [
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/79311.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83OTMxMS5tM3U4.m3u8"
         },
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72597.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjU5Ny5tM3U4.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/79312.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83OTMxMi5tM3U4.m3u8"
         },
         {
           "q": "SAT",
@@ -163,15 +163,15 @@
         },
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/108681.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMDg2ODEubTN1OA.m3u8"
         },
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/108682.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMDg2ODIubTN1OA.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/108683.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMDg2ODMubTN1OA.m3u8"
         }
       ],
       "uf": [
@@ -187,15 +187,15 @@
       "links": [
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/106638.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMDY2MzgubTN1OA.m3u8"
         },
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72594.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjU5NC5tM3U4.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/96526.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC85NjUyNi5tM3U4.m3u8"
         },
         {
           "q": "SAT",
@@ -550,19 +550,19 @@
       "id": "globo-sp",
       "name": "Globo SP",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
-      "url": "http://praia13.com:80/live/939041/8SA9sh/72042.m3u8",
+      "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjA0Mi5tM3U4.m3u8",
       "links": [
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131212.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzEyMTIubTN1OA.m3u8"
         },
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72040.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjA0MC5tM3U4.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72042.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjA0Mi5tM3U4.m3u8"
         }
       ]
     },
@@ -570,19 +570,19 @@
       "id": "globo-minas",
       "name": "Globo Minas",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
-      "url": "http://praia13.com:80/live/939041/8SA9sh/131159.m3u8",
+      "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNTkubTN1OA.m3u8",
       "links": [
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131159.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNTkubTN1OA.m3u8"
         },
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131200.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzEyMDAubTN1OA.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131209.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzEyMDkubTN1OA.m3u8"
         }
       ]
     },
@@ -590,19 +590,19 @@
       "id": "globo-rede-bahia",
       "name": "Globo Bahia",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
-      "url": "http://praia13.com:80/live/939041/8SA9sh/131213.m3u8",
+      "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzEyMTMubTN1OA.m3u8",
       "links": [
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131123.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExMjMubTN1OA.m3u8"
         },
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131213.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzEyMTMubTN1OA.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72024.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjAyNC5tM3U4.m3u8"
         }
       ]
     },
@@ -610,19 +610,19 @@
       "id": "globo-rpc-curitiba",
       "name": "Globo RPC Curitiba",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
-      "url": "http://praia13.com:80/live/939041/8SA9sh/131199.m3u8",
+      "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExOTkubTN1OA.m3u8",
       "links": [
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72626.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjYyNi5tM3U4.m3u8"
         },
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131199.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExOTkubTN1OA.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131127.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExMjcubTN1OA.m3u8"
         }
       ]
     },
@@ -630,19 +630,19 @@
       "id": "globo-rbs-porto-alegre",
       "name": "Globo RBS Porto Alegre",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
-      "url": "http://praia13.com:80/live/939041/8SA9sh/131102.m3u8",
+      "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExMDIubTN1OA.m3u8",
       "links": [
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72017.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjAxNy5tM3U4.m3u8"
         },
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131102.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExMDIubTN1OA.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131198.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExOTgubTN1OA.m3u8"
         }
       ]
     },
@@ -650,19 +650,19 @@
       "id": "globo-nordeste",
       "name": "Globo Nordeste",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/2/21/TV_Globo_Logo_2025.png",
-      "url": "http://praia13.com:80/live/939041/8SA9sh/72003.m3u8",
+      "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjAwMy5tM3U4.m3u8",
       "links": [
         {
           "q": "HD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/131157.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC8xMzExNTcubTN1OA.m3u8"
         },
         {
           "q": "FHD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72001.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjAwMS5tM3U4.m3u8"
         },
         {
           "q": "SD",
-          "url": "http://praia13.com:80/live/939041/8SA9sh/72003.m3u8"
+          "url": "https://frostviewrelease.squareweb.app/proxy/hls/aHR0cDovL3ByYWlhMTMuY29tOjgwL2xpdmUvOTM5MDQxLzhTQTlzaC83MjAwMy5tM3U4.m3u8"
         }
       ]
     },
