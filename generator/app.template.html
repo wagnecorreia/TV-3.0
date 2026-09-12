@@ -337,6 +337,13 @@ async function globoResolve() {
   if (!src || !src.url) throw new Error('Sem source primary na API Globo');
   // m3u8 direto (sem proxy): a TV/player nativo ignora o CORS restrito da Globo (ACAO só p/ *.globo.com).
   // Datacenter (Netlify US) apanha 488 da Globo, então NÃO passa pelo proxy. Se falhar, failover -> FrostView.
+  // Probe de alcance: Firefox (ETP) bloqueia o CDN video.globo.com com networkError no hls.js; aqui a gente
+  // detecta ANTES (fetch no-cors não liga pra CORS) e joga pro failover rápido (FrostView) em vez de travar.
+  try {
+    await fetch(src.url, { mode: 'no-cors', signal: AbortSignal.timeout(7000) });
+  } catch (e) {
+    throw new Error('Globo CDN bloqueada pelo navegador — failover');
+  }
   return src.url;
 }
 
